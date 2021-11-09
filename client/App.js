@@ -9,6 +9,7 @@ const App = () => {
       <Navbar />
       <Routes />
       <p>This is a paragraph</p>
+      <p>This is refactoring code?</p>
     </div>
   )
 }
