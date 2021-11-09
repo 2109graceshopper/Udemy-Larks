@@ -8,6 +8,7 @@ const App = () => {
     <div>
       <Navbar />
       <Routes />
+      <p>This is a paragraph</p>
     </div>
   )
 }
