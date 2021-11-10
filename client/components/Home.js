@@ -10,6 +10,7 @@ export const Home = props => {
   return (
     <div>
       <h3>Welcome, {username}</h3>
+      <p>This is a finalized feature.</p>
     </div>
   )
 }
