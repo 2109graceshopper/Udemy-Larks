@@ -9,7 +9,7 @@ const App = () => {
     <div>
       <Navbar />
       <Routes />
-      {/* <Registration /> //Testing purposes -- remove later */}
+      {/* <Registration />  */}
     </div>
   )
 }
