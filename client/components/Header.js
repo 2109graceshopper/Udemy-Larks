@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { cartIcon, graceShopperLogo } from "../../public/"; //path to wherever we save shared icons/art/logos/etc
+import { cartIcon, graceShopperLogo } from "../../public/icons"; //path to wherever we save shared icons/art/logos/etc
 import { profilePicture } from "../../server/"; //path to wherever we save user photo id
 
 const Header = ({ handleClick, handleChange, isLoggedIn }) => {
@@ -29,7 +29,7 @@ const Header = ({ handleClick, handleChange, isLoggedIn }) => {
       </Link>
 
       {isLoggedIn ? (
-        <div onSubmit->
+        <div>
           {/* The navbar will show these links after you log in */}
           <Link to="/profile">
             <img className="profile-picture" src={profilePicture} />
