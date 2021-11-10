@@ -7,7 +7,7 @@ const axios = require('axios');
 const SALT_ROUNDS = 5;
 
 const OrderDetail = db.define('orderdetail', {
-    quatity:{
+    quantity:{
         type: Sequelize.INTEGER,
         allowNull: false
     }

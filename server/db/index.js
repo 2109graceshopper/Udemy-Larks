@@ -8,11 +8,12 @@ const Order = require('./models/Order')
 const OrderDetail = require('./models/OrderDetail')
 
 //associations could go here!
-<<<<<<< HEAD
-console.log("git pull requ")
-=======
-console.log("This is me trying to refactor the code")
->>>>>>> f8eeb6f21f2c125da9d461ad269e6cd809c5593f
+//Associations
+// Project.belongsToMany(Robot, { through: 'RobotProjects' })
+// Robot.belongsToMany(Project, { through: 'RobotProjects' })
+
+User.hasMany(Order, { through: OrderDetail })
+Order.hasMany(Video, { through: OrderDetail })
 
 module.exports = {
   db,
