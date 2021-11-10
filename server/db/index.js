@@ -8,7 +8,7 @@ const Order = require('./models/Order')
 const OrderDetail = require('./models/OrderDetail')
 
 //associations could go here!
-console.log("HelloWORLD")
+
 
 module.exports = {
   db,
