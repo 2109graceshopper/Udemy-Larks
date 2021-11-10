@@ -10,6 +10,20 @@ label {
   display: block;
 }
 
+nav {
+  align-items: center;
+  background-color: beige;
+  display: flex;
+  height: 60px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.graceShopperLogo,
+.cart-icon {
+  height: 50px;
+}
+
 nav a {
   display: inline-block;
   margin: 1em;
