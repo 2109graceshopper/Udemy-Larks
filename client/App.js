@@ -1,17 +1,18 @@
-import React from 'react'
+import React from "react";
 
-import Navbar from './components/Navbar'
-import Routes from './Routes'
-// import Registration from './components/Registration/Registration'
+import Navbar from "./components/Navbar";
+import Routes from "./Routes";
+import Header from "./components/Header";
 
 const App = () => {
   return (
     <div>
       <Navbar />
       <Routes />
+      <Header />
       {/* <Registration />  */}
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
