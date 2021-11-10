@@ -14,7 +14,6 @@ const App = () => {
       <Routes />
       <Header />
       <SignIn />
-      {/* <Registration />  */}
     </div>
   );
 };
