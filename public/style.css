@@ -20,7 +20,8 @@ nav {
 }
 
 .graceShopperLogo,
-.cart-icon {
+.cart-icon,
+.profile-picture {
   height: 50px;
 }
 
