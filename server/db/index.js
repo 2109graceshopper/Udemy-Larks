@@ -8,6 +8,7 @@ const Order = require('./models/Order')
 const OrderDetail = require('./models/OrderDetail')
 
 //associations could go here!
+console.log("This is me trying to refactor the code")
 
 module.exports = {
   db,
