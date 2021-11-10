@@ -9,15 +9,36 @@ const SALT_ROUNDS = 5;
 const Video = db.define('video', {
     title:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: true
+          }
     },
     price:{
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        validate: {
+        notEmpty: true
+        }
     },
     unitsInStock:{
         type: Sequelize.INTEGER,
 
-    }
+    },
+    description: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+        validate: {
+          notEmpty: true
+        }
+      },
+    imageURL :{
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true
+          }
+    }  
 
 })
 

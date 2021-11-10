@@ -8,12 +8,14 @@ const Order = require('./models/Order')
 const OrderDetail = require('./models/OrderDetail')
 
 //associations could go here!
-//Associations
-// Project.belongsToMany(Robot, { through: 'RobotProjects' })
-// Robot.belongsToMany(Project, { through: 'RobotProjects' })
+//Videos can be part of multiple orders
+//order can have multiple videos
+Video.belongsToMany(Order, { through: OrderDetail })
+Order.belongsToMany(Video, { through: OrderDetail })
 
-User.hasMany(Order, { through: OrderDetail })
-Order.hasMany(Video, { through: OrderDetail })
+//User can have multiple orders
+Order.belongsTo(User);
+User.hasMany(Order)
 
 module.exports = {
   db,
