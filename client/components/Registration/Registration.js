@@ -25,7 +25,7 @@ class Registration extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if(this.state.username) {
-      //check if username is taken
+      //check if username is taken -> Make an axios request here
     } else if (this.state.password === this.state.reenter) {
       //Register account
       this.setState({
