@@ -1,18 +1,14 @@
 import React from "react";
 
 import Navbar from "./components/Navbar";
-import Routes from "./Routes";
 import Header from "./components/Header";
-import SignIn from "./components/SignIn/SignIn";
-
+import Routes from "./Routes";
 
 const App = () => {
   return (
     <div>
-      <Navbar />
-      <Routes />
       <Header />
-      <SignIn />
+      <Routes />
     </div>
   );
 };

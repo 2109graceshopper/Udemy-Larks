@@ -4,7 +4,10 @@ class SignIn extends React.Component {
   constructor() {
     super();
     this.state = {
-      
+      username: "",
+      password: "",
+      msg: "",
+      msgBool: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,9 +23,7 @@ class SignIn extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if(this.state.username) {
-      //check if username is taken -> Make an axios request here
-    } else if (this.state.password === this.state.reenter) {
+    if (this.state.password === this.state.reenter) {
       //Register account
       this.setState({
         username: "",
@@ -44,8 +45,8 @@ class SignIn extends React.Component {
   render() {
     return (
       <div onSubmit={this.handleSubmit}>
-        <h1>Register</h1>
-        <h4>Register and start learning!</h4>
+        <h1>Sign In</h1>
+        <h4>Sign in and start Learning!</h4>
         {this.state.msgBool ? this.message() : null}
         <form>
           <label>
@@ -66,16 +67,7 @@ class SignIn extends React.Component {
               onChange={this.handleChange}
             />
           </label>
-          <label>
-            <input
-              name="reenter"
-              type="password"
-              placeholder="Re-Enter Password"
-              value={this.state.reenter}
-              onChange={this.handleChange}
-            />
-          </label>
-          <input type="submit" value="Register" />
+          <input type="submit" value="Login" />
         </form>
       </div>
     );
