@@ -16,8 +16,6 @@ const Order = require('./models/Order.js')
 // OrderUser.belongsTo(User);
 // User.hasMany(OrderUser)
 
-
-
 Video.belongsToMany(User, {
   through: {
     model: Order,
