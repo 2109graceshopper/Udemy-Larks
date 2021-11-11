@@ -16,28 +16,31 @@ const Video = db.define('video', {
     },
     price:{
         type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: {
-        notEmpty: true
-        }
+        // allowNull: false,
+        // validate: {
+        // notEmpty: true
+        // }
     },
     unitsInStock:{
         type: Sequelize.INTEGER,
 
     },
+    authorName:{
+        type: Sequelize.STRING,
+    },
     description: {
         type: Sequelize.TEXT,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        // allowNull: false,
+        // validate: {
+        //   notEmpty: true
+        // }
       },
     imageURL :{
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: true
-          }
+        // allowNull: false,
+        // validate: {
+        //     notEmpty: true
+        //   }
     }  
 
 })
