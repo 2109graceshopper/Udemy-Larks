@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  text-align: center;
 }
 
 a {
@@ -32,4 +33,8 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.profile-picture {
+  width: 5%;
 }

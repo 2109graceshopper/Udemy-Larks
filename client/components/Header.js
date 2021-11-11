@@ -1,5 +1,7 @@
 import React from "react";
 import { Router, Route, Link, Switch } from "react-router-dom";
+import {connect} from 'react-redux'
+import {logout} from '../store'
 // import { cartIcon, graceShopperLogo } from "../../public/icons"; //path to wherever we save shared icons/art/logos/etc
 // import { profilePicture } from "../../server/"; //path to wherever we save user photo id
 
@@ -61,4 +63,18 @@ const Header = ({ handleClick, handleChange, isLoggedIn }) => {
   );
 };
 
-export default Header;
+const mapState = state => {
+  return {
+    isLoggedIn: !!state.auth.id
+  }
+}
+
+const mapDispatch = dispatch => {
+  return {
+    handleClick() {
+      dispatch(logout())
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(Header);
