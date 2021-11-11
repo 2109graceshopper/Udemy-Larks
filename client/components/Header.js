@@ -51,6 +51,9 @@ const Header = ({ handleClick, handleChange, isLoggedIn }) => {
             <Link to="/login" className="logInOut">
               Sign In
             </Link>
+            <Link to="/signup" className="signUp">
+              Sign Up
+            </Link>
           </div>
         )}
       </nav>
