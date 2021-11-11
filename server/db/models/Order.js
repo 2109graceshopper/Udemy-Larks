@@ -20,11 +20,16 @@ const Order = db.define(
       type: Sequelize.INTEGER,
       },
     },
+    { isCart: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      }
+    },
     { timestamps: true }
   );
 
-Order.addVideoToOrder = async(videoID, userID) =>{
-
+Order.addVideoToOrder = async(videoID, userID, Qty) =>{
+    
 }
   
 
