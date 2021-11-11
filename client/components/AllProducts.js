@@ -38,9 +38,10 @@ export class AllProducts extends React.Component {
         return (
           <div className="single-video-card" key={product.id}>
             <Link to={`/videos/${product.id}`}>
-              <div className="video-preview">
-                Video Preview Goes Here (embedded product.image)
-              </div>
+              <img
+                className="graceShopperLogo"
+                src="/icons/video-preview-placeholder.png"
+              />
               <div className="video-details">
                 {product.title}
                 {product.details}
