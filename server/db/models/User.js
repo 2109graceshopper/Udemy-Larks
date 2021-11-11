@@ -10,25 +10,19 @@ const User = db.define('user', {
   username: {//also email
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false,
-    validate: {
-      isEmail: true
-    }
+    allowNull: false
   },
   password: {
     type: Sequelize.STRING,
   },
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false
   },
   address:{//billing and shipping
     type: Sequelize.STRING,
-    allowNull: false
   },
   creditcard:{//hash later?
     type: Sequelize.INTEGER(16)
