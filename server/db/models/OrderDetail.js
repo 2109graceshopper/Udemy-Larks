@@ -13,4 +13,6 @@ const OrderDetail = db.define('orderdetail', {
     }
 })
 
+
+
 module.exports = OrderDetail
