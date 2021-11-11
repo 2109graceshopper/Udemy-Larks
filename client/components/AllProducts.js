@@ -7,7 +7,8 @@ export class AllProducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      videoCategoryFilter: "All",
+      videoCategoryFilter: "All", //this.state dependent on state from header selector, will
+      //connect later
     };
     this.handleAddToCart = this.handleAddToCart.bind(this);
   }
@@ -35,21 +36,23 @@ export class AllProducts extends React.Component {
       filteredProducts.map((product) => {
         return (
           <div className="single-video-card" key={product.id}>
-            <div className="video-preview">
-              Video Preview Goes Here (embedded product.image)
-            </div>
-            <div className="video-details">
-              {product.title}
-              {product.details}
-              <button
-                className="add-to-cart-button"
-                type="button"
-                onClick={() => handleAddToCart(product.id)}
-              >
-                Add to cart
-              </button>
-            </div>
-            <div className="video-price">{product.price}</div>
+            <Link to={`/videos/${product.id}`}>
+              <div className="video-preview">
+                Video Preview Goes Here (embedded product.image)
+              </div>
+              <div className="video-details">
+                {product.title}
+                {product.details}
+                <button
+                  className="add-to-cart-button"
+                  type="button"
+                  onClick={() => handleAddToCart(product.id)}
+                >
+                  Add to cart
+                </button>
+              </div>
+              <div className="video-price">{product.price}</div>
+            </Link>
           </div>
         );
       });
@@ -76,11 +79,17 @@ export class AllProducts extends React.Component {
   }
 }
 
-// const mapDispatch = (dispatch) => {
+// const mapStateToProps = (state) => {
+//   return {
+//     products: state.products
+//   };
+// };
+
+// const mapDispatchToProps = (dispatch) => {
 //   return {
 //     getProducts: () => dispatch(fetchProducts()),
 //     addToCart: (productId) => dispatch(addProductToCart(productId)),
 //   };
 // };
 
-// export default connect(null, mapDispatch)(AllProducts)
+// export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
