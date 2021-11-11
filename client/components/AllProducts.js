@@ -13,9 +13,10 @@ export class AllProducts extends React.Component {
     this.handleAddToCart = this.handleAddToCart.bind(this);
   }
 
-  componentDidMount() {
-    this.props.getProducts();
-  }
+  //Uncomment when redux is set up
+  // componentDidMount() {
+  //   this.props.getProducts();
+  // }
 
   async handleAddToCart(productId) {
     await this.props.addToCart(productId);
