@@ -40,6 +40,10 @@ Order.addVideoToOrder = async(videoID, userID, Qty) =>{
     }
 }
 //use isCart to checkout
+/**
+ * @TODO
+ * Need to update quantity of videos later 
+ */
 Order.checkOut = async(id) =>{
     try{
         await this.update({
