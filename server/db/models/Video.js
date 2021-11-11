@@ -45,4 +45,30 @@ const Video = db.define('video', {
 
 })
 
+//find all videos
+
+Video.findAllVideos = async function(){
+    let result = await this.findALL()
+    return result; //Will get an array of objects that needs to be cleaned p;
+}
+//get a specific video
+Video.findOneVideo = async function(id){
+    let result = await this.findALL({
+        where: {
+            videoId: {[Sequelize.Op.eq]: id}
+          }
+    })
+    return result;
+}
+
+//get all videos by an author
+Video.findAuthorVideos = async function(author){
+    let result = await this.findALL({
+        where: {
+            authorName: {[Sequelize.Op.eq]: author}
+          }
+    })
+    return result
+}
+
 module.exports = Video

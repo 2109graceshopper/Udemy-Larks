@@ -4,6 +4,7 @@ const db = require('./db')
 const Sequelize = require('sequelize')
 const User = require('./models/User')
 const Video = require('./models/Video')
+const Order = require('./models/Order.js')
 
 //associations could go here!
 //Videos can be part of multiple orders
@@ -15,35 +16,17 @@ const Video = require('./models/Video')
 // OrderUser.belongsTo(User);
 // User.hasMany(OrderUser)
 
-const Order = db.define(
-  "Order",
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-  },
-  {
-    quantity :{
-    type: Sequelize.INTEGER,
-    },
-  },
-  { timestamps: true }
-);
-
-
 
 
 Video.belongsToMany(User, {
   through: {
-    model: "Order",
+    model: Order,
     unique: false,
   },
 });
 User.belongsToMany(Video, {
   through: {
-    model: "Order",
+    model: Order,
     unique: false,
   },
 });
