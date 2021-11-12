@@ -10,7 +10,7 @@ const User = db.define('user', {
   username: {//also email
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    //allowNull: false
   },
   password: {
     type: Sequelize.STRING,
@@ -25,12 +25,19 @@ const User = db.define('user', {
     type: Sequelize.STRING,
   },
   creditcard:{//hash later?
-    type: Sequelize.INTEGER(16)
+    type: Sequelize.INTEGER
   },
   isAdmin: {// This is for special users
     type: Sequelize.BOOLEAN,
     default: false
   },
+  userimageURL :{
+    type: Sequelize.STRING,
+    //allowNull: false,
+  //   validate: {
+  //       notEmpty: true
+  // }
+} 
 })
 
 module.exports = User
