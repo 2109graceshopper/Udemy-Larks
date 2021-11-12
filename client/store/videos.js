@@ -14,7 +14,7 @@ const getVideos = (videos) => {
 };
 
 //THUNK CREATORS
-export const fetchProducts = () => {
+export const fetchVideos = () => {
   return async (dispatch) => {
     try {
       const { data: videos } = await axios.get("/api/videos");
@@ -29,7 +29,7 @@ export const fetchProducts = () => {
 export default function videosReducer(state = initialState, action) {
   switch (action.type) {
     case GET_VIDEOS:
-      return action.videos;
+      return { ...state, videos: action.videos };
     default:
       return state;
   }

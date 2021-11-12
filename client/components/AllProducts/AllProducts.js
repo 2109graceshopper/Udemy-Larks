@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchProducts, addProductToCart } from "../../store/videos";
+import { fetchVideos, addProductToCart } from "../../store/videos";
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -13,47 +13,52 @@ export class AllProducts extends React.Component {
     this.handleAddToCart = this.handleAddToCart.bind(this);
   }
 
-  //Uncomment when redux is set up
   componentDidMount() {
-    this.props.getProducts();
+    this.props.getVideos();
+    console.log(this.props);
   }
+
+  // componentDidUpdate() {
+
+  // }
 
   async handleAddToCart(productId) {
     await this.props.addToCart(productId);
   }
 
   render() {
+    console.log(this.props);
     const { handleAddToCart } = this;
-    const products = this.props.products || [];
-    let filteredProducts =
+    const videos = this.props.videos || [];
+    let filteredVideos =
       this.state.videoCategoryFilter !== "All"
-        ? products.filter(
-            (product) => product.category === this.state.videoCategoryFilter
+        ? videos.filter(
+            (video) => video.category === this.state.videoCategoryFilter
           )
-        : products;
+        : videos;
 
-    const productsToShow =
-      filteredProducts &&
-      filteredProducts.map((product) => {
+    const videosToShow =
+      filteredVideos &&
+      filteredVideos.map((video) => {
         return (
-          <div className="single-video-card" key={product.id}>
-            <Link to={`/videos/${product.id}`}>
+          <div className="single-video-card" key={video.id}>
+            <Link to={`/videos/${video.id}`}>
               <img
                 className="graceShopperLogo"
                 src="/icons/video-preview-placeholder.png"
               />
               <div className="video-details">
-                {product.title}
-                {product.details}
+                {video.title}
+                {video.details}
                 <button
                   className="add-to-cart-button"
                   type="button"
-                  onClick={() => handleAddToCart(product.id)}
+                  onClick={() => handleAddToCart(video.id)}
                 >
                   Add to cart
                 </button>
               </div>
-              <div className="video-price">{product.price}</div>
+              <div className="video-price">{video.price}</div>
             </Link>
           </div>
         );
@@ -61,11 +66,11 @@ export class AllProducts extends React.Component {
 
     return (
       <div>
-        <h1>All Products:</h1>
-        <section className="all-product-cards">
-          {products.length > 0 ? (
-            productsToShow.length > 0 ? (
-              productsToShow
+        <h1>All Videos:</h1>
+        <section className="all-video-cards">
+          {videos.length > 0 ? (
+            videosToShow.length > 0 ? (
+              videosToShow
             ) : (
               <h2>
                 There are no videos in the database matching the search
@@ -83,14 +88,14 @@ export class AllProducts extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    products: state.products,
+    videos: state.videos,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getProducts: () => dispatch(fetchProducts()),
-    addToCart: (productId) => dispatch(addProductToCart(productId)),
+    getVideos: () => dispatch(fetchVideos()),
+    addToCart: (videoId) => dispatch(addProductToCart(videoId)),
   };
 };
 
