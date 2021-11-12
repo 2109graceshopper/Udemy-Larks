@@ -1,6 +1,6 @@
 "use strict";
 
-const { db, User, Video, Order } = require("../server/index");
+const { db, User, Video, Order } = require("../server/db/index");
 
 /**
  * seed - this function clears the database, updates tables to
