@@ -20,12 +20,9 @@ class UserProfile extends React.Component {
       <div>
         <section>
           <h2>User Profile</h2>
-          <img
-            className='profile-picture'
-            src='/icons/profile-picture-placeholder.png'
-          />
-          <h3>Name: {user.firstName + ' ' + user.lastName}</h3>
-          <h3>Email: To Get From Props</h3>
+          <img className='profile-picture' src={user.userimageURL} />
+          <h3>Name: {`${user.firstName} ${user.lastName}`}</h3>
+          <h3>Email: {user.username}</h3>
         </section>
         <section>
           <h2>Your Products</h2>
@@ -36,7 +33,7 @@ class UserProfile extends React.Component {
                   <img src={video.imageUrl} />
                   <div>
                     <h3>{video.title}</h3>
-                    <h4>{video.description}</h4>
+                    <h5>Created by: {video.authorName}</h5>
                   </div>
                 </Link>
               </div>
