@@ -1,10 +1,9 @@
 //this is the access point for all things database related!
 
 const db = require('./db')
-const Sequelize = require('sequelize')
 const User = require('./models/User')
 const Video = require('./models/Video')
-const Order = require('./models/Order.js')
+const Order = require('./models/Order')
 
 //associations could go here!
 //Videos can be part of multiple orders
@@ -31,9 +30,7 @@ User.belongsToMany(Video, {
 
 module.exports = {
   db,
-  models: {
-    User,
-    Video,
-    Order
-  },
+  User,
+  Video,
+  Order
 }

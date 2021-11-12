@@ -29,9 +29,6 @@ const Order = db.define(
   );
 
 Order.addVideoToOrder = async(videoID, userID, Qty) =>{
-    
 }
   
-
-
-  module.exports = Order
+module.exports = Order;
