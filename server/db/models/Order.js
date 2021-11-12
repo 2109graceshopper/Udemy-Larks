@@ -29,6 +29,30 @@ const Order = db.define(
   );
 
 Order.addVideoToOrder = async(videoID, userID, Qty) =>{
+    try{
+        await this.create({
+            videoID: videoID,
+            userID: userID,
+            quantity: Qty,
+        })
+    }catch(err){
+        console.log("Adding to cart error")
+    }
 }
-  
-module.exports = Order;
+//use isCart to checkout
+/**
+ * @TODO
+ * Need to update quantity of videos later 
+ */
+Order.checkOut = async(id) =>{
+    try{
+        await this.update({
+            isCart: true,
+            where: {id: id}
+        })
+    }catch(err){
+        console.log("Error Checking Out")
+    }
+}
+
+  module.exports = Order
