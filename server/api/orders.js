@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const { User } = require("../db/index");
+const { Order } = require("../db/index");
 
 router.get("/", async (req, res, next) => {
   try {
-    const users = await User.findAll();
-    res.json(users);
+    const orders = await Order.findAll();
+    res.json(orders);
   } catch (err) {
     next(err);
   }
