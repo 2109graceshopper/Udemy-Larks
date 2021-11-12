@@ -1,22 +1,22 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-// import {fetchProducts, addProductToCart} from "....." redux function pathing
+import { fetchProducts, addProductToCart } from "../../store/videos";
 
 export class AllProducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       videoCategoryFilter: "All", //this.state dependent on state from header selector, will
-      //connect later
+      //connect later if we decide to implement
     };
     this.handleAddToCart = this.handleAddToCart.bind(this);
   }
 
   //Uncomment when redux is set up
-  // componentDidMount() {
-  //   this.props.getProducts();
-  // }
+  componentDidMount() {
+    this.props.getProducts();
+  }
 
   async handleAddToCart(productId) {
     await this.props.addToCart(productId);
@@ -81,17 +81,17 @@ export class AllProducts extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     products: state.products
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    products: state.products,
+  };
+};
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     getProducts: () => dispatch(fetchProducts()),
-//     addToCart: (productId) => dispatch(addProductToCart(productId)),
-//   };
-// };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getProducts: () => dispatch(fetchProducts()),
+    addToCart: (productId) => dispatch(addProductToCart(productId)),
+  };
+};
 
-// export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
+export default connect(mapStateToProps, mapDispatchToProps)(AllProducts);

@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
-import Header from "./components/Header";
+// import Header from "./components/Header";
 import Login from "./components/Login/Login";
 import Registration from "./components/Registration/Registration";
 import Home from "./components/Home";
-import { AllProducts } from "./components/AllProducts/AllProducts";
+import AllProducts from "./components/AllProducts/AllProducts";
 import { me } from "./store";
 
 /**
