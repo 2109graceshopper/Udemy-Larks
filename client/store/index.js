@@ -5,7 +5,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import videosReducer from "./videos";
 
-const reducer = combineReducers({ auth, videosReducer });
+const reducer = combineReducers({ auth, videos: videosReducer });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );

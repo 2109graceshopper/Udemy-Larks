@@ -15,31 +15,25 @@ export class AllProducts extends React.Component {
 
   componentDidMount() {
     this.props.getVideos();
-    console.log(this.props);
   }
-
-  // componentDidUpdate() {
-
-  // }
 
   async handleAddToCart(productId) {
     await this.props.addToCart(productId);
   }
 
   render() {
-    console.log(this.props);
     const { handleAddToCart } = this;
     const videos = this.props.videos || [];
-    let filteredVideos =
-      this.state.videoCategoryFilter !== "All"
-        ? videos.filter(
-            (video) => video.category === this.state.videoCategoryFilter
-          )
-        : videos;
+    // let filteredVideos =
+    //   this.state.videoCategoryFilter !== "All"
+    //     ? videos.filter(
+    //         (video) => video.category === this.state.videoCategoryFilter
+    //       )
+    //     : videos;
 
     const videosToShow =
-      filteredVideos &&
-      filteredVideos.map((video) => {
+      videos &&
+      videos.map((video) => {
         return (
           <div className="single-video-card" key={video.id}>
             <Link to={`/videos/${video.id}`}>
@@ -63,6 +57,33 @@ export class AllProducts extends React.Component {
           </div>
         );
       });
+
+    // const videosToShow =
+    //   filteredVideos &&
+    //   filteredVideos.map((video) => {
+    //     return (
+    //       <div className="single-video-card" key={video.id}>
+    //         <Link to={`/videos/${video.id}`}>
+    //           <img
+    //             className="graceShopperLogo"
+    //             src="/icons/video-preview-placeholder.png"
+    //           />
+    //           <div className="video-details">
+    //             {video.title}
+    //             {video.details}
+    //             <button
+    //               className="add-to-cart-button"
+    //               type="button"
+    //               onClick={() => handleAddToCart(video.id)}
+    //             >
+    //               Add to cart
+    //             </button>
+    //           </div>
+    //           <div className="video-price">{video.price}</div>
+    //         </Link>
+    //       </div>
+    //     );
+    //   });
 
     return (
       <div>

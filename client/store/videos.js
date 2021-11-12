@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const initialState = { videos: [] };
+const initialState = [];
 
 //ACTION TYPES
 const GET_VIDEOS = "GET_VIDEOS";
 
 //ACTION CREATORS
-const getVideos = (videos) => {
+export const getVideos = (videos) => {
   return {
     type: GET_VIDEOS,
     videos,
@@ -17,8 +17,8 @@ const getVideos = (videos) => {
 export const fetchVideos = () => {
   return async (dispatch) => {
     try {
-      const { data: videos } = await axios.get("/api/videos");
-      dispatch(getVideos(videos));
+      const { data } = await axios.get("/api/videos");
+      dispatch(getVideos(data));
     } catch (error) {
       console.error(error);
     }
@@ -29,7 +29,7 @@ export const fetchVideos = () => {
 export default function videosReducer(state = initialState, action) {
   switch (action.type) {
     case GET_VIDEOS:
-      return { ...state, videos: action.videos };
+      return action.videos;
     default:
       return state;
   }
