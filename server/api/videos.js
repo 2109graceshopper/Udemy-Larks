@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const { User } = require("../db/index");
+const { Video } = require("../db/index");
 
 router.get("/", async (req, res, next) => {
   try {
-    const users = await User.findAll();
-    res.json(users);
+    const videos = await Video.findAll();
+    res.json(videos);
   } catch (err) {
     next(err);
   }

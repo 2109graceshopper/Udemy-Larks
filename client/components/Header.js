@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Router, Route, Link, Switch } from "react-router-dom";
 import { logout } from "../store";
+// import { cartIcon, graceShopperLogo } from "../../public/icons"; //path to wherever we save shared icons/art/logos/etc
+// import { profilePicture } from "../../server/"; //path to wherever we save user photo id
 
 const Header = ({ handleClick, handleChange, isLoggedIn }) => {
   return (
@@ -41,7 +43,6 @@ const Header = ({ handleClick, handleChange, isLoggedIn }) => {
               src="/icons/profile-picture-placeholder.png"
             />
           </Link>
-
           <button className="logInOut" type="button" onClick={handleClick}>
             Sign Out
           </button>
@@ -52,9 +53,13 @@ const Header = ({ handleClick, handleChange, isLoggedIn }) => {
           <Link to="/login" className="logInOut">
             Sign In
           </Link>
+          <Link to="/signup" className="signUp">
+            Sign Up
+          </Link>
         </div>
       )}
     </nav>
+    // </div>
   );
 };
 
