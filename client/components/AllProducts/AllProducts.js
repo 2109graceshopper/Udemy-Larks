@@ -17,13 +17,16 @@ export class AllProducts extends React.Component {
     this.props.getVideos();
   }
 
-  async handleAddToCart(productId) {
-    await this.props.addToCart(productId);
+  async handleAddToCart(videoId) {
+    console.log("add " + videoId + " to cart!");
+    // await this.props.addToCart(productId);
   }
 
   render() {
     const { handleAddToCart } = this;
     const videos = this.props.videos || [];
+
+    //uncomment if video.category is added
     // let filteredVideos =
     //   this.state.videoCategoryFilter !== "All"
     //     ? videos.filter(
@@ -37,10 +40,7 @@ export class AllProducts extends React.Component {
         return (
           <div className="single-video-card" key={video.id}>
             <Link to={`/videos/${video.id}`}>
-              <img
-                className="graceShopperLogo"
-                src="/icons/video-preview-placeholder.png"
-              />
+              <img className="video-preview" src={video.imageURL} />
               <div className="video-details">
                 {video.title}
                 {video.details}
@@ -58,6 +58,7 @@ export class AllProducts extends React.Component {
         );
       });
 
+    // replace above 'videosToShow' with this if categorization is added
     // const videosToShow =
     //   filteredVideos &&
     //   filteredVideos.map((video) => {
