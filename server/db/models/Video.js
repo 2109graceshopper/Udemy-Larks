@@ -35,7 +35,7 @@ const Video = db.define('video', {
         //   notEmpty: true
         // }
       },
-    imageURL :{
+    imageURL:{
         type: Sequelize.STRING,
         // allowNull: false,
         // validate: {
