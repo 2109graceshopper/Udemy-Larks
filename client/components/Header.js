@@ -1,7 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Router, Route, Link, Switch } from "react-router-dom";
+<<<<<<< HEAD
 import { logout } from "../store";
+=======
+import {connect} from 'react-redux'
+import {logout} from '../store'
+// import { cartIcon, graceShopperLogo } from "../../public/icons"; //path to wherever we save shared icons/art/logos/etc
+// import { profilePicture } from "../../server/"; //path to wherever we save user photo id
+>>>>>>> d02229523714beaf8fa727263ca14c04bf4e72f6
 
 const Header = ({ handleClick, handleChange, isLoggedIn }) => {
   return (
@@ -42,6 +49,7 @@ const Header = ({ handleClick, handleChange, isLoggedIn }) => {
             />
           </Link>
 
+<<<<<<< HEAD
           <button className="logInOut" type="button" onClick={handleClick}>
             Sign Out
           </button>
@@ -73,3 +81,49 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(Header);
+=======
+        {isLoggedIn ? (
+          <div>
+            {/* The navbar will show these links after you log in */}
+            <Link to="/profile">
+              <img
+                className="profile-picture"
+                src="/icons/profile-picture-placeholder.png"
+              />
+            </Link>
+            <button className="logInOut" type="button" onClick={handleClick}>
+              Sign Out
+            </button>
+          </div>
+        ) : (
+          <div>
+            {/* The navbar will show these links before you log in */}
+            <Link to="/login" className="logInOut">
+              Sign In
+            </Link>
+            <Link to="/signup" className="signUp">
+              Sign Up
+            </Link>
+          </div>
+        )}
+      </nav>
+    </div>
+  );
+};
+
+const mapState = state => {
+  return {
+    isLoggedIn: !!state.auth.id
+  }
+}
+
+const mapDispatch = dispatch => {
+  return {
+    handleClick() {
+      dispatch(logout())
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(Header);
+>>>>>>> d02229523714beaf8fa727263ca14c04bf4e72f6
