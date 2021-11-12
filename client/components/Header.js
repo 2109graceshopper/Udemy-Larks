@@ -22,7 +22,7 @@ const Header = ({ handleClick, handleChange, isLoggedIn }) => {
           <option value="category5">Category 5</option>
         </select>
       </div>
-      <Link to="/products">Videos</Link>
+      <Link to="/videos">Videos</Link>
       {/* Search Bar */}
       <input
         className="searchBar"
@@ -59,6 +59,7 @@ const Header = ({ handleClick, handleChange, isLoggedIn }) => {
         </div>
       )}
     </nav>
+    // </div>
   );
 };
 

@@ -26,6 +26,11 @@ nav {
   height: 50px;
 }
 
+/* Move to allProducts.css */
+.video-preview {
+  height: 150px;
+}
+
 nav a {
   display: inline-block;
   margin: 1em;
@@ -37,5 +42,6 @@ form div {
 }
 
 .profile-picture {
-  width: 5%;
+  max-width: 5%;
+  height: auto;
 }
