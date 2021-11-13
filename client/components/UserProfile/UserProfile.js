@@ -1,17 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
-// import { fetchUser, fetchUserVideos } from '../redux/user';
+import { connect } from 'react-redux';
+
+import { fetchSingleUser } from '../../store/userProfile';
 
 class UserProfile extends React.Component {
-  //REDUX - Gets User and Associated Videos From DB
-  // componentDidMount() {
-  //   try {
-  //     this.props.getUser(this.props.match.params.userId);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  componentDidMount() {
+    try {
+      this.props.getUser(this.props.match.params.userId);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   render() {
     const user = this.props.user;
@@ -45,14 +46,12 @@ class UserProfile extends React.Component {
   }
 }
 
-// const mapState = (state) => ({
-//   user: state.user,
-// });
+const mapStateToProps = (state) => ({
+  user: state.singleUser,
+});
 
-// const mapDispatch = (dispatch) => ({
-//   getUser: (userId) => dispatch(fetchUser(userId)),
-// });
+const mapDispatchToProps = (dispatch) => ({
+  getUser: (id) => dispatch(fetchSingleUser(id)),
+});
 
-//connect(mapStateToProps, mapDispatchToProps)(UserProfile) -> export default once db connected
-
-export default UserProfile;
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
