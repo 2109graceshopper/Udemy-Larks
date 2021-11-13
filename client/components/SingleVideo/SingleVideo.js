@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import { fetchSingleVideo } from '.../store/singleVideo';
+import { fetchSingleVideo } from '../../store/singleVideo';
 
 class SingleVideo extends React.Component {
   constructor() {
