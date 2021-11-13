@@ -53,6 +53,7 @@ export class ShoppingCart extends React.Component {
         </div>
       );
     });
+
     const checkoutView = (
       <div className="checkout-card">
         <section className="checkout-top-half"></section>
@@ -96,3 +97,8 @@ export class ShoppingCart extends React.Component {
 // }
 
 // export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart)
+
+//Localstorage notes
+/*
+window.localStorage.
+*/
