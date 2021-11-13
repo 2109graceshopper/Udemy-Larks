@@ -1,22 +1,23 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
-// import { fetchVideo } from '../redux/video';
+import { connect } from 'react-redux';
+
+import { fetchSingleVideo } from '.../store/singleVideo';
 
 class SingleVideo extends React.Component {
   constructor() {
     super();
-    this.handleAddToCart = this.handleAddToCart.bind(this);
+    // this.handleAddToCart = this.handleAddToCart.bind(this);
   }
 
-  //REDUX - Gets Video From DB
-  // componentDidMount() {
-  //   try {
-  //     this.props.getVideo(this.props.match.params.videoId);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  componentDidMount() {
+    try {
+      this.props.getVideo(this.props.match.params.videoId);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   // handleAddToCart() {
   //   const userId = this.props.user.id;
@@ -39,12 +40,13 @@ class SingleVideo extends React.Component {
           </div>
           <div>
             <img className='video-picture' src={video.imageUrl} />
-            <h4>Spots Remaining: {video.unitsInStock}</h4>
+            {/* <h4>Spots Remaining: {video.unitsInStock}</h4> */}
             <h4>Enrollment Price: {video.price}</h4>
           </div>
           <button
             onClick={() => {
-              handleAddToCart;
+              console.log('Add To Cart Button Clicked!');
+              // handleAddToCart;
             }}
           >
             Add To Cart
@@ -55,15 +57,14 @@ class SingleVideo extends React.Component {
   }
 }
 
-// const mapState = (state) => ({
-//   video: state.video,
-// });
+const mapStateToProps = (state) => ({
+  video: state.singleVideo,
+});
 
-// const mapDispatch = (dispatch) => ({
-//   getVideo: (videoId) => dispatch(fetchVideo(videoId)),
-//   addToCart: (videoId, userId, quantity) => dispatch(addToCart(videoId, userId, quantity))
-// });
+const mapDispatchToProps = (dispatch) => ({
+  getVideo: (id) => dispatch(fetchSingleVideo(id)),
+  // addToCart: (videoId, userId, quantity) =>
+  //   dispatch(addToCart(videoId, userId, quantity)),
+});
 
-//connect(mapStateToProps, mapDispatchToProps)(SingleVideo) -> export default once db connected
-
-export default SingleVideo;
+export default connect(mapStateToProps, mapDispatchToProps)(SingleVideo);

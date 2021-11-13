@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Video } = require('../db/index');
 
+// GET /api/videos
 router.get('/', async (req, res, next) => {
   try {
     const videos = await Video.findAll();

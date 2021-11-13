@@ -1,15 +1,20 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import { createLogger } from "redux-logger";
-import thunkMiddleware from "redux-thunk";
-import { composeWithDevTools } from "redux-devtools-extension";
-import auth from "./auth";
-import videosReducer from "./videos";
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createLogger } from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import auth from './auth';
+import videosReducer from './videos';
+import singleVideoReducer from './singleVideo';
 
-const reducer = combineReducers({ auth, videos: videosReducer });
+const reducer = combineReducers({
+  auth,
+  videos: videosReducer,
+  singleVideo: singleVideoReducer,
+});
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
 const store = createStore(reducer, middleware);
 
 export default store;
-export * from "./auth";
+export * from './auth';
