@@ -1,19 +1,27 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { fetchVideoById } from "../../store/videos";
 
 export class ShoppingCart extends React.Component {
   constructor(props) {
     super(props);
+
+    const localCart = JSON.parse(localStorage.getItem("graceShopperCart"));
+
     this.state = {
+      cartContents: localCart || [],
       cartTotalCost: 0,
     };
 
     this.handleCartCheckout = this.handleCartCheckout.bind(this);
     this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
+    this.handleVideoInfo = this.handleVideoInfo.bind(this);
+
+    console.log(this.state);
   }
 
-  //Uncomment when redux is set up
+  // //Uncomment when redux is set up
   // componentDidMount(userId) {
   //   this.props.getUserCart(userId);
   // }
@@ -27,10 +35,18 @@ export class ShoppingCart extends React.Component {
     await this.props.checkout();
   }
 
+  async handleVideoInfo(videoId) {
+    await this.props.getVideoInfo(videoId);
+  }
+
   render() {
-    const { handleRemoveFromCart, handleCartCheckout } = this;
-    const cartContents = this.props.cartContents || [];
-    const cartContentsView = cartContents.map((product) => {
+    const { handleVideoInfo, handleRemoveFromCart, handleCartCheckout } = this;
+    const cartContents = this.state.cartContents || [];
+    const cartContentsInfo =
+      cartContents.map(async (videoId) => {
+        await handleVideoInfo(videoId);
+      }) || [];
+    const cartContentsView = cartContentsInfo.map((product) => {
       return (
         <div className="single-cart-item" key={product.id}>
           <Link to={`/videos/${product.id}`}>
@@ -83,22 +99,17 @@ export class ShoppingCart extends React.Component {
 
 // const mapStateToProps = (state) => {
 //   return {
-//     products: state.userid.products
-// (will likely be something different)
-//   }
-// }
+//     videos: state.videos,
+//   };
+// };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     getUserCart: (userId) =>
-//     removeFromCart: (productId) =>
-//     checkOut: () =>
-//   }
-// }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getVideoInfo: (videoId) => dispatch(fetchVideoById(videoId)),
+    // getUserCart: (userId) =>
+    // removeFromCart: (productId) =>
+    // checkOut: () =>
+  };
+};
 
-// export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart)
-
-//Localstorage notes
-/*
-window.localStorage.
-*/
+export default connect(null, mapDispatchToProps)(ShoppingCart);

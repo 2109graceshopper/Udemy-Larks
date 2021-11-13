@@ -7,7 +7,7 @@ import Registration from "./components/Registration/Registration";
 import Home from "./components/Home";
 import AllProducts from "./components/AllProducts/AllProducts";
 import { me } from "./store";
-import { ShoppingCart } from "./components/ShoppingCart/ShoppingCart";
+import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
 
 /**
  * COMPONENT
