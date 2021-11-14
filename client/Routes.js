@@ -1,13 +1,23 @@
-import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { withRouter, Route, Switch, Redirect } from "react-router-dom";
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 // import Header from "./components/Header";
+<<<<<<< HEAD
 import Login from "./components/Login/Login";
 import Registration from "./components/Registration/Registration";
 import Home from "./components/Home";
 import AllProducts from "./components/AllProducts/AllProducts";
 import { me } from "./store";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
+=======
+import Login from './components/Login/Login';
+import Registration from './components/Registration/Registration';
+import Home from './components/Home';
+import AllProducts from './components/AllProducts/AllProducts';
+import { me } from './store';
+
+import SingleVideo from './components/SingleVideo/SingleVideo';
+>>>>>>> 05d4e3fecbbf8732975ae9fa4c068f9380c97ca5
 
 /**
  * COMPONENT
@@ -24,17 +34,26 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={Home} />
-            <Route path="/videos" component={AllProducts} />
+            <Route path='/home' component={Home} />
+            <Route exact path='/videos' component={AllProducts} />
+            <Route exact path='/videos/:videoId' component={SingleVideo} />
             {/* <Redirect to="/home" /> */}
           </Switch>
         ) : (
           <Switch>
+<<<<<<< HEAD
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/videos" component={AllProducts} />
             <Route path="/signup" component={Registration} />
             <Route path="/cart" component={ShoppingCart} />
+=======
+            <Route path='/' exact component={Login} />
+            <Route path='/login' component={Login} />
+            <Route exact path='/videos' component={AllProducts} />
+            <Route path='/signup' component={Registration} />
+            <Route exact path='/videos/:videoId' component={SingleVideo} />
+>>>>>>> 05d4e3fecbbf8732975ae9fa4c068f9380c97ca5
           </Switch>
         )}
       </div>

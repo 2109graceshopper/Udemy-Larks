@@ -12,6 +12,7 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
+<<<<<<< HEAD
     User.create({
       username: "cody@gmail.com",
       password: "123",
@@ -234,6 +235,22 @@ async function seed() {
     Order.create({ videoId: 10, userId: 5 }),
     Order.create({ videoId: 6, userId: 7 }),
     Order.create({ videoId: 4, userId: 8 }),
+=======
+    User.create({ username: "cody", password: "123" }),
+    User.create({ username: "murphy", password: "123" }),
+  ]);
+
+  //Creating Videos
+  const videos = await Promise.all([
+    Video.create({ title: "title1 " }),
+    Video.create({ title: "title2" }),
+  ]);
+
+  //Creating Orders
+  const orders = await Promise.all([
+    Order.create({ userId: 1, videoId: 1 }),
+    Order.create({ userId: 1, videoId: 2 }),
+>>>>>>> 05d4e3fecbbf8732975ae9fa4c068f9380c97ca5
   ]);
 
   console.log(`seeded ${users.length} users`);
