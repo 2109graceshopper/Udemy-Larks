@@ -22,10 +22,15 @@ export class ShoppingCart extends React.Component {
     await this.props.getVideosInfo(this.state.cartContents);
   }
 
-  async handleRemoveFromCart(productId) {
+  async handleRemoveFromCart(videoId) {
     // await this.props.removeFromCart(productId);
     // this.props.getUserCart();
     console.log("Remove from cart!");
+    const cart = this.state.cartContents;
+    let cartItem = cart.findIndex((video) => video.id === videoId);
+    cart.splice(cartItem, 1);
+    this.setState({ cartContents: cart });
+    console.log(this.state.cartContents);
   }
 
   async handleCartCheckout() {
