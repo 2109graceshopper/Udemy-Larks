@@ -14,19 +14,12 @@ const Order = db.define(
       primaryKey: true,
       autoIncrement: true,
     },
-  },
-  {
-    quantity: {
-      type: Sequelize.INTEGER,
-    },
-  },
-  {
     isCart: {
       type: Sequelize.BOOLEAN,
       defaultValue: false,
     },
   },
-  { timestamps: true }
+  { timestamps: false }
 );
 
 Order.addVideoToOrder = async (videoID, userID, Qty) => {

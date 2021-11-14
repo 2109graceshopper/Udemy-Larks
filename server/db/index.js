@@ -3,7 +3,7 @@
 const db = require("./db");
 const User = require("./models/User");
 const Video = require("./models/Video");
-// const Order = require("./models/Order");
+const Order = require("./models/Order");
 const { Sequelize } = require("sequelize");
 const { findAllVideos } = require("./models/Video");
 
@@ -18,34 +18,20 @@ const { findAllVideos } = require("./models/Video");
 // User.hasMany(OrderUser)
 
 //User Owned Videos
-const UserOwnedVideo = db.define("userownedvideos", {}, { timestamps: false });
+const UserOwnedVideo = db.define("userownedvideo", {}, { timestamps: false });
+
 Video.belongsToMany(User, {
   through: {
     model: UserOwnedVideo,
   },
 });
+
 User.hasMany(UserOwnedVideo);
 
 //User has Orders
-const Order = db.define(
-  "order",
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    isCart: {
-      type: Sequelize.BOOLEAN,
-      defaultValue: false,
-    },
-  },
-  { timestamps: false }
-);
-
 User.hasMany(Order);
 
-//Orders have multiple videos
+//Orders have many videos
 const OrderVideo = db.define(
   "ordervideo",
   {
@@ -61,8 +47,8 @@ Video.belongsToMany(Order, {
   through: { model: OrderVideo },
 });
 
-//Users have multiple videos in their cart
-
+//Users have many ordervideo
+User.hasMany(OrderVideo);
 
 module.exports = {
   db,
