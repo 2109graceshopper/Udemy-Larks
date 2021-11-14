@@ -4,7 +4,7 @@ const initialState = [];
 
 //ACTION TYPES
 const GET_VIDEOS = "GET_VIDEOS";
-const GET_VIDEO_BY_ID = "GET_VIDEO_BY_ID";
+const GET_VIDEOS_BY_IDS = "GET_VIDEOS_BY_IDS";
 
 //ACTION CREATORS
 export const getVideos = (videos) => {
@@ -14,11 +14,10 @@ export const getVideos = (videos) => {
   };
 };
 
-export const getVideoById = (video) => {
-  console.log("action creator", video);
+export const getVideosByIds = (videos) => {
   return {
-    type: GET_VIDEO_BY_ID,
-    video,
+    type: GET_VIDEOS_BY_IDS,
+    videos,
   };
 };
 
@@ -34,11 +33,14 @@ export const fetchVideos = () => {
   };
 };
 
-export const fetchVideoById = (videoId) => {
+export const fetchVideosByIds = (videosArray) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/api/videos/${videoId}`);
-      dispatch(getVideoById(data));
+      const [...data] = await Promise.all(
+        videosArray.map((videoId) => axios.get(`/api/videos/${videoId}`))
+      );
+      let videoDataArray = data.map((thunkResponse) => thunkResponse.data);
+      dispatch(getVideosByIds(videoDataArray));
     } catch (error) {
       console.error(error);
     }
@@ -50,9 +52,8 @@ export default function videosReducer(state = initialState, action) {
   switch (action.type) {
     case GET_VIDEOS:
       return action.videos;
-    case GET_VIDEO_BY_ID:
-      console.log("reducer", action.video);
-      return action.video;
+    case GET_VIDEOS_BY_IDS:
+      return action.videos;
     default:
       return state;
   }

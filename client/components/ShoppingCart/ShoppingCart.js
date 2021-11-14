@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchVideoById } from "../../store/videos";
+import { fetchVideosByIds } from "../../store/videos";
 
 export class ShoppingCart extends React.Component {
   constructor(props) {
@@ -11,43 +11,15 @@ export class ShoppingCart extends React.Component {
 
     this.state = {
       cartContents: localCart || [],
-      cartContentsInfo: [],
       cartTotalCost: 0,
     };
 
     this.handleCartCheckout = this.handleCartCheckout.bind(this);
     this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
-    this.handleVideoInfo = this.handleVideoInfo.bind(this);
   }
 
   async componentDidMount() {
-    console.log("cart contents:", this.state.cartContents);
-    let info = await this.props.getVideoInfo(1);
-
-    console.log("info:", info);
-    // const getData = async () => {
-    //   return Promise.all(
-    //     this.state.cartContents.map((item) => this.props.getVideoInfo(item))
-    //   );
-    // };
-    // let cartInfo = await getData();
-    // console.log(cartInfo);
-    // Promise.all(
-    //   this.state.cartContents.map((item) => this.props.getVideoInfo(item))
-    // ).then((values) => {
-    //   console.log(values);
-    // });
-    // this.setState({ cartContentsInfo: cartInfo });
-
-    // this.state.cartContents.forEach((videoId) =>
-    //   this.state.cartContentsInfo.push(this.props.getVideoInfo(1))
-    // );
-    // console.log(this.state.cartContents);
-  }
-
-  async handleVideoInfo(videoId) {
-    const videoInfo = await this.props.getVideoInfo(videoId);
-    return videoInfo;
+    await this.props.getVideosInfo(this.state.cartContents);
   }
 
   async handleRemoveFromCart(productId) {
@@ -62,9 +34,9 @@ export class ShoppingCart extends React.Component {
   }
 
   render() {
-    const { handleVideoInfo, handleRemoveFromCart, handleCartCheckout } = this;
+    const { handleRemoveFromCart, handleCartCheckout } = this;
 
-    let cart = [this.props.videos];
+    let cart = this.props.videos;
 
     const cartContentsView = cart.map((video) => {
       return (
@@ -126,7 +98,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getVideoInfo: (videoId) => dispatch(fetchVideoById(videoId)),
+    getVideosInfo: (videoArray) => dispatch(fetchVideosByIds(videoArray)),
     // getUserCart: (userId) =>
     // removeFromCart: (productId) =>
     // checkOut: () =>
