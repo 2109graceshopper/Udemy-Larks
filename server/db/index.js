@@ -43,12 +43,19 @@ const OrderVideo = db.define(
   { timestamps: false }
 );
 
-Video.belongsToMany(Order, {
-  through: { model: OrderVideo },
-});
+Video.belongsToMany(Order, { through: OrderVideo, otherKey: "id" });
+
+// Video.belongsToMany(OrderVideo);
+
+//Users has orderid as a foreign key
+// User.hasOne(Order, { foreignKey: "orderid", targetKey: "id" });
+// Order.belongsTo(User, { foreignKey: "userid", targetKey: "id" });
+
+// User.hasOne(Order, { foreignKey: "userid", target: "id"});
+// Order.hasOne(User, {foreignKey: "orderid"});
 
 //Users have many ordervideo
-User.hasMany(OrderVideo);
+// User.hasMany(OrderVideo);
 
 module.exports = {
   db,

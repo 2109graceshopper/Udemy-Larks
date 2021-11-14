@@ -44,18 +44,11 @@ router.get("/:id", async (req, res, next) => {
   try {
     const user = await User.findOne({
       where: { id: req.params.id },
-      include: {
-        model: Order,
-        where: {
-          isCart: true
-        }
-      },
     });
-    const orderid = user.orders[0].id;
     const ordervideos = await OrderVideo.findAll({
-      where: { orderId: orderid }
-    })
-    res.json(ordervideos); 
+      where: { orderid: user.orderid },
+    });
+    res.json(ordervideos);
   } catch (err) {
     next(err);
   }
