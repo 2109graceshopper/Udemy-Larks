@@ -20,17 +20,30 @@ export class ShoppingCart extends React.Component {
 
   async componentDidMount() {
     await this.props.getVideosInfo(this.state.cartContents);
+
+    let total = this.props.videos.reduce((a, b) => ({
+      price: a.price + b.price,
+    }));
+    this.setState({ cartTotalCost: total.price });
   }
 
   async handleRemoveFromCart(videoId) {
     const cart = this.state.cartContents;
     let cartItem = cart.findIndex((video) => video === videoId);
-    console.log(cartItem);
     cart.splice(cartItem, 1);
-    console.log(cart);
     this.setState({ cartContents: cart });
     let cartItems = JSON.stringify(this.state.cartContents);
     localStorage.setItem("graceShopperCart", cartItems);
+    await this.props.getVideosInfo(this.state.cartContents);
+
+    //Update displayed subtotal when items are removed
+    let total =
+      this.props.videos.length > 0
+        ? this.props.videos.reduce((a, b) => ({
+            price: a.price + b.price,
+          }))
+        : { price: 0 };
+    this.setState({ cartTotalCost: total.price });
 
     //Add routing to remove from user db as well
   }
@@ -74,7 +87,7 @@ export class ShoppingCart extends React.Component {
       <div className="checkout-card">
         <section className="checkout-top-half"></section>
         <section className="checkout-bottom-half">
-          Subtotal: {`$${this.cartTotalCost}`}
+          Subtotal: {`$${this.state.cartTotalCost}`}
           <button
             className="checkout-button"
             type="button"
