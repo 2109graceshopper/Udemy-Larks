@@ -11,61 +11,82 @@ export class ShoppingCart extends React.Component {
 
     this.state = {
       cartContents: localCart || [],
+      cartContentsInfo: [],
       cartTotalCost: 0,
     };
 
     this.handleCartCheckout = this.handleCartCheckout.bind(this);
     this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
     this.handleVideoInfo = this.handleVideoInfo.bind(this);
-
-    console.log(this.state);
   }
 
-  // //Uncomment when redux is set up
-  // componentDidMount(userId) {
-  //   this.props.getUserCart(userId);
-  // }
+  async componentDidMount() {
+    console.log("cart contents:", this.state.cartContents);
+    let info = await this.props.getVideoInfo(1);
 
-  async handleRemoveFromCart(productId) {
-    await this.props.removeFromCart(productId);
-    this.props.getUserCart();
-  }
+    console.log("info:", info);
+    // const getData = async () => {
+    //   return Promise.all(
+    //     this.state.cartContents.map((item) => this.props.getVideoInfo(item))
+    //   );
+    // };
+    // let cartInfo = await getData();
+    // console.log(cartInfo);
+    // Promise.all(
+    //   this.state.cartContents.map((item) => this.props.getVideoInfo(item))
+    // ).then((values) => {
+    //   console.log(values);
+    // });
+    // this.setState({ cartContentsInfo: cartInfo });
 
-  async handleCartCheckout() {
-    await this.props.checkout();
+    // this.state.cartContents.forEach((videoId) =>
+    //   this.state.cartContentsInfo.push(this.props.getVideoInfo(1))
+    // );
+    // console.log(this.state.cartContents);
   }
 
   async handleVideoInfo(videoId) {
-    await this.props.getVideoInfo(videoId);
+    const videoInfo = await this.props.getVideoInfo(videoId);
+    return videoInfo;
+  }
+
+  async handleRemoveFromCart(productId) {
+    // await this.props.removeFromCart(productId);
+    // this.props.getUserCart();
+    console.log("Remove from cart!");
+  }
+
+  async handleCartCheckout() {
+    // await this.props.checkout();
+    console.log("Checkout!");
   }
 
   render() {
     const { handleVideoInfo, handleRemoveFromCart, handleCartCheckout } = this;
-    const cartContents = this.state.cartContents || [];
-    const cartContentsInfo =
-      cartContents.map(async (videoId) => {
-        await handleVideoInfo(videoId);
-      }) || [];
-    const cartContentsView = cartContentsInfo.map((product) => {
+
+    let cart = [this.props.videos];
+
+    const cartContentsView = cart.map((video) => {
       return (
-        <div className="single-cart-item" key={product.id}>
-          <Link to={`/videos/${product.id}`}>
-            <div className="video-preview">
-              Video Preview Goes Here (embedded product.image)
-            </div>
+        <div className="single-cart-item" key={video.id}>
+          <Link to={`/videos/${video.id}`}>
+            <img className="video-preview" src={video.imageURL} />
             <div className="video-details">
-              {product.title}
-              {product.details}
-              <button
-                className="remove-from-cart-button"
-                type="button"
-                onClick={() => handleRemoveFromCart(product.id)}
-              >
-                Remove from cart
-              </button>
+              {video.title}
+              {/* {video.description} */}
             </div>
-            <div className="video-price">{product.price}</div>
           </Link>
+          <div>
+            {" "}
+            <button
+              className="remove-from-cart-button"
+              type="button"
+              onClick={() => handleRemoveFromCart(video.id)}
+            >
+              Remove from cart
+            </button>
+          </div>
+          <div className="video-price">{video.price}</div>
         </div>
       );
     });
@@ -97,11 +118,11 @@ export class ShoppingCart extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     videos: state.videos,
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    videos: state.videos,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -112,4 +133,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(ShoppingCart);
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart);

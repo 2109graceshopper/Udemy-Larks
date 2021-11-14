@@ -15,6 +15,7 @@ export const getVideos = (videos) => {
 };
 
 export const getVideoById = (video) => {
+  console.log("action creator", video);
   return {
     type: GET_VIDEO_BY_ID,
     video,
@@ -50,6 +51,7 @@ export default function videosReducer(state = initialState, action) {
     case GET_VIDEOS:
       return action.videos;
     case GET_VIDEO_BY_ID:
+      console.log("reducer", action.video);
       return action.video;
     default:
       return state;

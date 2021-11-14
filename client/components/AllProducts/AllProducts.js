@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchVideos, addProductToCart } from "../../store/videos";
+import { fetchVideos } from "../../store/videos";
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -129,7 +129,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getVideos: () => dispatch(fetchVideos()),
-    addToCart: (videoId) => dispatch(addProductToCart(videoId)),
+    // addToCart: (videoId) => dispatch(addProductToCart(videoId)),
   };
 };
 
