@@ -64,7 +64,7 @@ export class AllProducts extends React.Component {
                   Add to cart
                 </button>
               </div>
-              <div className="video-price">{video.price}</div>
+              <div className="video-price">{video.price} KREM</div>
             </Link>
           </div>
         );

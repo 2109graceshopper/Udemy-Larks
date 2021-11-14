@@ -23,14 +23,16 @@ export class ShoppingCart extends React.Component {
   }
 
   async handleRemoveFromCart(videoId) {
-    // await this.props.removeFromCart(productId);
-    // this.props.getUserCart();
-    console.log("Remove from cart!");
     const cart = this.state.cartContents;
-    let cartItem = cart.findIndex((video) => video.id === videoId);
+    let cartItem = cart.findIndex((video) => video === videoId);
+    console.log(cartItem);
     cart.splice(cartItem, 1);
+    console.log(cart);
     this.setState({ cartContents: cart });
-    console.log(this.state.cartContents);
+    let cartItems = JSON.stringify(this.state.cartContents);
+    localStorage.setItem("graceShopperCart", cartItems);
+
+    //Add routing to remove from user db as well
   }
 
   async handleCartCheckout() {
@@ -63,7 +65,7 @@ export class ShoppingCart extends React.Component {
               Remove from cart
             </button>
           </div>
-          <div className="video-price">{video.price}</div>
+          <div className="video-price">{video.price} KREM</div>
         </div>
       );
     });
