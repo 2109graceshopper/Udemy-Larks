@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Video } = require('../db/index');
+const { User, OrderVideo, Order, UserOwnedVideo } = require('../db/index');
 
 // GET /api/users
 router.get('/', async (req, res, next) => {
@@ -14,12 +14,11 @@ router.get('/', async (req, res, next) => {
 // GET /api/users/userId
 router.get('/:userId', async (req, res, next) => {
   try {
-    // DB query to updated once DB design is updated
-    const user = await User.findAll({
-      where: {
-        id: req.params.userId,
+    const user = await User.findOne({
+      where: { id: req.params.userId },
+      include: {
+        model: UserOwnedVideo,
       },
-      include: Video,
     });
     res.json(user);
   } catch (err) {
