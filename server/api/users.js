@@ -18,7 +18,7 @@ router.get("/", async (req, res, next) => {
 });
 
 /*
-// Shopping Cart of videos for some given user
+  // Shopping Cart of videos for some given user
     const videos = await Video.findAll({
       include: {
         model: ShoppingCart,
@@ -28,7 +28,7 @@ router.get("/", async (req, res, next) => {
       },
     });
     let user = await User.findByPk(req.params.id);
-    user = { videos: videos };
+    user = { ...user, shoppingCart: videos };
     res.json(user);
 
   - Finding Videos that a User owns?
@@ -57,7 +57,7 @@ router.get("/:id", async (req, res, next) => {
       },
     });
     let user = await User.findByPk(req.params.id);
-    user = { videos: videos };
+    user = { ...user, shoppingCart: videos };
     res.json(user);
   } catch (err) {
     next(err);
