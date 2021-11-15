@@ -1,5 +1,12 @@
 const router = require('express').Router();
-const { User, OrderVideo, Order, UserOwnedVideo } = require('../db/index');
+const {
+  User,
+  Video,
+  Order,
+  OrderVideo,
+  ShoppingCart,
+  UserOwnedVideo,
+} = require('../db/index');
 
 // GET /api/users
 router.get('/', async (req, res, next) => {
@@ -14,12 +21,18 @@ router.get('/', async (req, res, next) => {
 // GET /api/users/userId
 router.get('/:userId', async (req, res, next) => {
   try {
-    const user = await User.findOne({
-      where: { id: req.params.userId },
+    const videos = await Video.findAll({
       include: {
         model: UserOwnedVideo,
+        where: {
+          userId: req.params.userId,
+        },
       },
     });
+    let user = await User.findOne({
+      where: { id: req.params.userId },
+    });
+    user = { ...user, videos: videos };
     res.json(user);
   } catch (err) {
     next(err);
