@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchVideos, addProductToCart } from "../../store/videos";
+import { fetchVideos } from "../../store/videos";
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -10,20 +10,32 @@ export class AllProducts extends React.Component {
       videoCategoryFilter: "All", //this.state dependent on state from header selector, will
       //connect later if we decide to implement
     };
-    this.handleAddToCart = this.handleAddToCart.bind(this);
+    this.handleAddToCart = this.handleAddToLocalCart.bind(this);
   }
 
   componentDidMount() {
     this.props.getVideos();
   }
 
-  async handleAddToCart(videoId) {
+  //This checks for a "graceShopperCart" in local storage. If it doesn't exist, it makes one with a value of [videoId].
+  //If it already exists, it retrieves the cart, adds a new videoId to the value, and re-stores locally.
+  handleAddToLocalCart(videoId) {
     console.log("add " + videoId + " to cart!");
+    if (!localStorage.getItem("graceShopperCart")) {
+      let cartItems = JSON.stringify([videoId]);
+      localStorage.setItem("graceShopperCart", cartItems);
+    } else {
+      let cartItems = JSON.parse(localStorage.getItem("graceShopperCart"));
+      cartItems.push(videoId);
+      cartItems = JSON.stringify(cartItems);
+      localStorage.setItem("graceShopperCart", cartItems);
+    }
+
     // await this.props.addToCart(productId);
   }
 
   render() {
-    const { handleAddToCart } = this;
+    const { handleAddToLocalCart } = this;
     const videos = this.props.videos || [];
 
     //uncomment if video.category is added
@@ -47,12 +59,12 @@ export class AllProducts extends React.Component {
                 <button
                   className="add-to-cart-button"
                   type="button"
-                  onClick={() => handleAddToCart(video.id)}
+                  onClick={() => handleAddToLocalCart(video.id)}
                 >
                   Add to cart
                 </button>
               </div>
-              <div className="video-price">{video.price}</div>
+              <div className="video-price">{video.price} KREM</div>
             </Link>
           </div>
         );
@@ -117,7 +129,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getVideos: () => dispatch(fetchVideos()),
-    addToCart: (videoId) => dispatch(addProductToCart(videoId)),
+    // addToCart: (videoId) => dispatch(addProductToCart(videoId)),
   };
 };
 
