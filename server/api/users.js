@@ -27,7 +27,8 @@ router.get("/", async (req, res, next) => {
         },
       },
     });
-    const user = { videos: videos };
+    let user = await User.findByPk(req.params.id);
+    user = { videos: videos };
     res.json(user);
 
   - Finding Videos that a User owns?
@@ -39,11 +40,7 @@ router.get("/", async (req, res, next) => {
         }
       }
     });
-    let user = await User.findOne(
-      {
-        where: { id: req.params.id },
-      }
-    );
+    let user = await User.findByPk(req.params.id);
     user = {...user, videos: videos};
     res.json(user);
 
@@ -52,19 +49,12 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     // Shopping Cart of videos for some given user
-    const videos = await Video.findAll({
-      include: {
-        model: ShoppingCart,
-        where: {
-          userId: req.params.id,
-        },
-      },
-    });
-    let user = await User.findOne({
+    const user = await User.findOne({
       where: { id: req.params.id },
-    });
-    user = { ...user, videos: videos };
-    res.json(user);
+      include: {
+        model:
+      }
+    res.json(users);
   } catch (err) {
     next(err);
   }

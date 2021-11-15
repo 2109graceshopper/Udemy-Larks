@@ -9,6 +9,9 @@ const { findAllVideos } = require("./models/Video");
 
 //associations could go here!
 
+//User have many Orders
+User.hasMany(Order);
+
 //User Owned Videos
 const UserOwnedVideo = db.define("userownedvideo", {}, { timestamps: false });
 
@@ -19,9 +22,6 @@ Video.belongsToMany(User, {
 });
 
 Video.hasMany(UserOwnedVideo);
-
-//User have many Orders
-User.hasMany(Order);
 
 //Past (instantiated) orders have many videos
 const OrderVideo = db.define(
