@@ -5,19 +5,19 @@ class LandingPage extends React.Component {
   render() {
     return (
       <div>
-        <main>
+        <main className='main'>
           <div>
             <h1>Your Learning Journey Starts Here!</h1>
             <p>
               Break into a new field with courses from our world class
               instructors. Build skills for your present and your future.
             </p>
-            <div>
+            <div className='cta-get-started'>
               <Link to={'/videos'}>Get Started</Link>
             </div>
           </div>
         </main>
-        <section>
+        <section className='services'>
           <div>
             <img className='trophy-icon' src='/icons/trophy.png' />
             <h3>High Quality</h3>
