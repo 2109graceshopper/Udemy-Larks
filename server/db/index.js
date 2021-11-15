@@ -38,7 +38,16 @@ const OrderVideo = db.define(
 Video.belongsToMany(Order, { through: OrderVideo, otherKey: "id" });
 
 //Users have many Videos in their shopping cart
-const ShoppingCart = db.define("shoppingcart", {}, { timestamps: false });
+const ShoppingCart = db.define(
+  "shoppingcart",
+  {
+    qty: {
+      type: Sequelize.INTEGER,
+      defaultValue: 1,
+    },
+  },
+  { timestamps: false }
+);
 Video.belongsToMany(User, { through: ShoppingCart });
 Video.hasMany(ShoppingCart);
 
