@@ -14,9 +14,6 @@ const User = db.define("user", {
     unique: true,
     //allowNull: false
   },
-  orderid: {
-    type: Sequelize.INTEGER,
-  },
   password: {
     type: Sequelize.STRING,
   },

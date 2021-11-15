@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const {
   User,
-  OrderVideo,
-  Order,
-  UserOwnedVideo,
   Video,
+  Order,
+  OrderVideo,
+  ShoppingCart,
+  UserOwnedVideo,
 } = require("../db/index");
 
 router.get("/", async (req, res, next) => {
@@ -17,58 +18,52 @@ router.get("/", async (req, res, next) => {
 });
 
 /*
-
-- Finding Shopping Cart Items for a given user?
-const user = await User.findOne({
-      where: { id: req.params.id },
+// Shopping Cart of videos for some given user
+    const videos = await Video.findAll({
       include: {
-        model: Order,
+        model: ShoppingCart,
         where: {
-          isCart: true
-        }
+          userId: req.params.id,
+        },
       },
     });
-    const orderid = user.orders[0].id;
-    const ordervideos = await OrderVideo.findAll({
-      where: { orderId: orderid }
-    })
-    res.json(ordervideos);
+    const user = { videos: videos };
+    res.json(user);
 
-
-  - Finding Vidos that a User owns?
-  const user = await User.findOne({
-      where: { id: req.params.id },
+  - Finding Videos that a User owns?
+  const videos = await Video.findAll({
       include: {
         model: UserOwnedVideo,
-      },
+        where: {
+          userId: req.params.id,
+        }
+      }
     });
+    let user = await User.findOne(
+      {
+        where: { id: req.params.id },
+      }
+    );
+    user = {...user, videos: videos};
     res.json(user);
 
 */
 
 router.get("/:id", async (req, res, next) => {
   try {
-    // const videos = await Video.findAll({
-    //   include: {
-    //     model: Order,
-    //     where: {
-    //       isCart: true,
-    //     },
-    //   },
-    // });
-
-    const user = await User.findOne({
-      where: { id: req.params.id },
+    // Shopping Cart of videos for some given user
+    const videos = await Video.findAll({
       include: {
-        model: Video,
-        include: {
-          model: Order,
-          where: {
-            isCart: true,
-          },
+        model: ShoppingCart,
+        where: {
+          userId: req.params.id,
         },
       },
     });
+    let user = await User.findOne({
+      where: { id: req.params.id },
+    });
+    user = { ...user, videos: videos };
     res.json(user);
   } catch (err) {
     next(err);

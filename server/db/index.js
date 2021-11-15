@@ -8,14 +8,6 @@ const { Sequelize } = require("sequelize");
 const { findAllVideos } = require("./models/Video");
 
 //associations could go here!
-//Videos can be part of multiple orders
-//order can have multiple videos
-// Video.belongsToMany(OrderUser, { through: OrderVideo })
-// OrderUser.belongsToMany(Video, { through: OrderVideo })
-
-// //User can have multiple orders
-// OrderUser.belongsTo(User);
-// User.hasMany(OrderUser)
 
 //User Owned Videos
 const UserOwnedVideo = db.define("userownedvideo", {}, { timestamps: false });
@@ -26,12 +18,12 @@ Video.belongsToMany(User, {
   },
 });
 
-User.hasMany(UserOwnedVideo);
+Video.hasMany(UserOwnedVideo);
 
-//User has Orders
+//User have many Orders
 User.hasMany(Order);
 
-//Orders have many videos
+//Past (instantiated) orders have many videos
 const OrderVideo = db.define(
   "ordervideo",
   {
@@ -44,17 +36,11 @@ const OrderVideo = db.define(
 );
 
 Video.belongsToMany(Order, { through: OrderVideo, otherKey: "id" });
-User.belongsToMany(Order, { through: OrderVideo, otherKey: "id" });
 
-//Users has orderid as a foreign key
-// User.hasOne(Order, { foreignKey: "orderid", targetKey: "id" });
-// Order.belongsTo(User, { foreignKey: "userid", targetKey: "id" });
-
-// User.hasOne(Order, { foreignKey: "userid", target: "id"});
-// Order.hasOne(User, {foreignKey: "orderid"});
-
-//Users have many ordervideo
-// User.hasMany(OrderVideo);
+//Users have many Videos in their shopping cart
+const ShoppingCart = db.define("shoppingcart", {}, { timestamps: false });
+Video.belongsToMany(User, { through: ShoppingCart });
+Video.hasMany(ShoppingCart);
 
 module.exports = {
   db,
@@ -62,5 +48,6 @@ module.exports = {
   Video,
   Order,
   OrderVideo,
+  ShoppingCart,
   UserOwnedVideo,
 };
