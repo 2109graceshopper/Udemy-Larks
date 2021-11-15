@@ -44,8 +44,7 @@ const OrderVideo = db.define(
 );
 
 Video.belongsToMany(Order, { through: OrderVideo, otherKey: "id" });
-
-// Video.belongsToMany(OrderVideo);
+User.belongsToMany(Order, { through: OrderVideo, otherKey: "id" });
 
 //Users has orderid as a foreign key
 // User.hasOne(Order, { foreignKey: "orderid", targetKey: "id" });

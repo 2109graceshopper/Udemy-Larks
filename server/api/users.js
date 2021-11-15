@@ -1,5 +1,11 @@
 const router = require("express").Router();
-const { User, OrderVideo, Order, UserOwnedVideo } = require("../db/index");
+const {
+  User,
+  OrderVideo,
+  Order,
+  UserOwnedVideo,
+  Video,
+} = require("../db/index");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -42,13 +48,28 @@ const user = await User.findOne({
 
 router.get("/:id", async (req, res, next) => {
   try {
+    // const videos = await Video.findAll({
+    //   include: {
+    //     model: Order,
+    //     where: {
+    //       isCart: true,
+    //     },
+    //   },
+    // });
+
     const user = await User.findOne({
       where: { id: req.params.id },
+      include: {
+        model: Video,
+        include: {
+          model: Order,
+          where: {
+            isCart: true,
+          },
+        },
+      },
     });
-    const ordervideos = await OrderVideo.findAll({
-      where: { orderid: user.orderid },
-    });
-    res.json(ordervideos);
+    res.json(user);
   } catch (err) {
     next(err);
   }
