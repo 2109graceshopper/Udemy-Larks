@@ -32,7 +32,7 @@ router.get('/:userId', async (req, res, next) => {
     let user = await User.findOne({
       where: { id: req.params.userId },
     });
-    user = { ...user, videos: videos };
+    user = { ...user, ownedVideos: videos };
     res.json(user);
   } catch (err) {
     next(err);

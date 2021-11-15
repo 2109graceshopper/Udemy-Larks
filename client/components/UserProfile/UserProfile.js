@@ -27,7 +27,7 @@ class UserProfile extends React.Component {
         </section>
         <section>
           <h2>Your Products</h2>
-          {user.videos.map((video) => {
+          {user.ownedVideos.map((video) => {
             return (
               <div key={video.id}>
                 <Link to={`/videos/${video.id}`}>
