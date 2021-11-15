@@ -6,10 +6,17 @@ import Login from './components/Login/Login';
 import Registration from './components/Registration/Registration';
 import Home from './components/Home';
 import AllProducts from './components/AllProducts/AllProducts';
+<<<<<<< HEAD
 import { me } from './store';
 
 import SingleVideo from './components/SingleVideo/SingleVideo';
 import ShoppingCart from './components/ShoppingCart/ShoppingCart';
+=======
+import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
+
+import { me } from './store';
+
+>>>>>>> f0217b4788cc54620203128cb0cbdbd405ea16a8
 /**
  * COMPONENT
  */
@@ -28,11 +35,11 @@ class Routes extends Component {
             <Route path='/home' component={Home} />
             <Route exact path='/videos' component={AllProducts} />
             <Route exact path='/videos/:videoId' component={SingleVideo} />
-            {/* <Redirect to="/home" /> */}
+            <Redirect to="/home" />
           </Switch>
         ) : (
           <Switch>
-            <Route path='/' exact component={Login} />
+            <Route path='/' exact component={Home} />
             <Route path='/login' component={Login} />
             <Route exact path='/videos' component={AllProducts} />
             <Route path='/signup' component={Registration} />
