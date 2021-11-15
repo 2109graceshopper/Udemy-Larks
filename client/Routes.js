@@ -1,13 +1,14 @@
-import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { withRouter, Route, Switch, Redirect } from "react-router-dom";
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 // import Header from "./components/Header";
-import Login from "./components/Login/Login";
-import Registration from "./components/Registration/Registration";
-import Home from "./components/Home";
-import AllProducts from "./components/AllProducts/AllProducts";
-import { me } from "./store";
+import Login from './components/Login/Login';
+import Registration from './components/Registration/Registration';
+import Home from './components/Home';
+import AllProducts from './components/AllProducts/AllProducts';
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
+
+import { me } from './store';
 
 /**
  * COMPONENT
@@ -24,17 +25,19 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={Home} />
-            <Route path="/videos" component={AllProducts} />
-            {/* <Redirect to="/home" /> */}
+            <Route path='/home' component={Home} />
+            <Route path='/videos' component={AllProducts} />
+            <Redirect to='/home' />
           </Switch>
         ) : (
           <Switch>
-            <Route path="/" exact component={Login} />
-            <Route path="/login" component={Login} />
-            <Route path="/videos" component={AllProducts} />
-            <Route path="/signup" component={Registration} />
+
+            <Route path='/' exact component={Login} />
+            <Route path='/login' component={Login} />
+            <Route path='/videos' component={AllProducts} />
+            <Route path='/signup' component={Registration} />
             <Route path="/cart" component={ShoppingCart} />
+
           </Switch>
         )}
       </div>
