@@ -21,10 +21,12 @@ export class ShoppingCart extends React.Component {
   async componentDidMount() {
     await this.props.getVideosInfo(this.state.cartContents);
 
-    let total = this.props.videos.reduce((a, b) => ({
-      price: a.price + b.price,
-    }));
-    this.setState({ cartTotalCost: total.price });
+    if (this.state.cartContents.length > 0) {
+      let total = this.props.videos.reduce((a, b) => ({
+        price: a.price + b.price,
+      }));
+      this.setState({ cartTotalCost: total.price });
+    }
   }
 
   async handleRemoveFromCart(videoId) {
@@ -51,6 +53,10 @@ export class ShoppingCart extends React.Component {
   async handleCartCheckout() {
     // await this.props.checkout();
     console.log("Checkout!");
+
+    //clear cart from localStorage and set state cart to []
+    window.localStorage.removeItem("graceShopperCart");
+    this.setState({ cartContents: [] });
   }
 
   render() {
@@ -102,7 +108,11 @@ export class ShoppingCart extends React.Component {
     return (
       <div>
         <h1>Your Cart:</h1>
-        <section className="all-cart-products">{cartContentsView}</section>
+        <section className="all-cart-products">
+          {" "}
+          {cart.length > 0 ? cartContentsView : <h2>Your cart is empty!</h2>}
+        </section>
+
         <section className="checkout-box">{checkoutView}</section>
         {/* <section className="recommendations">(optional)</section> */}
       </div>
