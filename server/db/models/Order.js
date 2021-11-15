@@ -15,20 +15,42 @@ const Order = db.define(
         autoIncrement: true,
       },
     },
-    {
-      quantity :{
-      type: Sequelize.INTEGER,
-      },
+    isCart: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
     },
-    { isCart: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
-      }
-    },
-    { timestamps: true }
-  );
+  },
+  { timestamps: false }
+);
+
+Order.addVideoToOrder = async (videoID, userID, Qty) => {
+  try {
+    await this.create({
+      videoID: videoID,
+      userID: userID,
+      quantity: Qty,
+    });
+  } catch (err) {
+    console.log("Adding to cart error");
+  }
+};
+//use isCart to checkout
+/**
+ * @TODO
+ * Need to update quantity of videos later
+ */
+Order.checkOut = async (id) => {
+  try {
+    await this.update({
+      isCart: true,
+      where: { id: id },
+    });
+  } catch (err) {
+    console.log("Error Checking Out");
+  }
+};
 
 Order.addVideoToOrder = async(videoID, userID, Qty) =>{
 }
-  
+
 module.exports = Order;

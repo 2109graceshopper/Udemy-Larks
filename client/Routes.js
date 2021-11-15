@@ -9,7 +9,7 @@ import AllProducts from './components/AllProducts/AllProducts';
 import { me } from './store';
 
 import SingleVideo from './components/SingleVideo/SingleVideo';
-
+import ShoppingCart from './components/ShoppingCart/ShoppingCart';
 /**
  * COMPONENT
  */
@@ -36,6 +36,7 @@ class Routes extends Component {
             <Route path='/login' component={Login} />
             <Route exact path='/videos' component={AllProducts} />
             <Route path='/signup' component={Registration} />
+            <Route path='/cart' component={ShoppingCart} />
             <Route exact path='/videos/:videoId' component={SingleVideo} />
           </Switch>
         )}

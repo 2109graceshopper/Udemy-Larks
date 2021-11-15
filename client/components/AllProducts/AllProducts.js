@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchVideos, addProductToCart } from "../../store/videos";
+import { fetchVideos } from "../../store/videos";
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -64,7 +64,7 @@ export class AllProducts extends React.Component {
                   Add to cart
                 </button>
               </div>
-              <div className="video-price">{video.price}</div>
+              <div className="video-price">{video.price} KREM</div>
             </Link>
           </div>
         );
@@ -129,7 +129,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getVideos: () => dispatch(fetchVideos()),
-    addToCart: (videoId) => dispatch(addProductToCart(videoId)),
+    // addToCart: (videoId) => dispatch(addProductToCart(videoId)),
   };
 };
 
