@@ -50,19 +50,16 @@ export class ShoppingCart extends React.Component {
       });
 
       await this.props.getUserCart(user.id);
-
       let userCart = this.props.orders.map((item) => item.videoId);
-
       let newCart = userCart.concat(this.state.cartContents);
-
       this.setState({ cartContents: newCart });
-
-      // console.log(this.state.cartContents);
       newCart = JSON.stringify(newCart);
-
       localStorage.setItem("graceShopperCart", newCart);
-      await this.props.getVideosInfo(this.state.cartContents);
     }
+
+    await this.props.getVideosInfo(this.state.cartContents);
+
+    //add pathing to update cart in db
   }
 
   async handleRemoveFromCart(videoId) {
