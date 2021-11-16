@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
+// eslint-disable-next-line no-unused-vars
 import { Link } from "react-router-dom";
 import { fetchVideosByIds } from "../../store/videos";
+import { fetchCartByUser } from "../../store/orders";
 
 export class ShoppingCart extends React.Component {
   constructor(props) {
@@ -12,6 +14,7 @@ export class ShoppingCart extends React.Component {
     this.state = {
       cartContents: localCart || [],
       cartTotalCost: 0,
+      userId: 0,
     };
 
     this.handleCartCheckout = this.handleCartCheckout.bind(this);
@@ -19,6 +22,23 @@ export class ShoppingCart extends React.Component {
   }
 
   async componentDidMount() {
+    //If a userid is found (user logged in), reflect in state.
+    //Otherwise, userId defaults to 0 (guest user)
+    this.props.user.id ? this.setState({ userId: this.props.user.id }) : null;
+
+    //If a user is logged in, querry the db for any saved cart (incomplete orders), and merge with any locally stored cart.
+    console.log(this.props);
+
+    if (this.state.userId > 0) {
+      console.log("user", this.state.userId);
+      await this.props.getUserCart(this.state.userId);
+      let userCart = this.props.orders.map((item) => item.videoId);
+      let newCart = userCart.concat(this.state.cartContents);
+      localStorage.setItem("graceShopperCart", newCart);
+      this.setState({ cartContents: newCart });
+      console.log(this.state.cartContents);
+    }
+
     await this.props.getVideosInfo(this.state.cartContents);
 
     if (this.state.cartContents.length > 0) {
@@ -122,14 +142,16 @@ export class ShoppingCart extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    user: state.auth,
     videos: state.videos,
+    orders: state.orders,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getVideosInfo: (videoArray) => dispatch(fetchVideosByIds(videoArray)),
-    // getUserCart: (userId) =>
+    getUserCart: (userId) => dispatch(fetchCartByUser(userId)),
     // removeFromCart: (productId) =>
     // checkOut: () =>
   };
