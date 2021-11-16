@@ -247,7 +247,7 @@ async function seed() {
   ]);
 
   //Creating orderVideos
-  const userUniqueVideo = await Promise.all([
+  const orderVideos = await Promise.all([
     OrderVideo.create({qty: 1, videoId: 1, orderId:4}),
     OrderVideo.create({qty: 1, videoId: 5, orderId:5}),
     OrderVideo.create({qty: 1, videoId: 1, orderId:6}),
@@ -262,7 +262,7 @@ async function seed() {
   ])
 
   //creting userOwnedVideos  //no duplicate videos per user
-  const userUniqueVideo = await Promise.all([
+   await Promise.all([
     userUniqueVideo.create({ videoId: 1, userId: 2 }),
     userUniqueVideo.create({ videoId: 5, userId: 1 }),
     userUniqueVideo.create({ videoId: 1, userId: 1 }), 
