@@ -77,9 +77,7 @@ router.get("/:id", async (req, res, next) => {
     });
 
     let user = await User.findByPk(req.params.id);
-
     user = { ...user, shoppingCart: videos };
-
     res.json(user);
   } catch (err) {
     next(err);
