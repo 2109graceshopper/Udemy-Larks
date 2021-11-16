@@ -15,6 +15,7 @@ export class ShoppingCart extends React.Component {
       cartContents: localCart || [],
       cartTotalCost: 0,
       userId: 0,
+      gotCart: false,
     };
 
     this.handleCartCheckout = this.handleCartCheckout.bind(this);
@@ -22,16 +23,6 @@ export class ShoppingCart extends React.Component {
   }
 
   async componentDidMount() {
-    // if (this.state.userId > 0) {
-    //   console.log("user", this.state.userId);
-    //   await this.props.getUserCart(this.state.userId);
-    //   let userCart = this.props.orders.map((item) => item.videoId);
-    //   let newCart = userCart.concat(this.state.cartContents);
-    //   localStorage.setItem("graceShopperCart", newCart);
-    //   this.setState({ cartContents: newCart });
-    //   console.log(this.state.cartContents);
-    // }
-
     await this.props.getVideosInfo(this.state.cartContents);
 
     if (this.state.cartContents.length > 0) {
@@ -40,26 +31,28 @@ export class ShoppingCart extends React.Component {
       }));
       this.setState({ cartTotalCost: total.price });
     }
-  }
 
-  async componentDidUpdate(prevProps) {
-    let user = this.props.user;
-    if (prevProps.user.id !== user.id) {
+    setTimeout(async () => {
+      let user = this.props.user;
       this.setState({
         userId: user.id,
       });
+    }, 100);
 
-      await this.props.getUserCart(user.id);
+    if (this.state.gotCart === false) {
+      await this.props.getUserCart(this.state.userId);
       let userCart = this.props.orders.map((item) => item.videoId);
       let newCart = userCart.concat(this.state.cartContents);
-      this.setState({ cartContents: newCart });
+      this.setState({ cartContents: newCart, gotCart: true });
       newCart = JSON.stringify(newCart);
       localStorage.setItem("graceShopperCart", newCart);
+      await this.props.getVideosInfo(this.state.cartContents);
     }
+  }
 
-    await this.props.getVideosInfo(this.state.cartContents);
-
-    //add pathing to update cart in db
+  async componentDidUpdate(prevProps) {
+    //pathing to update cart in db
+    //fix refresh issue with cart rendering
   }
 
   async handleRemoveFromCart(videoId) {
