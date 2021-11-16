@@ -4,13 +4,13 @@ const {
   Video,
   Order,
   OrderVideo,
-  UserOwnedVideo,
+  userUniqueVideo,
 } = require("../db/index");
 
 router.get("/", async (req, res, next) => {
   try {
     const users = await User.findAll({
-      attributes:['id', 'username']
+      attributes:['id', 'username'] //returning only needed data from users safer!
     });
     res.json(users);
   } catch (err) {
@@ -79,7 +79,9 @@ router.get("/:id", async (req, res, next) => {
     });
 
     let user = await User.findByPk(req.params.id);
-    user = { ...user, shoppingCart: videos };
+    let safeUserData = {'id': user.dataValues.id, 'username': user.dataValues.username, 'firstName':  user.dataValues.firstName, 'lastName':  user.dataValues.lastName, 'address':  user.dataValues.address, 'userimageURL':  user.dataValues.userimageURL,}
+    user = { ...safeUserData, shoppingCart: videos };
+    
     res.json(user);
   } catch (err) {
     next(err);
