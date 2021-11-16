@@ -9,7 +9,7 @@ const SALT_ROUNDS = 5;
 const Order = db.define(
   "order",
   {
-    id: {
+    orderId: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
