@@ -4,8 +4,7 @@ const {
   Video,
   Order,
   OrderVideo,
-  ShoppingCart,
-  UserOwnedVideo,
+  userUniqueVideo,
 } = require('../db/index');
 
 // GET /api/users
@@ -18,49 +17,28 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-/*
-  // Shopping Cart of videos for some given user
+router.get('/:id', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: req.params.id,
+        isCart: true,
+      },
+    });
+
+    const { orderId } = order;
+
     const videos = await Video.findAll({
       include: {
-        model: ShoppingCart,
+        model: OrderVideo,
         where: {
-          userId: req.params.id,
+          orderId: orderId,
         },
       },
     });
+
     let user = await User.findByPk(req.params.id);
     user = { ...user, shoppingCart: videos };
-    res.json(user);
-
-  - Finding Videos that a User owns?
-    const videos = await Video.findAll({
-      include: {
-        model: UserOwnedVideo,
-        where: {
-          userId: req.params.id,
-        }
-      }
-    });
-    let user = await User.findByPk(req.params.id);
-    user = {...user, videos: videos};
-    res.json(user);
-*/
-
-// GET /api/users/userId
-router.get('/:userId', async (req, res, next) => {
-  try {
-    const videos = await Video.findAll({
-      include: {
-        model: UserOwnedVideo,
-        where: {
-          userId: req.params.userId,
-        },
-      },
-    });
-    let user = await User.findOne({
-      where: { id: req.params.userId },
-    });
-    user = { ...user, ownedVideos: videos };
     res.json(user);
   } catch (err) {
     next(err);

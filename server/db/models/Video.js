@@ -41,7 +41,15 @@ const Video = db.define('video', {
         // validate: {
         //     notEmpty: true
         //   }
+    },
+    category:{
+        type: Sequelize.STRING,
+        // allowNull: false,
+        // validate: {
+        //     notEmpty: true
+        //   }
     }  
+
 
 })
 
