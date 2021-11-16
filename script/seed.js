@@ -133,7 +133,7 @@ async function seed() {
       authorName: "FSA",
       description: "Tech Video",
       imageURL:
-        "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+        "https://i.ytimg.com/vi/uQ5A0owPFk0/maxresdefault.jpg",
       category: 1
     }),
     Video.create({
@@ -143,7 +143,7 @@ async function seed() {
       authorName: "Takumi",
       description: "Tech Video",
       imageURL:
-        "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+        "https://miro.medium.com/https://miro.medium.com/max/800/1*YhIXFNRgs5urKD6G3D04sw.jpeg/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
       category: 2
     }),
     Video.create({
@@ -153,7 +153,7 @@ async function seed() {
       authorName: "Takumi",
       description: "Tech Video",
       imageURL:
-        "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+        "https://learnrepeatacademy.com/wp-content/uploads/2020/07/Python-Bootcamp-Cover.png",
       category: 3
     }),
     Video.create({
@@ -163,7 +163,7 @@ async function seed() {
       authorName: "Jian",
       description: "Tech Video",
       imageURL:
-        "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+        "https://i.morioh.com/200910/b119e8ba.webp",
       category: 4
     }),
     Video.create({
@@ -183,7 +183,7 @@ async function seed() {
       authorName: "Tandeep",
       description: "Tech Video",
       imageURL:
-        "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+        "https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/QEY2ZW45ABHM3PPY36IJHWHLGM.jpg",
       category: 1
     }),
     Video.create({
@@ -193,7 +193,7 @@ async function seed() {
       authorName: "Tandeep",
       description: "Tech Video",
       imageURL:
-        "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+        "https://cloudskills.io/images/aws-cloud-architect.png",
       category: 1
     }),
     Video.create({
@@ -203,7 +203,7 @@ async function seed() {
       authorName: "Sarah",
       description: "Tech Video",
       imageURL:
-        "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+        "https://www.it-ology.org/wp-content/uploads/2019/12/a0977aa6ae2b4ffbab686e2d924caf3b.jpg",
       category: 3
     }),
     Video.create({
@@ -213,7 +213,7 @@ async function seed() {
       authorName: "Joey",
       description: "Tech Video",
       imageURL:
-        "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+        "https://media.freebiesglobal.com/thumbs_dir/the-angular-bootcamp-2020-oqbrertz9sq4slybe7aoovh1o9xt0s9xq8wdcaosfu.jpg",
       category: 2
     }),
     Video.create({
@@ -223,7 +223,7 @@ async function seed() {
       authorName: "Shashi",
       description: "Tech Video",
       imageURL:
-        "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+        "https://coursemarks.com/wp-content/uploads/2020/11/1456642_de18_3.jpg",
       category: 4
     }),
   ]);
