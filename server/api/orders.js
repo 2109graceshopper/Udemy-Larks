@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Order, OrderVideo, UserOwnedVideo } = require("../db/index");
+const { Order, OrderVideo, userUniqueVideo } = require("../db/index");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -58,17 +58,20 @@ router.put("/:userId", async (req, res, next) => {
     });
 
     //Find or create user unique videos for user
-    await Promise.all(
-      ordervideos.map(async (ordervideo) => {
-        UserOwnedVideo.findOrCreate({
-          where: {
-            userId: req.params.userId,
-            videoId: ordervideo.videoId,
-          },
-        });
-      })
+    const [...videoAssignment] = await Promise.all(
+      ordervideos.map((ordervideo) => ordervideo.videoId)
     );
-    res.json(ordervideos);
+
+    videoAssignment.map(async (videoId) => {
+      await userUniqueVideo.findOrCreate({
+        where: {
+          videoId: videoId,
+          userId: req.params.userId,
+        },
+      });
+    });
+
+    res.send("Added videos" + videoAssignment + " to User Account");
   } catch (error) {
     next(error);
   }

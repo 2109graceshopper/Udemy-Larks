@@ -21,7 +21,7 @@ Video.belongsToMany(User, {
   },
 });
 
-Video.hasMany (userUniqueVideo);
+Video.hasMany(userUniqueVideo);
 
 //Videos Belong To Many Orders via OrderVideo
 const OrderVideo = db.define(
