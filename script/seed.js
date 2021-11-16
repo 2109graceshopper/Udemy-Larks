@@ -1,13 +1,6 @@
 "use strict";
 
-const {
-  db,
-  User,
-  Video,
-  Order,
-  OrderVideo,
-  UserOwnedVideo,
-} = require("../server/db/index");
+const { db, User, Video, Order, OrderVideo, userUniqueVideo } = require("../server/db/index");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -232,7 +225,7 @@ async function seed() {
     }),
   ]);
 
-  //Creating Orders
+  //Creating Orders //possible duplicate values 
   const order = await Promise.all([
     Order.create({ videoId: 2, userId: 1, isCart: true }),
     Order.create({ videoId: 3, userId: 1 }),
@@ -265,20 +258,21 @@ async function seed() {
     OrderVideo.create({ qty: 1, videoId: 4, orderId: 14 }),
   ]);
 
-  //creting userOwnedVideos
-  const userOwnedVideos = await Promise.all([
-    UserOwnedVideo.create({ videoId: 1, userId: 2 }),
-    UserOwnedVideo.create({ videoId: 5, userId: 1 }),
-    UserOwnedVideo.create({ videoId: 1, userId: 1 }),
-    UserOwnedVideo.create({ videoId: 7, userId: 4 }),
-    UserOwnedVideo.create({ videoId: 9, userId: 6 }),
-    UserOwnedVideo.create({ videoId: 8, userId: 3 }),
-    UserOwnedVideo.create({ videoId: 4, userId: 9 }),
-    UserOwnedVideo.create({ videoId: 10, userId: 11 }),
-    UserOwnedVideo.create({ videoId: 10, userId: 5 }),
-    UserOwnedVideo.create({ videoId: 6, userId: 7 }),
-    UserOwnedVideo.create({ videoId: 4, userId: 8 }),
-  ]);
+  //creting userOwnedVideos  //no duplicate videos per user
+   await Promise.all([
+    userUniqueVideo.create({ videoId: 1, userId: 2 }),
+    userUniqueVideo.create({ videoId: 5, userId: 1 }),
+    userUniqueVideo.create({ videoId: 1, userId: 1 }), 
+    userUniqueVideo.create({ videoId: 7, userId: 4 }),
+    userUniqueVideo.create({ videoId: 9, userId: 6 }),
+    userUniqueVideo.create({ videoId: 8, userId: 3 }),
+    userUniqueVideo.create({ videoId: 4, userId: 9 }),
+    userUniqueVideo.create({ videoId: 10, userId: 11 }),
+    userUniqueVideo.create({ videoId: 10, userId: 5 }),
+    userUniqueVideo.create({ videoId: 6, userId: 7 }),
+    userUniqueVideo.create({ videoId: 4, userId: 8 }),
+  ])
+
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
