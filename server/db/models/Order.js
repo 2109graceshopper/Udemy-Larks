@@ -3,7 +3,7 @@ const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
-const { User, OrderVideo, UserOwnedVideo } = require("../index");
+const { User, OrderVideo, userUniqueVideo } = require("../index");
 
 const SALT_ROUNDS = 5;
 
@@ -35,6 +35,7 @@ Order.addVideoToOrder = async (videoID, userID, Qty) => {
     console.log("Adding to cart error");
   }
 };
+
 //use isCart to checkout
 /**
  * @TODO
@@ -64,7 +65,7 @@ Order.checkOut = async (id) => {
     //Find or create user unique videos for user
     Promise.all(
       ordervideos.map(async (ordervideo) => {
-        UserOwnedVideo.findOrCreate({
+        userUniqueVideo.findOrCreate({
           where: {
             userId: id,
             videoId: ordervideo.videoId,

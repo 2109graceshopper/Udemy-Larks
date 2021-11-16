@@ -1,6 +1,13 @@
 "use strict";
 
-const { db, User, Video, Order, OrderVideo, userUniqueVideo } = require("../server/db/index");
+const {
+  db,
+  User,
+  Video,
+  Order,
+  OrderVideo,
+  userUniqueVideo,
+} = require("../server/db/index");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -225,22 +232,22 @@ async function seed() {
     }),
   ]);
 
-  //Creating Orders //possible duplicate values 
+  //Creating Orders //possible duplicate values
   const order = await Promise.all([
-    Order.create({ videoId: 2, userId: 1, isCart: true }),
-    Order.create({ videoId: 3, userId: 1 }),
-    Order.create({ videoId: 1, userId: 1 }),
-    Order.create({ videoId: 1, userId: 2, isCart: true }),
-    Order.create({ videoId: 5, userId: 1 }),
-    Order.create({ videoId: 1, userId: 1 }), //<--Repeat Order
-    Order.create({ videoId: 7, userId: 4, isCart: true }),
-    Order.create({ videoId: 9, userId: 6 }),
-    Order.create({ videoId: 8, userId: 3 }),
-    Order.create({ videoId: 4, userId: 9 }),
-    Order.create({ videoId: 10, userId: 11 }),
-    Order.create({ videoId: 10, userId: 5 }),
-    Order.create({ videoId: 6, userId: 7 }),
-    Order.create({ videoId: 4, userId: 8 }),
+    Order.create({ userId: 1, isCart: true }),
+    Order.create({ userId: 1 }),
+    Order.create({ userId: 1 }),
+    Order.create({ userId: 2, isCart: true }),
+    Order.create({ userId: 1 }),
+    Order.create({ userId: 1 }), //<--Repeat Order
+    Order.create({ userId: 4, isCart: true }),
+    Order.create({ userId: 6 }),
+    Order.create({ userId: 3 }),
+    Order.create({ userId: 9 }),
+    Order.create({ userId: 11 }),
+    Order.create({ userId: 5 }),
+    Order.create({ userId: 7 }),
+    Order.create({ userId: 8 }),
   ]);
 
   //Creating orderVideos
@@ -258,11 +265,11 @@ async function seed() {
     OrderVideo.create({ qty: 1, videoId: 4, orderId: 14 }),
   ]);
 
-  //creting userOwnedVideos  //no duplicate videos per user
-   await Promise.all([
+  //no duplicate videos per user
+  await Promise.all([
     userUniqueVideo.create({ videoId: 1, userId: 2 }),
     userUniqueVideo.create({ videoId: 5, userId: 1 }),
-    userUniqueVideo.create({ videoId: 1, userId: 1 }), 
+    userUniqueVideo.create({ videoId: 1, userId: 1 }),
     userUniqueVideo.create({ videoId: 7, userId: 4 }),
     userUniqueVideo.create({ videoId: 9, userId: 6 }),
     userUniqueVideo.create({ videoId: 8, userId: 3 }),
@@ -271,8 +278,7 @@ async function seed() {
     userUniqueVideo.create({ videoId: 10, userId: 5 }),
     userUniqueVideo.create({ videoId: 6, userId: 7 }),
     userUniqueVideo.create({ videoId: 4, userId: 8 }),
-  ])
-
+  ]);
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
