@@ -17,6 +17,7 @@ const Order = db.define(
     isCart: {
       type: Sequelize.BOOLEAN,
       defaultValue: false,
+      isEmpty: false
     },
   },
   { timestamps: false }

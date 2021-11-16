@@ -1,6 +1,6 @@
 "use strict";
 
-const { db, User, Video, Order } = require("../server/db/index");
+const { db, User, Video, Order, OrderVideo } = require("../server/db/index");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -134,6 +134,7 @@ async function seed() {
       description: "Tech Video",
       imageURL:
         "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+      category: 1
     }),
     Video.create({
       title: "Machine Learning A-Z™: Hands-On Python & R In Data Science",
@@ -143,6 +144,7 @@ async function seed() {
       description: "Tech Video",
       imageURL:
         "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+      category: 2
     }),
     Video.create({
       title: "Python for Data Science and Machine Learning Bootcamp",
@@ -152,6 +154,7 @@ async function seed() {
       description: "Tech Video",
       imageURL:
         "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+      category: 3
     }),
     Video.create({
       title: "Build Web Apps with React & Firebase",
@@ -161,6 +164,7 @@ async function seed() {
       description: "Tech Video",
       imageURL:
         "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+      category: 4
     }),
     Video.create({
       title: "The Complete NFT Web Development Course - Zero To Expert",
@@ -170,6 +174,7 @@ async function seed() {
       description: "Tech Video",
       imageURL:
         "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+      category: 5
     }),
     Video.create({
       title: "100 Days Of Code - Web Development Bootcamp",
@@ -179,6 +184,7 @@ async function seed() {
       description: "Tech Video",
       imageURL:
         "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+      category: 1
     }),
     Video.create({
       title: "Ultimate AWS Certified Solutions Architect Associate 2021",
@@ -188,6 +194,7 @@ async function seed() {
       description: "Tech Video",
       imageURL:
         "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+      category: 1
     }),
     Video.create({
       title: "TOTAL: CompTIA A+ Certification (220-1001)",
@@ -197,6 +204,7 @@ async function seed() {
       description: "Tech Video",
       imageURL:
         "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+      category: 3
     }),
     Video.create({
       title: "Angular - The Complete Guide",
@@ -206,6 +214,7 @@ async function seed() {
       description: "Tech Video",
       imageURL:
         "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+      category: 2
     }),
     Video.create({
       title: "The Complete JavaScript Course 2021: From Zero to Expert!",
@@ -215,14 +224,15 @@ async function seed() {
       description: "Tech Video",
       imageURL:
         "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+      category: 4
     }),
   ]);
 
   //Creating Orders
   const order = await Promise.all([
-    Order.create({ videoId: 2, userId: 1 }),
-    Order.create({ videoId: 3, userId: 1 }),
-    Order.create({ videoId: 1, userId: 1 }),
+    Order.create({ videoId: 2, userId: 1, isCart: true }),
+    Order.create({ videoId: 3, userId: 1, isCart: true }),
+    Order.create({ videoId: 1, userId: 1, isCart: true }),
     Order.create({ videoId: 1, userId: 2 }),
     Order.create({ videoId: 5, userId: 1 }),
     Order.create({ videoId: 1, userId: 1 }), //<--Repeat Order
@@ -235,6 +245,23 @@ async function seed() {
     Order.create({ videoId: 6, userId: 7 }),
     Order.create({ videoId: 4, userId: 8 }),
   ]);
+
+  //Creating orderVideos
+  const orderVideos = await Promise.all([
+    OrderVideo.create({qty: 1, videoId: 1, orderId:4}),
+    OrderVideo.create({qty: 1, videoId: 5, orderId:5}),
+    OrderVideo.create({qty: 1, videoId: 1, orderId:6}),
+    OrderVideo.create({qty: 1, videoId: 7, orderId:7}),
+    OrderVideo.create({qty: 1, videoId: 9, orderId:8}),
+    OrderVideo.create({qty: 1, videoId: 8, orderId:9}),
+    OrderVideo.create({qty: 1, videoId: 4, orderId:10}),
+    OrderVideo.create({qty: 1, videoId: 10, orderId:11}),
+    OrderVideo.create({qty: 1, videoId: 10, orderId:12}),
+    OrderVideo.create({qty: 1, videoId: 6, orderId:13}),
+    OrderVideo.create({qty: 1, videoId: 4, orderId:14}),
+  ])
+
+  //creting userOwnedVideos
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
