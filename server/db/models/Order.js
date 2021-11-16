@@ -3,7 +3,7 @@ const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
-const { User, OrderVideo, UserOwnedVideo } = require("../index");
+const { User, OrderVideo, userUniqueVideo } = require("../index");
 
 const SALT_ROUNDS = 5;
 
@@ -58,26 +58,6 @@ Order.checkOut = async (id) => {
     });
 
     return fulfilledOrder.orderId;
-
-    // //Find all ordervideos for past checkout
-    // const ordervideos = await OrderVideo.findAll({
-    //   // where: {
-    //   //   orderId: fulfilledOrder.orderId,
-    //   // },
-    // });
-
-    // //Find or create user unique videos for user
-    // await Promise.all(
-    //   ordervideos.map(async (ordervideo) => {
-    //     UserOwnedVideo.findOrCreate({
-    //       where: {
-    //         userId: id,
-    //         videoId: ordervideo.videoId,
-    //       },
-    //     });
-    //   })
-    // );
-    // return newOrder;
   } catch (err) {
     console.log("Error Checking Out");
   }
