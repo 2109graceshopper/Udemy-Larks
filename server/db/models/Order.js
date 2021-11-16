@@ -17,7 +17,7 @@ const Order = db.define(
     isCart: {
       type: Sequelize.BOOLEAN,
       defaultValue: false,
-      isEmpty: false
+      isEmpty: false,
     },
   },
   { timestamps: false }
@@ -42,8 +42,8 @@ Order.addVideoToOrder = async (videoID, userID, Qty) => {
 Order.checkOut = async (id) => {
   try {
     await this.update({
-      isCart: true,
-      where: { id: id },
+      isCart: false,
+      where: { userId: id },
     });
   } catch (err) {
     console.log("Error Checking Out");
