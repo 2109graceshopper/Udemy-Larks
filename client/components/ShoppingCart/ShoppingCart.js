@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 // eslint-disable-next-line no-unused-vars
 import { Link } from "react-router-dom";
 import { fetchVideosByIds } from "../../store/videos";
-import { fetchCartByUser } from "../../store/orders";
+import { fetchCartByUser, removeVideoFromUserCart } from "../../store/orders";
 
 export class ShoppingCart extends React.Component {
   constructor(props) {
@@ -15,7 +15,6 @@ export class ShoppingCart extends React.Component {
       cartContents: localCart || [],
       cartTotalCost: 0,
       userId: 0,
-      gotCart: false,
     };
 
     this.handleCartCheckout = this.handleCartCheckout.bind(this);
@@ -37,17 +36,15 @@ export class ShoppingCart extends React.Component {
       this.setState({
         userId: user.id,
       });
-    }, 100);
 
-    if (this.state.gotCart === false) {
       await this.props.getUserCart(this.state.userId);
-      let userCart = this.props.orders.map((item) => item.videoId);
-      let newCart = userCart.concat(this.state.cartContents);
-      this.setState({ cartContents: newCart, gotCart: true });
-      newCart = JSON.stringify(newCart);
-      localStorage.setItem("graceShopperCart", newCart);
-      await this.props.getVideosInfo(this.state.cartContents);
-    }
+      let userDbCart = this.props.orders.map((item) => item.videoId);
+      let userLocalCart = this.state.cartContents;
+      let combinedCart = userDbCart.concat(userLocalCart);
+      combinedCart = [...new Set([...userDbCart, ...userLocalCart])];
+      localStorage.setItem("graceShopperCart", JSON.stringify(combinedCart));
+      console.log(this.state);
+    }, 100);
   }
 
   async componentDidUpdate(prevProps) {
@@ -56,6 +53,7 @@ export class ShoppingCart extends React.Component {
   }
 
   async handleRemoveFromCart(videoId) {
+    //remove video from local cart
     const cart = this.state.cartContents;
     let cartItem = cart.findIndex((video) => video === videoId);
     cart.splice(cartItem, 1);
@@ -63,6 +61,11 @@ export class ShoppingCart extends React.Component {
     let cartItems = JSON.stringify(this.state.cartContents);
     localStorage.setItem("graceShopperCart", cartItems);
     await this.props.getVideosInfo(this.state.cartContents);
+
+    //Routing to remove from user db as well, if user is logged in
+    this.props.userId > 0
+      ? await this.props.removeFromCart(this.state.userId, videoId)
+      : null;
 
     //Update displayed subtotal when items are removed
     let total =
@@ -72,8 +75,6 @@ export class ShoppingCart extends React.Component {
           }))
         : { price: 0 };
     this.setState({ cartTotalCost: total.price });
-
-    //Add routing to remove from user db as well
   }
 
   async handleCartCheckout() {
@@ -159,7 +160,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getVideosInfo: (videoArray) => dispatch(fetchVideosByIds(videoArray)),
     getUserCart: (userId) => dispatch(fetchCartByUser(userId)),
-    // removeFromCart: (productId) =>
+    removeFromCart: (userId, videoId) =>
+      dispatch(removeVideoFromUserCart(userId, videoId)),
     // checkOut: () =>
   };
 };
