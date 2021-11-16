@@ -8,7 +8,7 @@ import { fetchSingleUser } from '../../store/userProfile';
 class UserProfile extends React.Component {
   componentDidMount() {
     try {
-      this.props.getUser(this.props.match.params.userId);
+      this.props.getUser(this.props.match.params.id);
     } catch (error) {
       console.log(error);
     }
@@ -16,18 +16,20 @@ class UserProfile extends React.Component {
 
   render() {
     const user = this.props.user;
+    const userProfile = user.dataValues ? user.dataValues : [];
+    const videosArray = user.userUniqueVideos ? user.userUniqueVideos : [];
 
     return (
       <div>
         <section>
           <h2>User Profile</h2>
-          <img className='profile-picture' src={user.userimageURL} />
-          <h3>Name: {`${user.firstName} ${user.lastName}`}</h3>
-          <h3>Email: {user.username}</h3>
+          <img className='profile-picture' src={userProfile.userimageURL} />
+          <h3>Name: {`${userProfile.firstName} ${userProfile.lastName}`}</h3>
+          <h3>Email: {userProfile.username}</h3>
         </section>
         <section>
           <h2>Your Products</h2>
-          {user.ownedVideos.map((video) => {
+          {videosArray.map((video) => {
             return (
               <div key={video.id}>
                 <Link to={`/videos/${video.id}`}>
