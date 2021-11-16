@@ -49,6 +49,17 @@ export const fetchCartByUser = (userId) => {
   };
 };
 
+export const editCartByUser = (userId, userCart) => {
+  return async (dispatch) => {
+    try {
+      const data = await axios.put(`/api/orders/${userId}`, userCart);
+      dispatch(updateCartByUser(data));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
 export const removeVideoFromUserCart = (userId, videoId) => {
   return async (dispatch) => {
     try {
@@ -63,23 +74,13 @@ export const removeVideoFromUserCart = (userId, videoId) => {
 export const checkoutUserCart = (userId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put(`api/orders/${userId}`);
+      const { data } = await axios.put(`api/orders/${userId}/checkout`);
       dispatch(checkoutCartByUser(data));
     } catch (error) {
       console.error(error);
     }
   };
 };
-// export const editCartByUser = (userId) => {
-//   return async (dispatch) => {
-//     try {
-//       const {data} = await axios.put(`api/orders/${userId}`)
-
-//     } catch (error) {
-//       console.error(error)
-//     }
-//   }
-// }
 
 //REDUCER FUNCTION
 export default function ordersReducter(state = initialState, action) {

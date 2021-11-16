@@ -31,22 +31,25 @@ router.get("/:userId", async (req, res, next) => {
 });
 
 //updating a user's saved cart (merging w/ localstorage cart)
-router.post("/:userId", async (req, res, next) => {
+router.put("/:userId", async (req, res, next) => {
   try {
     const cart = await Order.findOne({
       where: { userId: req.params.userId, isCart: true },
     });
 
-    const cartVideos = await OrderVideo.findAll({
-      where: { orderId: cart.orderId },
-    });
+    console.log(req.body);
+    res.send(req.body);
+
+    // const cartVideos = await OrderVideo.findOrCreate({
+    //   where: { orderId: cart.orderId, videoId:  },
+    // });
   } catch (error) {
     next(error);
   }
 });
 
 //checkout a cart
-router.put("/:userId", async (req, res, next) => {
+router.put("/:userId/checkout", async (req, res, next) => {
   try {
     let fulfilledId = await Order.checkOut(req.params.userId);
 

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { fetchVideosByIds } from "../../store/videos";
 import {
   fetchCartByUser,
+  editCartByUser,
   removeVideoFromUserCart,
   checkoutUserCart,
 } from "../../store/orders";
@@ -47,13 +48,16 @@ export class ShoppingCart extends React.Component {
       let combinedCart = userDbCart.concat(userLocalCart);
       combinedCart = [...new Set([...userDbCart, ...userLocalCart])];
       localStorage.setItem("graceShopperCart", JSON.stringify(combinedCart));
-      console.log(this.state);
+
+      // await //router.post
+      //this.props.updateCart(userId, localUserCart)
     }, 100);
   }
 
   async componentDidUpdate(prevProps) {
     //update display when checkout
     // await this.props.getVideosInfo(this.state.cartContents);
+    //update db cart when localcart changes
   }
 
   async handleRemoveFromCart(videoId) {
@@ -163,6 +167,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getVideosInfo: (videoArray) => dispatch(fetchVideosByIds(videoArray)),
     getUserCart: (userId) => dispatch(fetchCartByUser(userId)),
+    updateCart: (userId, localUserCart) =>
+      dispatch(editCartByUser(userId, localUserCart)),
     removeFromCart: (userId, videoId) =>
       dispatch(removeVideoFromUserCart(userId, videoId)),
     checkOut: (userId) => dispatch(checkoutUserCart(userId)),
