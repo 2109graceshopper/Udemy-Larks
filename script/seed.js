@@ -247,7 +247,7 @@ async function seed() {
   ]);
 
   //Creating orderVideos
-  const orderVideos = await Promise.all([
+  const userUniqueVideo = await Promise.all([
     OrderVideo.create({qty: 1, videoId: 1, orderId:4}),
     OrderVideo.create({qty: 1, videoId: 5, orderId:5}),
     OrderVideo.create({qty: 1, videoId: 1, orderId:6}),
