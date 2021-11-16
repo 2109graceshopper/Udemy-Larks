@@ -6,11 +6,12 @@ const {
   OrderVideo,
   userUniqueVideo,
 } = require("../db/index");
+const {hasUserToken, isAdmin} = require("./gatekeepingMiddleware")
 
-router.get("/", async (req, res, next) => {
+router.get("/", hasUserToken,isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
-      attributes:['id', 'username'] //returning only needed data from users safer!
+      attributes:['id', 'username'] //returning only needed data from users safer! even with admin
     });
     res.json(users);
   } catch (err) {
@@ -58,7 +59,7 @@ router.get("/", async (req, res, next) => {
     res.json(user);
 */
 
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", hasUserToken, async (req, res, next) => {
   try {
     const order = await Order.findOne({
       where: {
