@@ -3,7 +3,6 @@ const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
-const { User, OrderVideo, userUniqueVideo } = require("../index");
 
 const SALT_ROUNDS = 5;
 
