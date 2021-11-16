@@ -30,18 +30,25 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
-//checkout a cart
-router.put("/:userId", async (req, res, next) => {
+//updating a user's saved cart (merging w/ localstorage cart)
+router.post("/:userId", async (req, res, next) => {
   try {
-    //search for open cart belonging to user
     const cart = await Order.findOne({
       where: { userId: req.params.userId, isCart: true },
     });
-    //send update (to change isCart to false)
-    await cart.update({ isCart: false });
 
-    //create a new active cart
-    res.send(await Order.create({ userId: req.params.userId, isCart: true }));
+    const cartVideos = await OrderVideo.findAll({
+      where: { orderId: cart.orderId },
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+//checkout a cart
+router.put("/:userId", async (req, res, next) => {
+  try {
+    res.json(Order.checkout(req.params.userId));
   } catch (error) {
     next(error);
   }
@@ -64,8 +71,5 @@ router.delete("/:userId/:videoId", async (req, res, next) => {
     next(error);
   }
 });
-
-//2 paths
-// router.put - checkout. Set isCart to false, create new cart
 
 module.exports = router;

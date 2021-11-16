@@ -234,20 +234,20 @@ async function seed() {
 
   //Creating Orders
   const order = await Promise.all([
-    Order.create({ videoId: 2, userId: 1, isCart: true }),
-    Order.create({ videoId: 3, userId: 1 }),
-    Order.create({ videoId: 1, userId: 1 }),
-    Order.create({ videoId: 1, userId: 2, isCart: true }),
-    Order.create({ videoId: 5, userId: 1 }),
-    Order.create({ videoId: 1, userId: 1 }), //<--Repeat Order
-    Order.create({ videoId: 7, userId: 4, isCart: true }),
-    Order.create({ videoId: 9, userId: 6 }),
-    Order.create({ videoId: 8, userId: 3 }),
-    Order.create({ videoId: 4, userId: 9 }),
-    Order.create({ videoId: 10, userId: 11 }),
-    Order.create({ videoId: 10, userId: 5 }),
-    Order.create({ videoId: 6, userId: 7 }),
-    Order.create({ videoId: 4, userId: 8 }),
+    Order.create({ userId: 1, isCart: true }),
+    Order.create({ userId: 1 }),
+    Order.create({ userId: 1 }),
+    Order.create({ userId: 2, isCart: true }),
+    Order.create({ userId: 1 }),
+    Order.create({ userId: 1 }), //<--Repeat Order
+    Order.create({ userId: 4, isCart: true }),
+    Order.create({ userId: 6 }),
+    Order.create({ userId: 3 }),
+    Order.create({ userId: 9 }),
+    Order.create({ userId: 11 }),
+    Order.create({ userId: 5 }),
+    Order.create({ userId: 7 }),
+    Order.create({ userId: 8 }),
   ]);
 
   //Creating orderVideos

@@ -49,7 +49,7 @@ Order.checkOut = async (id) => {
     });
 
     //Create new order for user
-    await Order.create({
+    const newOrder = await Order.create({
       userId: id,
       isCart: true,
     });
@@ -72,6 +72,7 @@ Order.checkOut = async (id) => {
         });
       })
     );
+    return newOrder;
   } catch (err) {
     console.log("Error Checking Out");
   }
