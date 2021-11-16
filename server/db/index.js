@@ -13,15 +13,15 @@ const { findAllVideos } = require("./models/Video");
 User.hasMany(Order);
 
 //User Owned Videos
-const UserOwnedVideo = db.define("userownedvideo", {}, { timestamps: false });
+const userUniqueVideo = db.define("userUniqueVideo", {}, { timestamps: false });
 
 Video.belongsToMany(User, {
   through: {
-    model: UserOwnedVideo,
+    model: userUniqueVideo,
   },
 });
 
-Video.hasMany(UserOwnedVideo);
+Video.hasMany (userUniqueVideo);
 
 //Videos Belong To Many Orders via OrderVideo
 const OrderVideo = db.define(
@@ -44,5 +44,5 @@ module.exports = {
   Video,
   Order,
   OrderVideo,
-  UserOwnedVideo,
+  userUniqueVideo,
 };
