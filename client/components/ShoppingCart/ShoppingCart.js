@@ -22,22 +22,15 @@ export class ShoppingCart extends React.Component {
   }
 
   async componentDidMount() {
-    //If a userid is found (user logged in), reflect in state.
-    //Otherwise, userId defaults to 0 (guest user)
-    this.props.user.id ? this.setState({ userId: this.props.user.id }) : null;
-
-    //If a user is logged in, querry the db for any saved cart (incomplete orders), and merge with any locally stored cart.
-    console.log(this.props);
-
-    if (this.state.userId > 0) {
-      console.log("user", this.state.userId);
-      await this.props.getUserCart(this.state.userId);
-      let userCart = this.props.orders.map((item) => item.videoId);
-      let newCart = userCart.concat(this.state.cartContents);
-      localStorage.setItem("graceShopperCart", newCart);
-      this.setState({ cartContents: newCart });
-      console.log(this.state.cartContents);
-    }
+    // if (this.state.userId > 0) {
+    //   console.log("user", this.state.userId);
+    //   await this.props.getUserCart(this.state.userId);
+    //   let userCart = this.props.orders.map((item) => item.videoId);
+    //   let newCart = userCart.concat(this.state.cartContents);
+    //   localStorage.setItem("graceShopperCart", newCart);
+    //   this.setState({ cartContents: newCart });
+    //   console.log(this.state.cartContents);
+    // }
 
     await this.props.getVideosInfo(this.state.cartContents);
 
@@ -46,6 +39,29 @@ export class ShoppingCart extends React.Component {
         price: a.price + b.price,
       }));
       this.setState({ cartTotalCost: total.price });
+    }
+  }
+
+  async componentDidUpdate(prevProps) {
+    let user = this.props.user;
+    if (prevProps.user.id !== user.id) {
+      this.setState({
+        userId: user.id,
+      });
+
+      await this.props.getUserCart(user.id);
+
+      let userCart = this.props.orders.map((item) => item.videoId);
+
+      let newCart = userCart.concat(this.state.cartContents);
+
+      this.setState({ cartContents: newCart });
+
+      // console.log(this.state.cartContents);
+      newCart = JSON.stringify(newCart);
+
+      localStorage.setItem("graceShopperCart", newCart);
+      await this.props.getVideosInfo(this.state.cartContents);
     }
   }
 
@@ -83,6 +99,7 @@ export class ShoppingCart extends React.Component {
     const { handleRemoveFromCart, handleCartCheckout } = this;
 
     let cart = this.props.videos;
+    console.log(this.state);
 
     const cartContentsView = cart.map((video) => {
       return (

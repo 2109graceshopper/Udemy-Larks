@@ -19,7 +19,7 @@ router.get("/:userId", async (req, res, next) => {
 
     //searches for videos belonging to open cart
     const cartVideos = await OrderVideo.findAll({
-      where: { id: cart.id },
+      where: { orderId: cart.orderId },
     });
 
     //returns an array of videos sharing the same cart
