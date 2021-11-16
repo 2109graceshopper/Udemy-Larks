@@ -1,6 +1,6 @@
 "use strict";
 
-const { db, User, Video, Order, OrderVideo } = require("../server/db/index");
+const { db, User, Video, Order, OrderVideo, UserOwnedVideo } = require("../server/db/index");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -262,6 +262,20 @@ async function seed() {
   ])
 
   //creting userOwnedVideos
+  const userOwnedVideos = await Promise.all([
+    UserOwnedVideo.create({ videoId: 1, userId: 2 }),
+    UserOwnedVideo.create({ videoId: 5, userId: 1 }),
+    UserOwnedVideo.create({ videoId: 1, userId: 1 }), 
+    UserOwnedVideo.create({ videoId: 7, userId: 4 }),
+    UserOwnedVideo.create({ videoId: 9, userId: 6 }),
+    UserOwnedVideo.create({ videoId: 8, userId: 3 }),
+    UserOwnedVideo.create({ videoId: 4, userId: 9 }),
+    UserOwnedVideo.create({ videoId: 10, userId: 11 }),
+    UserOwnedVideo.create({ videoId: 10, userId: 5 }),
+    UserOwnedVideo.create({ videoId: 6, userId: 7 }),
+    UserOwnedVideo.create({ videoId: 4, userId: 8 }),
+  ])
+
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
