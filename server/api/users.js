@@ -4,7 +4,6 @@ const {
   Video,
   Order,
   OrderVideo,
-  ShoppingCart,
   UserOwnedVideo,
 } = require("../db/index");
 
@@ -19,16 +18,28 @@ router.get("/", async (req, res, next) => {
 
 /*
   // Shopping Cart of videos for some given user
+    const order = await Order.findOne({
+      where: {
+        userId: req.params.id,
+        isCart: true,
+      },
+    });
+
+    const { orderId } = order;
+
     const videos = await Video.findAll({
       include: {
-        model: ShoppingCart,
+        model: OrderVideo,
         where: {
-          userId: req.params.id,
+          orderId: orderId,
         },
       },
     });
+
     let user = await User.findByPk(req.params.id);
+
     user = { ...user, shoppingCart: videos };
+
     res.json(user);
 
   - Finding Videos that a User owns?
@@ -47,16 +58,28 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
+    const order = await Order.findOne({
+      where: {
+        userId: req.params.id,
+        isCart: true,
+      },
+    });
+
+    const { orderId } = order;
+
     const videos = await Video.findAll({
       include: {
-        model: UserOwnedVideo,
+        model: OrderVideo,
         where: {
-          userId: req.params.id,
-        }
-      }
+          orderId: orderId,
+        },
+      },
     });
+
     let user = await User.findByPk(req.params.id);
-    user = {...user, ownedVideos: videos};
+
+    user = { ...user, shoppingCart: videos };
+
     res.json(user);
   } catch (err) {
     next(err);
