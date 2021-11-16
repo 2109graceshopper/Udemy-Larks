@@ -18,6 +18,7 @@ class UserProfile extends React.Component {
     const user = this.props.user;
     const userProfile = user.dataValues ? user.dataValues : [];
     const videosArray = user.userUniqueVideos ? user.userUniqueVideos : [];
+    console.log(videosArray);
 
     return (
       <div>
@@ -33,7 +34,7 @@ class UserProfile extends React.Component {
             return (
               <div key={video.id}>
                 <Link to={`/videos/${video.id}`}>
-                  <img src={video.imageUrl} />
+                  <img src={video.imageURL} />
                   <div>
                     <h3>{video.title}</h3>
                     <h5>Created by: {video.authorName}</h5>
