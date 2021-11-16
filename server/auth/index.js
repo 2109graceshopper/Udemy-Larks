@@ -1,9 +1,12 @@
 const router = require("express").Router();
 const { User } = require("../db");
-module.exports = router;
+
 
 router.post("/login", async (req, res, next) => {
+  console.log("Here!")
   try {
+    const token = await User.authenticate(req.body)
+    console.log(token)
     res.send({ token: await User.authenticate(req.body) });
   } catch (err) {
     next(err);
@@ -32,3 +35,5 @@ router.get("/me", async (req, res, next) => {
     next(ex);
   }
 });
+
+module.exports = router;
