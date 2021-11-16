@@ -37,8 +37,21 @@ router.get('/:id', async (req, res, next) => {
       },
     });
 
+    const userVideos = await Video.findAll({
+      include: {
+        model: userUniqueVideo,
+        where: {
+          userId: req.params.id,
+        },
+      },
+    });
+
     let user = await User.findByPk(req.params.id);
-    user = { ...user, shoppingCart: videos };
+    user = {
+      ...user,
+      shoppingCart: videos,
+      userUniqueVideos: userVideos,
+    };
     res.json(user);
   } catch (err) {
     next(err);
