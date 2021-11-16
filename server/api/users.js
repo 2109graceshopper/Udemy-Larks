@@ -77,7 +77,7 @@ router.get("/:id", async (req, res, next) => {
         },
       },
     });
-
+    //passing only data that is need for compnent rendering.
     let user = await User.findByPk(req.params.id);
     let safeUserData = {'id': user.dataValues.id, 'username': user.dataValues.username, 'firstName':  user.dataValues.firstName, 'lastName':  user.dataValues.lastName, 'address':  user.dataValues.address, 'userimageURL':  user.dataValues.userimageURL,}
     user = { ...safeUserData, shoppingCart: videos };
