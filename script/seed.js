@@ -231,12 +231,12 @@ async function seed() {
   //Creating Orders //possible duplicate values 
   const order = await Promise.all([
     Order.create({ videoId: 2, userId: 1, isCart: true }),
-    Order.create({ videoId: 3, userId: 1, isCart: true }),
-    Order.create({ videoId: 1, userId: 1, isCart: true }),
-    Order.create({ videoId: 1, userId: 2 }),
+    Order.create({ videoId: 3, userId: 1 }),
+    Order.create({ videoId: 1, userId: 1 }),
+    Order.create({ videoId: 1, userId: 2, isCart: true }),
     Order.create({ videoId: 5, userId: 1 }),
     Order.create({ videoId: 1, userId: 1 }), //<--Repeat Order
-    Order.create({ videoId: 7, userId: 4 }),
+    Order.create({ videoId: 7, userId: 4, isCart: true }),
     Order.create({ videoId: 9, userId: 6 }),
     Order.create({ videoId: 8, userId: 3 }),
     Order.create({ videoId: 4, userId: 9 }),
