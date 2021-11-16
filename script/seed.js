@@ -263,6 +263,8 @@ async function seed() {
     OrderVideo.create({ qty: 1, videoId: 10, orderId: 12 }),
     OrderVideo.create({ qty: 1, videoId: 6, orderId: 13 }),
     OrderVideo.create({ qty: 1, videoId: 4, orderId: 14 }),
+    OrderVideo.create({ qty: 1, videoId: 6, orderId: 1 }),
+    OrderVideo.create({ qty: 1, videoId: 8, orderId: 1 }),
   ]);
 
   //no duplicate videos per user
