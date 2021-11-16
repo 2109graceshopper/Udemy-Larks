@@ -53,7 +53,6 @@ export const removeVideoFromUserCart = (userId, videoId) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.delete(`api/orders/${userId}/${videoId}`);
-      console.log("BOO!");
       dispatch(deleteVideoFromCart(data));
     } catch (error) {
       console.error(error);
@@ -61,6 +60,16 @@ export const removeVideoFromUserCart = (userId, videoId) => {
   };
 };
 
+export const checkoutUserCart = (userId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(`api/orders/${userId}`);
+      dispatch(checkoutCartByUser(data));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
 // export const editCartByUser = (userId) => {
 //   return async (dispatch) => {
 //     try {

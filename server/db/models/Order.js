@@ -43,36 +43,41 @@ Order.addVideoToOrder = async (videoID, userID, Qty) => {
 Order.checkOut = async (id) => {
   try {
     //Update Order isCart to false
-    const fulfilledOrder = await Order.update({
+    const ordertoFulfill = await Order.findOne({
+      where: { userId: id, isCart: true },
+    });
+
+    const fulfilledOrder = await ordertoFulfill.update({
       isCart: false,
-      where: { userId: id },
     });
 
     //Create new order for user
-    const newOrder = await Order.create({
+    await Order.create({
       userId: id,
       isCart: true,
     });
 
-    //Find all ordervideos for past checkout
-    const ordervideos = await OrderVideo.findAll({
-      where: {
-        orderId: fulfilledOrder.orderId,
-      },
-    });
+    return fulfilledOrder.orderId;
 
-    //Find or create user unique videos for user
-    Promise.all(
-      ordervideos.map(async (ordervideo) => {
-        UserOwnedVideo.findOrCreate({
-          where: {
-            userId: id,
-            videoId: ordervideo.videoId,
-          },
-        });
-      })
-    );
-    return newOrder;
+    // //Find all ordervideos for past checkout
+    // const ordervideos = await OrderVideo.findAll({
+    //   // where: {
+    //   //   orderId: fulfilledOrder.orderId,
+    //   // },
+    // });
+
+    // //Find or create user unique videos for user
+    // await Promise.all(
+    //   ordervideos.map(async (ordervideo) => {
+    //     UserOwnedVideo.findOrCreate({
+    //       where: {
+    //         userId: id,
+    //         videoId: ordervideo.videoId,
+    //       },
+    //     });
+    //   })
+    // );
+    // return newOrder;
   } catch (err) {
     console.log("Error Checking Out");
   }

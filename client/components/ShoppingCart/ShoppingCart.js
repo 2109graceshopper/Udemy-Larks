@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 // eslint-disable-next-line no-unused-vars
 import { Link } from "react-router-dom";
 import { fetchVideosByIds } from "../../store/videos";
-import { fetchCartByUser, removeVideoFromUserCart } from "../../store/orders";
+import {
+  fetchCartByUser,
+  removeVideoFromUserCart,
+  checkoutUserCart,
+} from "../../store/orders";
 
 export class ShoppingCart extends React.Component {
   constructor(props) {
@@ -48,8 +52,8 @@ export class ShoppingCart extends React.Component {
   }
 
   async componentDidUpdate(prevProps) {
-    //pathing to update cart in db
-    //fix refresh issue with cart rendering
+    //update display when checkout
+    // await this.props.getVideosInfo(this.state.cartContents);
   }
 
   async handleRemoveFromCart(videoId) {
@@ -78,8 +82,7 @@ export class ShoppingCart extends React.Component {
   }
 
   async handleCartCheckout() {
-    // await this.props.checkout();
-    console.log("Checkout!");
+    await this.props.checkOut(this.state.userId);
 
     //clear cart from localStorage and set state cart to []
     window.localStorage.removeItem("graceShopperCart");
@@ -162,7 +165,7 @@ const mapDispatchToProps = (dispatch) => {
     getUserCart: (userId) => dispatch(fetchCartByUser(userId)),
     removeFromCart: (userId, videoId) =>
       dispatch(removeVideoFromUserCart(userId, videoId)),
-    // checkOut: () =>
+    checkOut: (userId) => dispatch(checkoutUserCart(userId)),
   };
 };
 
