@@ -31,18 +31,6 @@ router.post("/", hasUserToken, isAdmin, async (req, res, next) => {
 //   }
 // });
 
-//single order assuming user is logged in => Pending on Takumi's code
-router.get("/:orderId", hasUserToken, async (req, res, next) => {
-  try {
-    const order = await Order.findOne({
-      where: { id: req.params.orderId },
-    });
-    res.json(order);
-  } catch (err) {
-    next(err);
-  }
-});
-
 //getting a user's saved cart
 router.get("/:userId", async (req, res, next) => {
   try {

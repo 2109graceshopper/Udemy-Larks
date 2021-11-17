@@ -48,6 +48,7 @@ Order.addVideoToOrder = async (videoID, userID, Qty) => {
  * @TODO
  * Need to update quantity of videos later
  */
+
 Order.checkOut = async (id) => {
   try {
     //Update Order isCart to false

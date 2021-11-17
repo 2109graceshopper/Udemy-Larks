@@ -237,35 +237,35 @@ async function seed() {
     Order.create({ userId: 1, isCart: true }),
     Order.create({ userId: 4, isCart: true }),
     Order.create({ userId: 2, isCart: true }),
-    // Order.create({ userId: 1 }),
-    // Order.create({ userId: 1 }),
-    // Order.create({ userId: 1 }),
-    // Order.create({ userId: 1 }), //<--Repeat Order
-    // Order.create({ userId: 6 }),
-    // Order.create({ userId: 3 }),
-    // Order.create({ userId: 9 }),
-    // Order.create({ userId: 11 }),
-    // Order.create({ userId: 5 }),
-    // Order.create({ userId: 7 }),
-    // Order.create({ userId: 8 }),
+    Order.create({ userId: 1 }),
+    Order.create({ userId: 1 }),
+    Order.create({ userId: 1 }),
+    Order.create({ userId: 1 }), //<--Repeat Order
+    Order.create({ userId: 6 }),
+    Order.create({ userId: 3 }),
+    Order.create({ userId: 9 }),
+    Order.create({ userId: 11 }),
+    Order.create({ userId: 5 }),
+    Order.create({ userId: 7 }),
+    Order.create({ userId: 8 }),
   ]);
 
   // //Creating orderVideos
-  // const orderVideos = await Promise.all([
-  //   OrderVideo.create({ qty: 1, videoId: 1, orderId: 4 }),
-  //   OrderVideo.create({ qty: 1, videoId: 5, orderId: 5 }),
-  //   OrderVideo.create({ qty: 1, videoId: 1, orderId: 6 }),
-  //   OrderVideo.create({ qty: 1, videoId: 7, orderId: 7 }),
-  //   OrderVideo.create({ qty: 1, videoId: 9, orderId: 8 }),
-  //   OrderVideo.create({ qty: 1, videoId: 8, orderId: 9 }),
-  //   OrderVideo.create({ qty: 1, videoId: 4, orderId: 10 }),
-  //   OrderVideo.create({ qty: 1, videoId: 10, orderId: 11 }),
-  //   OrderVideo.create({ qty: 1, videoId: 10, orderId: 12 }),
-  //   OrderVideo.create({ qty: 1, videoId: 6, orderId: 13 }),
-  //   OrderVideo.create({ qty: 1, videoId: 4, orderId: 14 }),
-  //   OrderVideo.create({ qty: 1, videoId: 6, orderId: 1 }),
-  //   OrderVideo.create({ qty: 1, videoId: 8, orderId: 1 }),
-  // ]);
+  const orderVideos = await Promise.all([
+    OrderVideo.create({ qty: 1, videoId: 1, orderId: 4 }),
+    OrderVideo.create({ qty: 1, videoId: 5, orderId: 5 }),
+    OrderVideo.create({ qty: 1, videoId: 1, orderId: 6 }),
+    OrderVideo.create({ qty: 1, videoId: 7, orderId: 7 }),
+    OrderVideo.create({ qty: 1, videoId: 9, orderId: 8 }),
+    OrderVideo.create({ qty: 1, videoId: 8, orderId: 9 }),
+    OrderVideo.create({ qty: 1, videoId: 4, orderId: 10 }),
+    OrderVideo.create({ qty: 1, videoId: 10, orderId: 11 }),
+    OrderVideo.create({ qty: 1, videoId: 10, orderId: 12 }),
+    OrderVideo.create({ qty: 1, videoId: 6, orderId: 13 }),
+    OrderVideo.create({ qty: 1, videoId: 4, orderId: 14 }),
+    OrderVideo.create({ qty: 1, videoId: 6, orderId: 1 }),
+    OrderVideo.create({ qty: 1, videoId: 8, orderId: 1 }),
+  ]);
 
   //no duplicate videos per user
   await Promise.all([
