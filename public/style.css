@@ -31,6 +31,11 @@ nav {
   height: 150px;
 }
 
+/* Move to singleVideo.css */
+.video-picture {
+  height: 250px;
+}
+
 nav a {
   display: inline-block;
   margin: 1em;

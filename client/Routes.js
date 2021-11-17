@@ -35,10 +35,10 @@ class Routes extends Component {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/login" component={Login} />
-            <Route path="/videos" component={AllProducts} />
             <Route path="/signup" component={Registration} />
-            <Route path="/cart" component={ShoppingCart} />
+            <Route exact path="/videos" component={AllProducts} />
             <Route exact path="/videos/:videoId" component={SingleVideo} />
+            <Route path="/cart" component={ShoppingCart} />
           </Switch>
         )}
       </div>

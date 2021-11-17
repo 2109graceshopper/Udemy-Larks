@@ -1,14 +1,14 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import React from "react";
+import { connect } from "react-redux";
 
-import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
-import { fetchSingleVideo } from '../../store/singleVideo';
+import { fetchSingleVideo } from "../../store/singleVideo";
 
 class SingleVideo extends React.Component {
   constructor() {
     super();
-    // this.handleAddToCart = this.handleAddToCart.bind(this);
+    this.handleAddToLocalCart = this.handleAddToLocalCart.bind(this);
   }
 
   componentDidMount() {
@@ -19,12 +19,17 @@ class SingleVideo extends React.Component {
     }
   }
 
-  // handleAddToCart() {
-  //   const userId = this.props.user.id;
-  //   const videoId = this.props.video.id;
-  //   const quantity = 1;
-  //   this.props.addToCart(videoId, userId, quantity);
-  // }
+  handleAddToLocalCart(videoId) {
+    if (!localStorage.getItem("graceShopperCart")) {
+      let cartItems = JSON.stringify([videoId]);
+      localStorage.setItem("graceShopperCart", cartItems);
+    } else {
+      let cartItems = JSON.parse(localStorage.getItem("graceShopperCart"));
+      cartItems.push(videoId);
+      cartItems = JSON.stringify(cartItems);
+      localStorage.setItem("graceShopperCart", cartItems);
+    }
+  }
 
   render() {
     const video = this.props.video;
@@ -39,14 +44,14 @@ class SingleVideo extends React.Component {
             <p>{video.description}</p>
           </div>
           <div>
-            <img className='video-picture' src={video.imageUrl} />
+            <img className="video-picture" src={video.imageURL} />
             {/* <h4>Spots Remaining: {video.unitsInStock}</h4> */}
             <h4>Enrollment Price: {video.price}</h4>
           </div>
           <button
             onClick={() => {
-              console.log('Add To Cart Button Clicked!');
-              // handleAddToCart;
+              console.log("Add To Cart Button Clicked!");
+              this.handleAddToLocalCart(video.id);
             }}
           >
             Add To Cart
