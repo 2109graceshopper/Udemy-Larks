@@ -73,36 +73,35 @@ export class AllProducts extends React.Component {
     //   });
 
     // replace above 'videosToShow' with this if categorization is added
+
     const videosToShow =
       filteredVideos &&
       filteredVideos.map((video) => {
         return (
-          <div className="allVideos" key={video.id}>
-            <div className="allVideos__card">
-                <Link to={`/videos/${video.id}`}>
-                  <img className="allVideos__img" src={video.imageURL} />
-                </Link>
-                <div className="video-details">
-                  <h1>{video.title}</h1>
-                  <p>{video.description}</p>
-                 <div className="video-price">{video.price} KREM</div>
-                 <button
-                    className="add-to-cart-button"
-                    type="button"
-                    onClick={() => handleAddToLocalCart(video.id)}
-                  >
-                    Add to cart
-                  </button>
-                </div>
-                </div>
+          <div className="allVideos__card" key={video.id}>
+            <Link to={`/videos/${video.id}`}>
+              <img className="allVideos__img" src={video.imageURL} />
+            </Link>
+            <div className="video-details">
+              <h1>{video.title}</h1>
+              <p>{video.description}</p>
+              <div className="video-price">{video.price} KREM</div>
+              <button
+                className="add-to-cart-button"
+                type="button"
+                onClick={() => handleAddToLocalCart(video.id)}
+              >
+                Add to cart
+              </button>
             </div>
+          </div>
         );
       });
 
     return (
       <div>
         <h1>All Videos:</h1>
-        <section className="all-video-cards">
+        <section className="allVideos">
           {videos.length > 0 ? (
             videosToShow.length > 0 ? (
               videosToShow

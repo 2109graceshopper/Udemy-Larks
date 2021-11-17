@@ -15,11 +15,9 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  flex: 0 1 35%;
+  flex: 0 1 30%;
   border: solid 3px;
-  padding: 1em;
-  width: 45%;
-  margin: auto; }
+  padding: 1em; }
 
 body {
   font-family: sans-serif;
