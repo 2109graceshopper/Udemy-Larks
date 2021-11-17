@@ -6,12 +6,12 @@ const {
   OrderVideo,
   userUniqueVideo,
 } = require("../db/index");
-const {hasUserToken, isAdmin} = require("./gatekeepingMiddleware")
+const { hasUserToken, isAdmin } = require("./gatekeepingMiddleware");
 
-router.get("/", hasUserToken,isAdmin, async (req, res, next) => {
+router.get("/", hasUserToken, isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
-      attributes:['id', 'username'] //returning only needed data from users safer! even with admin
+      attributes: ["id", "username"], //returning only needed data from users safer! even with admin
     });
     res.json(users);
   } catch (err) {
@@ -27,22 +27,30 @@ router.get("/:id", async (req, res, next) => {
         isCart: true,
       },
     });
-
-    const { orderId } = order;
-
-    const videos = await Video.findAll({
-      include: {
-        model: OrderVideo,
-        where: {
-          orderId: orderId,
+    let videos = [];
+    if (order) {
+      videos = await Video.findAll({
+        include: {
+          model: OrderVideo,
+          where: {
+            orderId: order.orderId,
+          },
         },
-      },
-    });
+      });
+    }
+
     //passing only data that is need for compnent rendering.
     let user = await User.findByPk(req.params.id);
-    let safeUserData = {'id': user.dataValues.id, 'username': user.dataValues.username, 'firstName':  user.dataValues.firstName, 'lastName':  user.dataValues.lastName, 'address':  user.dataValues.address, 'userimageURL':  user.dataValues.userimageURL,}
+    let safeUserData = {
+      id: user.dataValues.id,
+      username: user.dataValues.username,
+      firstName: user.dataValues.firstName,
+      lastName: user.dataValues.lastName,
+      address: user.dataValues.address,
+      userimageURL: user.dataValues.userimageURL,
+    };
     user = { ...safeUserData, shoppingCart: videos };
-    
+
     res.json(user);
   } catch (err) {
     next(err);
