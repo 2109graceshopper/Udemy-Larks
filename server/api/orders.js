@@ -37,9 +37,6 @@ router.put("/:userId", async (req, res, next) => {
       where: { userId: req.params.userId, isCart: true },
     });
 
-    console.log("videos to put in db", req.body);
-    console.log("orderId to assign videos to", cart.orderId);
-
     req.body.map(async (videoId) => {
       await OrderVideo.findOrCreate({
         where: {
@@ -50,10 +47,6 @@ router.put("/:userId", async (req, res, next) => {
     });
 
     res.send(req.body);
-
-    // const cartVideos = await OrderVideo.findOrCreate({
-    //   where: { orderId: cart.orderId, videoId:  },
-    // });
   } catch (error) {
     next(error);
   }
