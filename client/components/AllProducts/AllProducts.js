@@ -57,7 +57,6 @@ export class AllProducts extends React.Component {
   render() {
     const { handleAddToLocalCart } = this;
     const videos = this.props.videos || [];
-    console.log(this.state);
 
     let filteredVideos =
       this.state.videoCategoryFilter !== "all"
