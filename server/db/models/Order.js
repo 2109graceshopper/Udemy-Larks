@@ -1,34 +1,77 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt');
-const axios = require('axios');
+const Sequelize = require("sequelize");
+const db = require("../db");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const axios = require("axios");
 
 const SALT_ROUNDS = 5;
 
 const Order = db.define(
-    "order",
-    {
-      id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-    },
-    {
-      quantity :{
+  "order",
+  {
+    orderId: {
       type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    userId: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      foreignKey: true,
+      references: {
+        model: "users",
+        key: "id",
       },
     },
-    { isCart: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
-      }
+    isCart: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
+      isEmpty: false,
     },
-    { timestamps: true }
-  );
+  },
+  { timestamps: false }
+);
 
-Order.addVideoToOrder = async(videoID, userID, Qty) =>{
-}
-  
+Order.addVideoToOrder = async (videoID, userID, Qty) => {
+  try {
+    await this.create({
+      videoID: videoID,
+      userID: userID,
+      quantity: Qty,
+    });
+  } catch (err) {
+    console.log("Adding to cart error");
+  }
+};
+//use isCart to checkout
+/**
+ * @TODO
+ * Need to update quantity of videos later
+ */
+
+Order.checkOut = async (id) => {
+  try {
+    //Update Order isCart to false
+    const ordertoFulfill = await Order.findOne({
+      where: { userId: id, isCart: true },
+    });
+
+    const fulfilledOrder = await ordertoFulfill.update({
+      isCart: false,
+    });
+
+    //Create new order for user
+    await Order.create({
+      userId: id,
+      isCart: true,
+    });
+
+    return fulfilledOrder.orderId;
+  } catch (err) {
+    console.log("Error Checking Out");
+  }
+};
+
+Order.addVideoToOrder = async (videoID, userID, Qty) => {};
+
 module.exports = Order;

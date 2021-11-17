@@ -1,7 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
+// eslint-disable-next-line no-unused-vars
 import { Link } from "react-router-dom";
 import { fetchVideosByIds } from "../../store/videos";
+import {
+  fetchCartByUser,
+  editCartByUser,
+  removeVideoFromUserCart,
+  checkoutUserCart,
+} from "../../store/orders";
 
 export class ShoppingCart extends React.Component {
   constructor(props) {
@@ -12,30 +19,85 @@ export class ShoppingCart extends React.Component {
     this.state = {
       cartContents: localCart || [],
       cartTotalCost: 0,
+      userId: 0,
     };
 
     this.handleCartCheckout = this.handleCartCheckout.bind(this);
     this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
   }
 
+  priceUpdater() {
+    let total =
+      this.props.videos.length > 0
+        ? this.props.videos.reduce((a, b) => ({
+            price: a.price + b.price,
+          }))
+        : { price: 0 };
+    this.setState({ cartTotalCost: total.price });
+  }
+
   async componentDidMount() {
     await this.props.getVideosInfo(this.state.cartContents);
+
+    this.priceUpdater();
+
+    setTimeout(async () => {
+      let user = this.props.user;
+      this.setState({
+        userId: user.id,
+      });
+
+      if (user.id > 0) {
+        await this.props.getUserCart(this.state.userId);
+        let userDbCart = this.props.orders.map((item) => item.videoId);
+        let userLocalCart = this.state.cartContents;
+        let combinedCart = userDbCart.concat(userLocalCart);
+        combinedCart = [...new Set([...userDbCart, ...userLocalCart])];
+        this.setState({ cartContents: combinedCart });
+        localStorage.setItem("graceShopperCart", JSON.stringify(combinedCart));
+
+        await this.props.updateCart(this.state.userId, this.state.cartContents);
+      }
+    }, 1000);
+  }
+
+  async componentDidUpdate(prevProps) {
+    if (prevProps.videos !== this.props.videos && this.state.userId > 0) {
+      await this.props.updateCart(this.state.userId, this.state.cartContents);
+    }
   }
 
   async handleRemoveFromCart(videoId) {
-    // await this.props.removeFromCart(productId);
-    // this.props.getUserCart();
-    console.log("Remove from cart!");
+    //remove video from local cart
     const cart = this.state.cartContents;
-    let cartItem = cart.findIndex((video) => video.id === videoId);
+    let cartItem = cart.findIndex((video) => video === videoId);
     cart.splice(cartItem, 1);
     this.setState({ cartContents: cart });
-    console.log(this.state.cartContents);
+    let cartItems = JSON.stringify(this.state.cartContents);
+    localStorage.setItem("graceShopperCart", cartItems);
+    await this.props.getVideosInfo(this.state.cartContents);
+
+    //Routing to remove from user db as well, if user is logged in
+    this.state.userId > 0
+      ? await this.props.removeFromCart(this.state.userId, videoId)
+      : null;
+
+    //Update displayed subtotal when items are removed
+    this.priceUpdater();
   }
 
   async handleCartCheckout() {
-    // await this.props.checkout();
-    console.log("Checkout!");
+    if (this.state.cartContents.length > 0) {
+      await this.props.checkOut(this.state.userId);
+
+      //clear cart from localStorage and set state cart to []
+      window.localStorage.removeItem("graceShopperCart");
+      this.setState({ cartContents: [] });
+      await this.props.getVideosInfo(this.state.cartContents);
+      this.priceUpdater();
+    } else {
+      console.log("Cart is empty, nothing to checkout!");
+    }
   }
 
   render() {
@@ -63,7 +125,7 @@ export class ShoppingCart extends React.Component {
               Remove from cart
             </button>
           </div>
-          <div className="video-price">{video.price}</div>
+          <div className="video-price">{video.price} KREM</div>
         </div>
       );
     });
@@ -72,7 +134,7 @@ export class ShoppingCart extends React.Component {
       <div className="checkout-card">
         <section className="checkout-top-half"></section>
         <section className="checkout-bottom-half">
-          Subtotal: {`$${this.cartTotalCost}`}
+          Subtotal: {`${this.state.cartTotalCost} KREM`}
           <button
             className="checkout-button"
             type="button"
@@ -87,7 +149,11 @@ export class ShoppingCart extends React.Component {
     return (
       <div>
         <h1>Your Cart:</h1>
-        <section className="all-cart-products">{cartContentsView}</section>
+        <section className="all-cart-products">
+          {" "}
+          {cart.length > 0 ? cartContentsView : <h2>Your cart is empty!</h2>}
+        </section>
+
         <section className="checkout-box">{checkoutView}</section>
         {/* <section className="recommendations">(optional)</section> */}
       </div>
@@ -97,16 +163,21 @@ export class ShoppingCart extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    user: state.auth,
     videos: state.videos,
+    orders: state.orders,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getVideosInfo: (videoArray) => dispatch(fetchVideosByIds(videoArray)),
-    // getUserCart: (userId) =>
-    // removeFromCart: (productId) =>
-    // checkOut: () =>
+    getUserCart: (userId) => dispatch(fetchCartByUser(userId)),
+    updateCart: (userId, localUserCart) =>
+      dispatch(editCartByUser(userId, localUserCart)),
+    removeFromCart: (userId, videoId) =>
+      dispatch(removeVideoFromUserCart(userId, videoId)),
+    checkOut: (userId) => dispatch(checkoutUserCart(userId)),
   };
 };
 

@@ -1,36 +1,48 @@
 //this is the access point for all things database related!
 
-const db = require('./db')
-const User = require('./models/User')
-const Video = require('./models/Video')
-const Order = require('./models/Order')
+const db = require("./db");
+const User = require("./models/User");
+const Video = require("./models/Video");
+const Order = require("./models/Order");
+const { Sequelize } = require("sequelize");
+const { findAllVideos } = require("./models/Video");
 
 //associations could go here!
-//Videos can be part of multiple orders
-//order can have multiple videos
-// Video.belongsToMany(OrderUser, { through: OrderVideo })
-// OrderUser.belongsToMany(Video, { through: OrderVideo })
 
-// //User can have multiple orders
-// OrderUser.belongsTo(User);
-// User.hasMany(OrderUser)
+//User have many Orders
+User.hasMany(Order);
+
+//User Owned Videos
+const userUniqueVideo = db.define("userUniqueVideo", {}, { timestamps: false });
 
 Video.belongsToMany(User, {
   through: {
-    model: Order,
-    unique: false,
+    model: userUniqueVideo,
   },
 });
-User.belongsToMany(Video, {
-  through: {
-    model: Order,
-    unique: false,
+
+Video.hasMany(userUniqueVideo);
+
+//Videos Belong To Many Orders via OrderVideo
+const OrderVideo = db.define(
+  "ordervideo",
+  {
+    qty: {
+      type: Sequelize.INTEGER,
+      defaultValue: 1,
+    },
   },
-});
+  { timestamps: false }
+);
+
+Video.belongsToMany(Order, { through: OrderVideo, otherKey: "orderId" });
+Video.hasMany(OrderVideo);
 
 module.exports = {
   db,
   User,
   Video,
-  Order
-}
+  Order,
+  OrderVideo,
+  userUniqueVideo,
+};
