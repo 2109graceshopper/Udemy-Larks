@@ -80,19 +80,19 @@ export class AllProducts extends React.Component {
           <div className="single-video-card" key={video.id}>
             <Link to={`/videos/${video.id}`}>
               <img className="video-preview" src={video.imageURL} />
-              <div className="video-details">
-                {video.title}
-                {video.details}
-                <button
-                  className="add-to-cart-button"
-                  type="button"
-                  onClick={() => handleAddToLocalCart(video.id)}
-                >
-                  Add to cart
-                </button>
-              </div>
-              <div className="video-price">{video.price} KREM</div>
             </Link>
+            <div className="video-details">
+              {video.title}
+              {video.description}
+              <button
+                className="add-to-cart-button"
+                type="button"
+                onClick={() => handleAddToLocalCart(video.id)}
+              >
+                Add to cart
+              </button>
+            </div>
+            <div className="video-price">{video.price} KREM</div>
           </div>
         );
       });
