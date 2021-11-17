@@ -12,6 +12,7 @@ router.get("/", hasUserToken, isAdmin, async (req, res, next) => {
   }
 });
 
+<<<<<<< HEAD
 router.post("/", hasUserToken, isAdmin, async (req, res, next) => {
   try {
     const order = await Order.create(req.body);
@@ -37,6 +38,19 @@ router.put("/", hasUserToken, isAdmin, async (req, res, next) => {
     next(err);
   }
 });
+=======
+// //single order assuming user is logged in => Pending on Takumi's code
+// router.get("/:orderId", hasUserToken, async (req, res, next) => {
+//   try {
+//     const order = await Order.findOne({
+//       where: { id: req.params.orderId },
+//     });
+//     res.json(order);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+>>>>>>> 70eb8bb (Removed redunt orders route)
 
 router.delete("/:orderId", hasUserToken, isAdmin, async (req, res, next) => {
   try {
