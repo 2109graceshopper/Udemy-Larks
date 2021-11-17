@@ -21,6 +21,16 @@ router.post("/", hasUserToken, isAdmin, async (req, res, next) => {
   }
 });
 
+// router.put("/", hasUserToken, isAdmin, async (req, res, next) => {
+//   try {
+//     console.log(req.body)
+
+//     res.json(order);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
 //single order assuming user is logged in => Pending on Takumi's code
 router.get("/:orderId", hasUserToken, async (req, res, next) => {
   try {
