@@ -49,7 +49,7 @@ router.delete("/:orderId", hasUserToken, isAdmin, async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-})
+});
 
 //getting a user's saved cart
 router.get("/:userId", async (req, res, next) => {
@@ -59,10 +59,13 @@ router.get("/:userId", async (req, res, next) => {
       where: { userId: req.params.userId, isCart: true },
     });
 
-    //searches for videos belonging to open cart
-    const cartVideos = await OrderVideo.findAll({
-      where: { orderId: cart.orderId },
-    });
+    let cartVideos = [];
+    if (cart) {
+      //searches for videos belonging to open cart
+      cartVideos = await OrderVideo.findAll({
+        where: { orderId: cart.orderId },
+      });
+    }
 
     //returns an array of videos sharing the same cart
     res.json(cartVideos);
@@ -124,8 +127,6 @@ router.put("/:userId/checkout", async (req, res, next) => {
     next(error);
   }
 });
-
-
 
 //removing an item from a user's cart
 router.delete("/:userId/:videoId", async (req, res, next) => {
