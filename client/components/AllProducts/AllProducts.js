@@ -73,17 +73,19 @@ export class AllProducts extends React.Component {
     //   });
 
     // replace above 'videosToShow' with this if categorization is added
+
     const videosToShow =
       filteredVideos &&
       filteredVideos.map((video) => {
         return (
-          <div className="single-video-card" key={video.id}>
+          <div className="allVideos__card" key={video.id}>
             <Link to={`/videos/${video.id}`}>
-              <img className="video-preview" src={video.imageURL} />
+              <img className="allVideos__img" src={video.imageURL} />
             </Link>
             <div className="video-details">
-              {video.title}
-              {video.description}
+              <h1>{video.title}</h1>
+              <p>{video.description}</p>
+              <div className="video-price">{video.price} KREM</div>
               <button
                 className="add-to-cart-button"
                 type="button"
@@ -92,7 +94,6 @@ export class AllProducts extends React.Component {
                 Add to cart
               </button>
             </div>
-            <div className="video-price">{video.price} KREM</div>
           </div>
         );
       });
@@ -100,7 +101,7 @@ export class AllProducts extends React.Component {
     return (
       <div>
         <h1>All Videos:</h1>
-        <section className="all-video-cards">
+        <section className="allVideos">
           {videos.length > 0 ? (
             videosToShow.length > 0 ? (
               videosToShow
