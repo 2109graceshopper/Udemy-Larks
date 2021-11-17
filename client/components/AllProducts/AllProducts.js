@@ -11,8 +11,7 @@ export class AllProducts extends React.Component {
     const videoFilter = localStorage.getItem("videoCategoryFilter");
 
     this.state = {
-      videoCategoryFilter: videoFilter || "all", //this.state dependent on state from header selector, will
-      //connect later if we decide to implement
+      videoCategoryFilter: videoFilter || "all", //this.state dependent on state from header selector
       userOwnedVideos: [],
     };
     this.handleAddToCart = this.handleAddToLocalCart.bind(this);
@@ -34,7 +33,10 @@ export class AllProducts extends React.Component {
       }
     }
     if (this.props.user.userUniqueVideos !== prevProps.user.userUniqueVideos) {
-      this.setState({ userOwnedVideos: this.props.user.userUniqueVideos });
+      let userOwnedVideoIds = this.props.user.userUniqueVideos.map(
+        (video) => video.id
+      );
+      this.setState({ userOwnedVideos: userOwnedVideoIds });
     }
   }
 
@@ -47,19 +49,16 @@ export class AllProducts extends React.Component {
     } else {
       let cartItems = JSON.parse(localStorage.getItem("graceShopperCart"));
       cartItems.includes(videoId) ? null : cartItems.push(videoId);
-
       cartItems = JSON.stringify(cartItems);
       localStorage.setItem("graceShopperCart", cartItems);
     }
-    // await this.props.addToCart(productId);
   }
 
   render() {
     const { handleAddToLocalCart } = this;
     const videos = this.props.videos || [];
-    console.log(this.props);
+    console.log(this.state);
 
-    // uncomment if video.category is added
     let filteredVideos =
       this.state.videoCategoryFilter !== "all"
         ? videos.filter(
@@ -67,31 +66,6 @@ export class AllProducts extends React.Component {
           )
         : videos;
 
-    // const videosToShow =
-    //   videos &&
-    //   videos.map((video) => {
-    //     return (
-    //       <div className="single-video-card" key={video.id}>
-    //         <Link to={`/videos/${video.id}`}>
-    //           <img className="video-preview" src={video.imageURL} />
-    //           <div className="video-details">
-    //             {video.title}
-    //             {video.details}
-    //             <button
-    //               className="add-to-cart-button"
-    //               type="button"
-    //               onClick={() => handleAddToLocalCart(video.id)}
-    //             >
-    //               Add to cart
-    //             </button>
-    //           </div>
-    //           <div className="video-price">{video.price} KREM</div>
-    //         </Link>
-    //       </div>
-    //     );
-    //   });
-
-    // replace above 'videosToShow' with this if categorization is added
     const videosToShow =
       filteredVideos &&
       filteredVideos.map((video) => {
@@ -103,15 +77,21 @@ export class AllProducts extends React.Component {
             <div className="video-details">
               {video.title}
               {video.description}
-              <button
-                className="add-to-cart-button"
-                type="button"
-                onClick={() => handleAddToLocalCart(video.id)}
-              >
-                Add to cart
-              </button>
+              {this.state.userOwnedVideos.includes(video.id) ? (
+                <h3>Course Owned!</h3>
+              ) : (
+                <div>
+                  <button
+                    className="add-to-cart-button"
+                    type="button"
+                    onClick={() => handleAddToLocalCart(video.id)}
+                  >
+                    Add to cart
+                  </button>
+                  <div className="video-price">{video.price} KREM</div>
+                </div>
+              )}
             </div>
-            <div className="video-price">{video.price} KREM</div>
           </div>
         );
       });
@@ -120,18 +100,19 @@ export class AllProducts extends React.Component {
       <div>
         <h1>All Videos:</h1>
         <section className="all-video-cards">
-          {videos.length > 0 ? (
-            videosToShow.length > 0 ? (
-              videosToShow
-            ) : (
-              <h2>
-                There are no videos in the database matching the search
-                parameters
-              </h2>
-            )
-          ) : (
-            <h2>There are no videos in the database</h2>
-          )}
+          {
+            videos.length > 0 ? (
+              videosToShow.length > 0 ? (
+                videosToShow
+              ) : (
+                <h2>
+                  There are no videos in the database matching the search
+                  parameters
+                </h2>
+              )
+            ) : null
+            // <h2>There are no videos in the database</h2>
+          }
         </section>
       </div>
     );
@@ -150,7 +131,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getUser: (userId, header) => dispatch(fetchUserInfo(userId, header)),
     getVideos: () => dispatch(fetchVideos()),
-    // addToCart: (videoId) => dispatch(addProductToCart(videoId)),
   };
 };
 
