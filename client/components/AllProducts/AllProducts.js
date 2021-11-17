@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchVideos } from "../../store/videos";
+import { fetchUserInfo } from "../../store/user";
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -10,14 +11,33 @@ export class AllProducts extends React.Component {
     const videoFilter = localStorage.getItem("videoCategoryFilter");
 
     this.state = {
-      videoCategoryFilter: videoFilter || "all", //this.state dependent on state from header selector, will
-      //connect later if we decide to implement
+      videoCategoryFilter: videoFilter || "all", //this.state dependent on state from header selector
+      userOwnedVideos: [],
     };
     this.handleAddToCart = this.handleAddToLocalCart.bind(this);
   }
 
   componentDidMount() {
     this.props.getVideos();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+      try {
+        const token = window.localStorage.getItem("token");
+        this.props.getUser(this.props.id, {
+          headers: { authorization: token },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    if (this.props.user.userUniqueVideos !== prevProps.user.userUniqueVideos) {
+      let userOwnedVideoIds = this.props.user.userUniqueVideos.map(
+        (video) => video.id
+      );
+      this.setState({ userOwnedVideos: userOwnedVideoIds });
+    }
   }
 
   //This checks for a "graceShopperCart" in local storage. If it doesn't exist, it makes one with a value of [videoId].
@@ -28,19 +48,16 @@ export class AllProducts extends React.Component {
       localStorage.setItem("graceShopperCart", cartItems);
     } else {
       let cartItems = JSON.parse(localStorage.getItem("graceShopperCart"));
-      cartItems.push(videoId);
+      cartItems.includes(videoId) ? null : cartItems.push(videoId);
       cartItems = JSON.stringify(cartItems);
       localStorage.setItem("graceShopperCart", cartItems);
     }
-    // await this.props.addToCart(productId);
   }
 
   render() {
     const { handleAddToLocalCart } = this;
     const videos = this.props.videos || [];
-    console.log(this.props);
 
-    // uncomment if video.category is added
     let filteredVideos =
       this.state.videoCategoryFilter !== "all"
         ? videos.filter(
@@ -85,14 +102,20 @@ export class AllProducts extends React.Component {
             <div className="video-details">
               <h1>{video.title}</h1>
               <p>{video.description}</p>
-              <div className="video-price">{video.price} KREM</div>
-              <button
-                className="add-to-cart-button"
-                type="button"
-                onClick={() => handleAddToLocalCart(video.id)}
-              >
-                Add to cart
-              </button>
+              {this.state.userOwnedVideos.includes(video.id) ? (
+                <h3>Course Owned!</h3>
+              ) : (
+                <div>
+                  <button
+                    className="add-to-cart-button"
+                    type="button"
+                    onClick={() => handleAddToLocalCart(video.id)}
+                  >
+                    Add to cart
+                  </button>
+                  <div className="video-price">{video.price} KREM</div>
+                </div>
+              )}
             </div>
           </div>
         );
@@ -123,13 +146,15 @@ export class AllProducts extends React.Component {
 const mapStateToProps = (state) => {
   return {
     videos: state.videos,
+    id: state.auth.id,
+    user: state.user,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getUser: (userId, header) => dispatch(fetchUserInfo(userId, header)),
     getVideos: () => dispatch(fetchVideos()),
-    // addToCart: (videoId) => dispatch(addProductToCart(videoId)),
   };
 };
 
