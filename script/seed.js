@@ -232,15 +232,15 @@ async function seed() {
     }),
   ]);
 
-  //Creating Orders //possible duplicate values
+  // //Creating Orders //possible duplicate values
   const order = await Promise.all([
     Order.create({ userId: 1, isCart: true }),
-    Order.create({ userId: 1 }),
-    Order.create({ userId: 1 }),
+    Order.create({ userId: 4, isCart: true }),
     Order.create({ userId: 2, isCart: true }),
     Order.create({ userId: 1 }),
+    Order.create({ userId: 1 }),
+    Order.create({ userId: 1 }),
     Order.create({ userId: 1 }), //<--Repeat Order
-    Order.create({ userId: 4, isCart: true }),
     Order.create({ userId: 6 }),
     Order.create({ userId: 3 }),
     Order.create({ userId: 9 }),
@@ -250,7 +250,7 @@ async function seed() {
     Order.create({ userId: 8 }),
   ]);
 
-  //Creating orderVideos
+  // //Creating orderVideos
   const orderVideos = await Promise.all([
     OrderVideo.create({ qty: 1, videoId: 1, orderId: 4 }),
     OrderVideo.create({ qty: 1, videoId: 5, orderId: 5 }),
