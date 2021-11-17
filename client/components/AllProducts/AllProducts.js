@@ -65,17 +65,43 @@ export class AllProducts extends React.Component {
           )
         : videos;
 
+    // const videosToShow =
+    //   videos &&
+    //   videos.map((video) => {
+    //     return (
+    //       <div className="single-video-card" key={video.id}>
+    //         <Link to={`/videos/${video.id}`}>
+    //           <img className="video-preview" src={video.imageURL} />
+    //           <div className="video-details">
+    //             {video.title}
+    //             {video.details}
+    //             <button
+    //               className="add-to-cart-button"
+    //               type="button"
+    //               onClick={() => handleAddToLocalCart(video.id)}
+    //             >
+    //               Add to cart
+    //             </button>
+    //           </div>
+    //           <div className="video-price">{video.price} KREM</div>
+    //         </Link>
+    //       </div>
+    //     );
+    //   });
+
+    // replace above 'videosToShow' with this if categorization is added
+
     const videosToShow =
       filteredVideos &&
       filteredVideos.map((video) => {
         return (
-          <div className="single-video-card" key={video.id}>
+          <div className="allVideos__card" key={video.id}>
             <Link to={`/videos/${video.id}`}>
-              <img className="video-preview" src={video.imageURL} />
+              <img className="allVideos__img" src={video.imageURL} />
             </Link>
             <div className="video-details">
-              {video.title}
-              {video.description}
+              <h1>{video.title}</h1>
+              <p>{video.description}</p>
               {this.state.userOwnedVideos.includes(video.id) ? (
                 <h3>Course Owned!</h3>
               ) : (
@@ -98,20 +124,19 @@ export class AllProducts extends React.Component {
     return (
       <div>
         <h1>All Videos:</h1>
-        <section className="all-video-cards">
-          {
-            videos.length > 0 ? (
-              videosToShow.length > 0 ? (
-                videosToShow
-              ) : (
-                <h2>
-                  There are no videos in the database matching the search
-                  parameters
-                </h2>
-              )
-            ) : null
-            // <h2>There are no videos in the database</h2>
-          }
+        <section className="allVideos">
+          {videos.length > 0 ? (
+            videosToShow.length > 0 ? (
+              videosToShow
+            ) : (
+              <h2>
+                There are no videos in the database matching the search
+                parameters
+              </h2>
+            )
+          ) : (
+            <h2>There are no videos in the database</h2>
+          )}
         </section>
       </div>
     );
