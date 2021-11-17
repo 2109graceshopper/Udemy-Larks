@@ -50,17 +50,19 @@ export class ShoppingCart extends React.Component {
       this.setState({ cartContents: combinedCart });
       localStorage.setItem("graceShopperCart", JSON.stringify(combinedCart));
 
-      // await //router.post
-      //this.props.updateCart(userId, localUserCart)
-
       await this.props.updateCart(this.state.userId, this.state.cartContents);
-    }, 100);
+
+      console.log(this.props);
+    }, 1000);
   }
 
   async componentDidUpdate(prevProps) {
     //update display when checkout
     // await this.props.getVideosInfo(this.state.cartContents);
-    //update db cart when localcart changes
+    //update db cart when items removed from localcart?
+    // if (prevProps.videos !== this.props.videos) {
+    //   await this.props.updateCare(this.state.userId, this.state.cartContents)
+    // }
   }
 
   async handleRemoveFromCart(videoId) {
@@ -74,7 +76,7 @@ export class ShoppingCart extends React.Component {
     await this.props.getVideosInfo(this.state.cartContents);
 
     //Routing to remove from user db as well, if user is logged in
-    this.props.userId > 0
+    this.state.userId > 0
       ? await this.props.removeFromCart(this.state.userId, videoId)
       : null;
 
