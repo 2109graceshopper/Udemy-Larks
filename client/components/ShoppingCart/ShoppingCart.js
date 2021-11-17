@@ -47,10 +47,13 @@ export class ShoppingCart extends React.Component {
       let userLocalCart = this.state.cartContents;
       let combinedCart = userDbCart.concat(userLocalCart);
       combinedCart = [...new Set([...userDbCart, ...userLocalCart])];
+      this.setState({ cartContents: combinedCart });
       localStorage.setItem("graceShopperCart", JSON.stringify(combinedCart));
 
       // await //router.post
       //this.props.updateCart(userId, localUserCart)
+
+      await this.props.updateCart(this.state.userId, this.state.cartContents);
     }, 100);
   }
 
