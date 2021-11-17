@@ -25,7 +25,7 @@ async function seed() {
       firstName: "cody",
       lastName: "banks",
       address: "419 Trantow Skyway\nDollyport, KY 28406-2282",
-      isAdmin: false,
+      isAdmin: true,
       userimageURL: "https://randomuser.me/api/portraits/men/75.jpg",
     }),
     User.create({
