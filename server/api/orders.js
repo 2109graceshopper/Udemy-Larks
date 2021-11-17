@@ -23,22 +23,6 @@ router.get("/", hasUserToken, isAdmin, async (req, res, next) => {
 //     next(err);
 //   }
 // });
-<<<<<<< .merge_file_bUxCaI
-
-router.delete("/:orderId", hasUserToken, isAdmin, async (req, res, next) => {
-  try {
-    const order = await Order.destroy({
-      where: {
-        orderId: req.params.orderId,
-      },
-    });
-    res.json(order);
-  } catch (err) {
-    next(err);
-  }
-})
-=======
->>>>>>> .merge_file_qH71ju
 
 //getting a user's saved cart
 router.get("/:userId", async (req, res, next) => {
