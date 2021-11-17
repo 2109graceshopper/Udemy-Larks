@@ -1,102 +1,71 @@
 body {
+  background-color: blue; }
+
+body {
   font-family: sans-serif;
-  text-align: center;
-}
+  text-align: center; }
 
 a {
-  text-decoration: none;
-}
+  text-decoration: none; }
 
 label {
-  display: block;
-}
+  display: block; }
 
 nav {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   background-color: beige;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   height: 60px;
   padding: 20px;
-  border-radius: 10px;
-}
+  border-radius: 10px; }
 
 .graceShopperLogo,
 .cart-icon,
 .profile-picture {
-  height: 50px;
-}
+  height: 50px; }
 
 /* Move to allProducts.css */
 .video-preview {
-  height: 150px;
-}
+  height: 150px; }
 
 /* Move to singleVideo.css */
 .video-picture {
-  height: 250px;
-}
+  height: 250px; }
 
 nav a {
   display: inline-block;
-  margin: 1em;
-}
+  margin: 1em; }
 
 form div {
   margin: 1em;
-  display: inline-block;
-}
+  display: inline-block; }
 
 .profile-picture {
   max-width: 5%;
-  height: auto;
-}
+  height: auto; }
 
 /* Landing Page - To Be Moved Later */
 .main {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
+  flex-direction: column;
+  justify-content: center; }
 
 .cta-get-started {
   background-color: beige;
   width: 100px;
   padding: 10px;
   text-decoration: none;
-  color: black;
-}
+  color: black; }
 
 .services {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
+  flex-direction: row;
+  justify-content: center; }
 
 .trophy-icon,
 .check-mark-icon,
 .support-icon {
-  height: 60px;
-}
+  height: 60px; }
 
 .carousel-image {
-  height: 200px;
-}
-/*# sourceMappingURL=style.css.map */
+  height: 200px; }
