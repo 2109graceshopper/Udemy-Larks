@@ -43,7 +43,7 @@ router.put("/:userId", async (req, res, next) => {
           videoId: videoId,
           orderId: cart.orderId,
         },
-      });
+      }).catch((err) => alert(err));
     });
 
     res.send(req.body);

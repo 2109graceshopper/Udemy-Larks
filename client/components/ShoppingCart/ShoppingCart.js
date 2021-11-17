@@ -60,7 +60,7 @@ export class ShoppingCart extends React.Component {
   }
 
   async componentDidUpdate(prevProps) {
-    if (prevProps.videos !== this.props.videos) {
+    if (prevProps.videos !== this.props.videos && this.state.userId > 0) {
       await this.props.updateCart(this.state.userId, this.state.cartContents);
     }
   }
