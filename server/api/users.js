@@ -6,10 +6,13 @@ const {
   OrderVideo,
   userUniqueVideo,
 } = require("../db/index");
+const {hasUserToken, isAdmin} = require("./gatekeepingMiddleware")
 
-router.get("/", async (req, res, next) => {
+router.get("/", hasUserToken,isAdmin, async (req, res, next) => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll({
+      attributes:['id', 'username'] //returning only needed data from users safer! even with admin
+    });
     res.json(users);
   } catch (err) {
     next(err);
@@ -35,9 +38,11 @@ router.get("/:id", async (req, res, next) => {
         },
       },
     });
-
+    //passing only data that is need for compnent rendering.
     let user = await User.findByPk(req.params.id);
-    user = { ...user, shoppingCart: videos };
+    let safeUserData = {'id': user.dataValues.id, 'username': user.dataValues.username, 'firstName':  user.dataValues.firstName, 'lastName':  user.dataValues.lastName, 'address':  user.dataValues.address, 'userimageURL':  user.dataValues.userimageURL,}
+    user = { ...safeUserData, shoppingCart: videos };
+    
     res.json(user);
   } catch (err) {
     next(err);

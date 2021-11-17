@@ -3,7 +3,6 @@ const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
-const { User, OrderVideo, userUniqueVideo } = require("../index");
 
 const SALT_ROUNDS = 5;
 
@@ -14,6 +13,15 @@ const Order = db.define(
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+    },
+    userId: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      foreignKey: true,
+      references: {
+        model: "users",
+        key: "id",
+      },
     },
     isCart: {
       type: Sequelize.BOOLEAN,
@@ -40,6 +48,7 @@ Order.addVideoToOrder = async (videoID, userID, Qty) => {
  * @TODO
  * Need to update quantity of videos later
  */
+
 Order.checkOut = async (id) => {
   try {
     //Update Order isCart to false
