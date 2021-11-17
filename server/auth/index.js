@@ -1,12 +1,11 @@
 const router = require("express").Router();
 const { User } = require("../db");
 
-
 router.post("/login", async (req, res, next) => {
-  console.log("Here!")
+  console.log("Here!");
   try {
-    const token = await User.authenticate(req.body)
-    console.log(token)
+    const token = await User.authenticate(req.body);
+    console.log(token);
     res.send({ token: await User.authenticate(req.body) });
   } catch (err) {
     next(err);
@@ -16,8 +15,8 @@ router.post("/login", async (req, res, next) => {
 router.post("/signup", async (req, res, next) => {
   try {
     //only take in username and password fields ignore everything else
-    const {username, password} = req.body;
-    const user = await User.create({username, password});
+    const { username, password } = req.body;
+    const user = await User.create({ username, password });
     res.send({ token: await user.generateToken() });
   } catch (err) {
     if (err.name === "SequelizeUniqueConstraintError") {

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { Order, OrderVideo, userUniqueVideo } = require("../db/index");
-const {hasUserToken, isAdmin} = require("./gatekeepingMiddleware")
+const { hasUserToken, isAdmin } = require("./gatekeepingMiddleware");
 
 //only admin should be able to get all orders?
 router.get("/", hasUserToken, isAdmin, async (req, res, next) => {
@@ -12,6 +12,7 @@ router.get("/", hasUserToken, isAdmin, async (req, res, next) => {
   }
 });
 
+<<<<<<< HEAD
 // //single order assuming user is logged in => Pending on Takumi's code
 // router.get("/:orderId", hasUserToken, async (req, res, next) => {
 //   try {
@@ -23,6 +24,46 @@ router.get("/", hasUserToken, isAdmin, async (req, res, next) => {
 //     next(err);
 //   }
 // });
+=======
+router.post("/", hasUserToken, isAdmin, async (req, res, next) => {
+  try {
+    const order = await Order.create(req.body);
+    res.json(order);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/", hasUserToken, isAdmin, async (req, res, next) => {
+  try {
+    const { userId, isCart } = req.body;
+    const order = await Order.update(
+      { userId, isCart },
+      {
+        where: {
+          userId: req.body.userId,
+        },
+      }
+    );
+    res.json(order);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete("/:orderId", hasUserToken, isAdmin, async (req, res, next) => {
+  try {
+    const order = await Order.destroy({
+      where: {
+        orderId: req.params.orderId,
+      },
+    });
+    res.json(order);
+  } catch (err) {
+    next(err);
+  }
+});
+>>>>>>> origin
 
 //getting a user's saved cart
 router.get("/:userId", async (req, res, next) => {
@@ -32,10 +73,13 @@ router.get("/:userId", async (req, res, next) => {
       where: { userId: req.params.userId, isCart: true },
     });
 
-    //searches for videos belonging to open cart
-    const cartVideos = await OrderVideo.findAll({
-      where: { orderId: cart.orderId },
-    });
+    let cartVideos = [];
+    if (cart) {
+      //searches for videos belonging to open cart
+      cartVideos = await OrderVideo.findAll({
+        where: { orderId: cart.orderId },
+      });
+    }
 
     //returns an array of videos sharing the same cart
     res.json(cartVideos);
@@ -51,12 +95,16 @@ router.put("/:userId", async (req, res, next) => {
       where: { userId: req.params.userId, isCart: true },
     });
 
-    console.log(req.body);
-    res.send(req.body);
+    req.body.map(async (videoId) => {
+      await OrderVideo.findOrCreate({
+        where: {
+          videoId: videoId,
+          orderId: cart.orderId,
+        },
+      }).catch((err) => alert(err));
+    });
 
-    // const cartVideos = await OrderVideo.findOrCreate({
-    //   where: { orderId: cart.orderId, videoId:  },
-    // });
+    res.send(req.body);
   } catch (error) {
     next(error);
   }

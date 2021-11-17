@@ -14,6 +14,15 @@ const Order = db.define(
       primaryKey: true,
       autoIncrement: true,
     },
+    userId: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      foreignKey: true,
+      references: {
+        model: "users",
+        key: "id",
+      },
+    },
     isCart: {
       type: Sequelize.BOOLEAN,
       defaultValue: false,
@@ -39,6 +48,7 @@ Order.addVideoToOrder = async (videoID, userID, Qty) => {
  * @TODO
  * Need to update quantity of videos later
  */
+
 Order.checkOut = async (id) => {
   try {
     //Update Order isCart to false
@@ -61,5 +71,7 @@ Order.checkOut = async (id) => {
     console.log("Error Checking Out");
   }
 };
+
+Order.addVideoToOrder = async (videoID, userID, Qty) => {};
 
 module.exports = Order;

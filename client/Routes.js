@@ -1,14 +1,15 @@
-import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { withRouter, Route, Switch, Redirect } from "react-router-dom";
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 // import Header from "./components/Header";
-import Login from "./components/Login/Login";
-import Registration from "./components/Registration/Registration";
-import Home from "./components/Home";
-import AllProducts from "./components/AllProducts/AllProducts";
-import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
-
-import { me } from "./store";
+import Login from './components/Login/Login';
+import Registration from './components/Registration/Registration';
+import Home from './components/Home';
+import AllProducts from './components/AllProducts/AllProducts';
+import ShoppingCart from './components/ShoppingCart/ShoppingCart';
+import SingleVideo from './components/SingleVideo/SingleVideo';
+import UserProfile from './components/UserProfile/UserProfile';
+import { me } from './store';
 
 /**
  * COMPONENT
@@ -25,18 +26,21 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={Home} />
-            <Route path="/videos" component={AllProducts} />
-            <Route path="/cart" component={ShoppingCart} />
-            <Redirect to="/home" />
+            <Route path='/home' component={Home} />
+            <Route exact path='/videos' component={AllProducts} />
+            <Route exact path='/videos/:videoId' component={SingleVideo} />
+            <Route path='/users/:id' component={UserProfile} />
+            <Route path='/cart' component={ShoppingCart} />
+            <Redirect to='/home' />
           </Switch>
         ) : (
           <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/videos" component={AllProducts} />
-            <Route path="/signup" component={Registration} />
-            <Route path="/cart" component={ShoppingCart} />
+            <Route path='/' exact component={Home} />
+            <Route path='/login' component={Login} />
+            <Route path='/signup' component={Registration} />
+            <Route exact path='/videos' component={AllProducts} />
+            <Route exact path='/videos/:videoId' component={SingleVideo} />
+            <Route path='/cart' component={ShoppingCart} />
           </Switch>
         )}
       </div>

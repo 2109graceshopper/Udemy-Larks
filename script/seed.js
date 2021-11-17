@@ -25,7 +25,7 @@ async function seed() {
       firstName: "cody",
       lastName: "banks",
       address: "419 Trantow Skyway\nDollyport, KY 28406-2282",
-      isAdmin: false,
+      isAdmin: true,
       userimageURL: "https://randomuser.me/api/portraits/men/75.jpg",
     }),
     User.create({
@@ -148,8 +148,7 @@ async function seed() {
       unitsInStock: 20,
       authorName: "Takumi",
       description: "Tech Video",
-      imageURL:
-        "https://miro.medium.com/https://miro.medium.com/max/800/1*YhIXFNRgs5urKD6G3D04sw.jpeg/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+      imageURL: "https://miro.medium.com/max/800/1*YhIXFNRgs5urKD6G3D04sw.jpeg",
       category: 2,
     }),
     Video.create({
@@ -232,15 +231,15 @@ async function seed() {
     }),
   ]);
 
-  //Creating Orders //possible duplicate values
+  // //Creating Orders //possible duplicate values
   const order = await Promise.all([
     Order.create({ userId: 1, isCart: true }),
-    Order.create({ userId: 1 }),
-    Order.create({ userId: 1 }),
+    Order.create({ userId: 4, isCart: true }),
     Order.create({ userId: 2, isCart: true }),
     Order.create({ userId: 1 }),
+    Order.create({ userId: 1 }),
+    Order.create({ userId: 1 }),
     Order.create({ userId: 1 }), //<--Repeat Order
-    Order.create({ userId: 4, isCart: true }),
     Order.create({ userId: 6 }),
     Order.create({ userId: 3 }),
     Order.create({ userId: 9 }),
@@ -250,7 +249,7 @@ async function seed() {
     Order.create({ userId: 8 }),
   ]);
 
-  //Creating orderVideos
+  // //Creating orderVideos
   const orderVideos = await Promise.all([
     OrderVideo.create({ qty: 1, videoId: 1, orderId: 4 }),
     OrderVideo.create({ qty: 1, videoId: 5, orderId: 5 }),

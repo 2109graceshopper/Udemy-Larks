@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { Video } = require("../db/index");
 
+// GET /api/videos
 router.get("/", async (req, res, next) => {
   try {
     const videos = await Video.findAll();
@@ -10,14 +11,17 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// GET /api/videos/videoId
 router.get("/:videoId", async (req, res, next) => {
   try {
     const video = await Video.findOne({
-      where: { id: req.params.videoId },
+      where: {
+        id: req.params.videoId,
+      },
     });
-    res.send(video);
-  } catch (error) {
-    next(error);
+    res.json(video);
+  } catch (err) {
+    next(err);
   }
 });
 
