@@ -47,16 +47,18 @@ export class ShoppingCart extends React.Component {
         userId: user.id,
       });
 
-      await this.props.getUserCart(this.state.userId);
-      let userDbCart = this.props.orders.map((item) => item.videoId);
-      let userLocalCart = this.state.cartContents;
-      let combinedCart = userDbCart.concat(userLocalCart);
-      combinedCart = [...new Set([...userDbCart, ...userLocalCart])];
-      this.setState({ cartContents: combinedCart });
-      localStorage.setItem("graceShopperCart", JSON.stringify(combinedCart));
+      if (user.id > 0) {
+        await this.props.getUserCart(this.state.userId);
+        let userDbCart = this.props.orders.map((item) => item.videoId);
+        let userLocalCart = this.state.cartContents;
+        let combinedCart = userDbCart.concat(userLocalCart);
+        combinedCart = [...new Set([...userDbCart, ...userLocalCart])];
+        this.setState({ cartContents: combinedCart });
+        localStorage.setItem("graceShopperCart", JSON.stringify(combinedCart));
 
-      await this.props.updateCart(this.state.userId, this.state.cartContents);
-    }, 500);
+        await this.props.updateCart(this.state.userId, this.state.cartContents);
+      }
+    }, 1000);
   }
 
   async componentDidUpdate(prevProps) {
@@ -85,13 +87,17 @@ export class ShoppingCart extends React.Component {
   }
 
   async handleCartCheckout() {
-    await this.props.checkOut(this.state.userId);
+    if (this.state.cartContents.length > 0) {
+      await this.props.checkOut(this.state.userId);
 
-    //clear cart from localStorage and set state cart to []
-    window.localStorage.removeItem("graceShopperCart");
-    this.setState({ cartContents: [] });
-    await this.props.getVideosInfo(this.state.cartContents);
-    this.priceUpdater();
+      //clear cart from localStorage and set state cart to []
+      window.localStorage.removeItem("graceShopperCart");
+      this.setState({ cartContents: [] });
+      await this.props.getVideosInfo(this.state.cartContents);
+      this.priceUpdater();
+    } else {
+      console.log("Cart is empty, nothing to checkout!");
+    }
   }
 
   render() {

@@ -21,16 +21,6 @@ router.post("/", hasUserToken, isAdmin, async (req, res, next) => {
   }
 });
 
-// router.put("/", hasUserToken, isAdmin, async (req, res, next) => {
-//   try {
-//     console.log(req.body)
-
-//     res.json(order);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
 //getting a user's saved cart
 router.get("/:userId", async (req, res, next) => {
   try {

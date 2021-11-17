@@ -20,7 +20,6 @@ export class AllProducts extends React.Component {
   //This checks for a "graceShopperCart" in local storage. If it doesn't exist, it makes one with a value of [videoId].
   //If it already exists, it retrieves the cart, adds a new videoId to the value, and re-stores locally.
   handleAddToLocalCart(videoId) {
-    console.log("add " + videoId + " to cart!");
     if (!localStorage.getItem("graceShopperCart")) {
       let cartItems = JSON.stringify([videoId]);
       localStorage.setItem("graceShopperCart", cartItems);
