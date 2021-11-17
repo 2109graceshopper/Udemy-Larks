@@ -14,6 +14,15 @@ const Order = db.define(
       primaryKey: true,
       autoIncrement: true,
     },
+    userId: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      foreignKey: true,
+      references: {
+        model: "users",
+        key: "id",
+      },
+    },
     isCart: {
       type: Sequelize.BOOLEAN,
       defaultValue: false,
