@@ -4,11 +4,13 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import videosReducer from "./videos";
+import singleVideoReducer from "./singleVideo";
 import ordersReducer from "./orders";
 
 const reducer = combineReducers({
   auth,
   videos: videosReducer,
+  singleVideo: singleVideoReducer,
   orders: ordersReducer,
 });
 const middleware = composeWithDevTools(

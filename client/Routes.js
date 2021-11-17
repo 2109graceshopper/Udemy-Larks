@@ -7,7 +7,7 @@ import Registration from "./components/Registration/Registration";
 import Home from "./components/Home";
 import AllProducts from "./components/AllProducts/AllProducts";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
-
+import SingleVideo from "./components/SingleVideo/SingleVideo";
 import { me } from "./store";
 
 /**
@@ -26,7 +26,8 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
-            <Route path="/videos" component={AllProducts} />
+            <Route exact path="/videos" component={AllProducts} />
+            <Route exact path="/videos/:videoId" component={SingleVideo} />
             <Route path="/cart" component={ShoppingCart} />
             <Redirect to="/home" />
           </Switch>
@@ -37,6 +38,7 @@ class Routes extends Component {
             <Route path="/videos" component={AllProducts} />
             <Route path="/signup" component={Registration} />
             <Route path="/cart" component={ShoppingCart} />
+            <Route exact path="/videos/:videoId" component={SingleVideo} />
           </Switch>
         )}
       </div>

@@ -72,4 +72,6 @@ Order.checkOut = async (id) => {
   }
 };
 
+Order.addVideoToOrder = async (videoID, userID, Qty) => {};
+
 module.exports = Order;
