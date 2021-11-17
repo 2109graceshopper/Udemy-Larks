@@ -12,4 +12,17 @@ router.get("/", hasUserToken, isAdmin, async (req, res, next) => {
   }
 });
 
+//single order assuming user is logged in
+router.get("/:orderId", hasUserToken, async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: { id: req.params.orderId },
+    });
+    res.json(order);
+  } catch (err) {
+    next(err);
+  }
+});
+
+
 module.exports = router;
