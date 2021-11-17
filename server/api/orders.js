@@ -21,15 +21,22 @@ router.post("/", hasUserToken, isAdmin, async (req, res, next) => {
   }
 });
 
-// router.put("/", hasUserToken, isAdmin, async (req, res, next) => {
-//   try {
-//     console.log(req.body)
-
-//     res.json(order);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+router.put("/", hasUserToken, isAdmin, async (req, res, next) => {
+  try {
+    const { userId, isCart } = req.body;
+    const order = await Order.update(
+      { userId, isCart },
+      {
+        where: {
+          userId: req.body.userId,
+        },
+      }
+    );
+    res.json(order);
+  } catch (err) {
+    next(err);
+  }
+});
 
 //getting a user's saved cart
 router.get("/:userId", async (req, res, next) => {
