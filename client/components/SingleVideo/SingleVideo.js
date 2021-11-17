@@ -12,6 +12,7 @@ class SingleVideo extends React.Component {
   }
 
   componentDidMount() {
+    console.log("hello");
     try {
       this.props.getVideo(this.props.match.params.videoId);
     } catch (error) {

@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import AllProducts from "./components/AllProducts/AllProducts";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
 import SingleVideo from "./components/SingleVideo/SingleVideo";
+import UserProfile from "./components/UserProfile/UserProfile";
 import { me } from "./store";
 
 /**
@@ -28,6 +29,7 @@ class Routes extends Component {
             <Route path="/home" component={Home} />
             <Route exact path="/videos" component={AllProducts} />
             <Route exact path="/videos/:videoId" component={SingleVideo} />
+            <Route path="/profile" component={UserProfile} />
             <Route path="/cart" component={ShoppingCart} />
             <Redirect to="/home" />
           </Switch>
