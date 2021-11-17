@@ -12,7 +12,7 @@ router.get("/", hasUserToken, isAdmin, async (req, res, next) => {
   }
 });
 
-// //single order assuming user is logged in => Pending on Takumi's code
+// single order assuming user is logged in => Pending on Takumi's code
 // router.get("/:orderId", hasUserToken, async (req, res, next) => {
 //   try {
 //     const order = await Order.findOne({
