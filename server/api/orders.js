@@ -12,19 +12,6 @@ router.get("/", hasUserToken, isAdmin, async (req, res, next) => {
   }
 });
 
-<<<<<<< HEAD
-// //single order assuming user is logged in => Pending on Takumi's code
-// router.get("/:orderId", hasUserToken, async (req, res, next) => {
-//   try {
-//     const order = await Order.findOne({
-//       where: { id: req.params.orderId },
-//     });
-//     res.json(order);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-=======
 router.post("/", hasUserToken, isAdmin, async (req, res, next) => {
   try {
     const order = await Order.create(req.body);
@@ -63,7 +50,6 @@ router.delete("/:orderId", hasUserToken, isAdmin, async (req, res, next) => {
     next(err);
   }
 });
->>>>>>> origin
 
 //getting a user's saved cart
 router.get("/:userId", async (req, res, next) => {

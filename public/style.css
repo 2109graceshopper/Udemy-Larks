@@ -16,7 +16,7 @@
   justify-content: space-between;
   align-items: center;
   flex: 0 1 45%;
-  height: 50%;
+  min-height: 250px;
   border: solid 3px;
   padding: 1em; }
 
