@@ -2,10 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import { Router, Route, Link, Switch } from "react-router-dom";
 import { logout } from "../store";
+import Routes from "../Routes";
+import AllProducts from "./AllProducts/AllProducts";
 // import { cartIcon, graceShopperLogo } from "../../public/icons"; //path to wherever we save shared icons/art/logos/etc
 // import { profilePicture } from "../../server/"; //path to wherever we save user photo id
 
-const Header = ({ handleClick, handleChange, isLoggedIn }) => {
+const Header = ({ handleClick, isLoggedIn }) => {
+  function handleChange(event) {
+    localStorage.setItem("videoCategoryFilter", event.target.value);
+  }
+
   return (
     <nav>
       <Link to="/">
@@ -15,11 +21,11 @@ const Header = ({ handleClick, handleChange, isLoggedIn }) => {
       <div className="categories-dropdown">
         <select onChange={handleChange}>
           <option value="all">All Videos</option>
-          <option value="category1">Category 1</option>
-          <option value="category2">Category 2</option>
-          <option value="category3">Category 3</option>
-          <option value="category4">Category 4</option>
-          <option value="category5">Category 5</option>
+          <option value="1">Category 1</option>
+          <option value="2">Category 2</option>
+          <option value="3">Category 3</option>
+          <option value="4">Category 4</option>
+          <option value="5">Category 5</option>
         </select>
       </div>
       <Link to="/videos">Videos</Link>
