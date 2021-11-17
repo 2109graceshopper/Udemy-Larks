@@ -38,6 +38,19 @@ router.put("/", hasUserToken, isAdmin, async (req, res, next) => {
   }
 });
 
+router.delete("/:orderId", hasUserToken, isAdmin, async (req, res, next) => {
+  try {
+    const order = await Order.destroy({
+      where: {
+        orderId: req.params.orderId,
+      },
+    });
+    res.json(order);
+  } catch (err) {
+    next(err);
+  }
+})
+
 //getting a user's saved cart
 router.get("/:userId", async (req, res, next) => {
   try {
@@ -111,6 +124,8 @@ router.put("/:userId/checkout", async (req, res, next) => {
     next(error);
   }
 });
+
+
 
 //removing an item from a user's cart
 router.delete("/:userId/:videoId", async (req, res, next) => {
