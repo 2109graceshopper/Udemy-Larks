@@ -1,8 +1,9 @@
-import React from "react";
-import { connect } from "react-redux";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import React from 'react';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
-import { fetchUserInfo } from "../../store/user";
+import { fetchUserInfo } from '../../store/user';
+import { me } from '../../store/auth';
 
 class UserProfile extends React.Component {
   constructor() {
@@ -11,7 +12,10 @@ class UserProfile extends React.Component {
 
   componentDidMount() {
     try {
-      this.props.getUser(this.props.match.params.userId);
+      const token = window.localStorage.getItem('token');
+      this.props.getUser(this.props.match.params.id, {
+        headers: { authorization: token },
+      });
     } catch (error) {
       console.log(error);
     }
@@ -19,19 +23,15 @@ class UserProfile extends React.Component {
 
   render() {
     const user = this.props.user;
-    console.log(user.videos);
-    const userVideos = user.videos ? user.Videos : [];
+    const userVideos = user.userUniqueVideos ? user.userUniqueVideos : [];
 
     return (
       <div>
         <section>
           <h2>User Profile</h2>
-          <img
-            className="profile-picture"
-            src="/icons/profile-picture-placeholder.png"
-          />
-          <h3>Name: {user.firstName + " " + user.lastName}</h3>
-          <h3>Email: To Get From Props</h3>
+          <img className='profile-picture' src={user.userimageURL} />
+          <h3>Name: {user.firstName + ' ' + user.lastName}</h3>
+          <h3>Email: {user.username}</h3>
         </section>
         <section>
           <h2>Your Products</h2>
@@ -39,7 +39,7 @@ class UserProfile extends React.Component {
             return (
               <div key={video.id}>
                 <Link to={`/videos/${video.id}`}>
-                  <img src={video.imageUrl} />
+                  <img src={video.imageURL} />
                   <div>
                     <h3>{video.title}</h3>
                     <h4>{video.description}</h4>
@@ -59,9 +59,7 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) => ({
-  getUser: (userId) => dispatch(fetchUserInfo(userId)),
+  getUser: (userId, header) => dispatch(fetchUserInfo(userId, header)),
 });
 
 export default connect(mapState, mapDispatch)(UserProfile);
-
-// export default UserProfile;
