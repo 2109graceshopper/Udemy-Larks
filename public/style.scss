@@ -1,3 +1,5 @@
+@import "./styles/AllProducts/allProducts";
+
 body {
   font-family: sans-serif;
   text-align: center;
@@ -12,12 +14,8 @@ label {
 }
 
 nav {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   background-color: beige;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   height: 60px;
   padding: 20px;
@@ -56,17 +54,11 @@ form div {
 }
 
 /* Landing Page - To Be Moved Later */
+
 .main {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .cta-get-started {
@@ -78,16 +70,9 @@ form div {
 }
 
 .services {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .trophy-icon,
@@ -99,4 +84,3 @@ form div {
 .carousel-image {
   height: 200px;
 }
-/*# sourceMappingURL=style.css.map */
