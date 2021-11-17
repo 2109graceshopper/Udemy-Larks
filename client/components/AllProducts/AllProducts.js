@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchVideos } from "../../store/videos";
+import { fetchUserInfo } from "../../store/user";
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -9,12 +10,29 @@ export class AllProducts extends React.Component {
     this.state = {
       videoCategoryFilter: "All", //this.state dependent on state from header selector, will
       //connect later if we decide to implement
+      userOwnedVideos: [],
     };
     this.handleAddToCart = this.handleAddToLocalCart.bind(this);
   }
 
   componentDidMount() {
     this.props.getVideos();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+      try {
+        const token = window.localStorage.getItem("token");
+        this.props.getUser(this.props.id, {
+          headers: { authorization: token },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    if (this.props.user.userUniqueVideos !== prevProps.user.userUniqueVideos) {
+      this.setState({ userOwnedVideos: this.props.user.userUniqueVideos });
+    }
   }
 
   //This checks for a "graceShopperCart" in local storage. If it doesn't exist, it makes one with a value of [videoId].
@@ -36,6 +54,8 @@ export class AllProducts extends React.Component {
   render() {
     const { handleAddToLocalCart } = this;
     const videos = this.props.videos || [];
+
+    console.log(this.state);
 
     //uncomment if video.category is added
     // let filteredVideos =
@@ -122,11 +142,14 @@ export class AllProducts extends React.Component {
 const mapStateToProps = (state) => {
   return {
     videos: state.videos,
+    id: state.auth.id,
+    user: state.user,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getUser: (userId, header) => dispatch(fetchUserInfo(userId, header)),
     getVideos: () => dispatch(fetchVideos()),
     // addToCart: (videoId) => dispatch(addProductToCart(videoId)),
   };
