@@ -1,12 +1,17 @@
+@import "./styles/AllProducts/allProducts.scss";
+
 body {
   font-family: sans-serif;
-  text-align: center; }
+  text-align: center;
+}
 
 a {
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 label {
-  display: block; }
+  display: block;
+}
 
 nav {
   align-items: center;
@@ -14,55 +19,68 @@ nav {
   display: flex;
   height: 60px;
   padding: 20px;
-  border-radius: 10px; }
+  border-radius: 10px;
+}
 
 .graceShopperLogo,
 .cart-icon,
 .profile-picture {
-  height: 50px; }
+  height: 50px;
+}
 
 /* Move to allProducts.css */
 .video-preview {
-  height: 150px; }
+  height: 150px;
+}
 
 /* Move to singleVideo.css */
 .video-picture {
-  height: 250px; }
+  height: 250px;
+}
 
 nav a {
   display: inline-block;
-  margin: 1em; }
+  margin: 1em;
+}
 
 form div {
   margin: 1em;
-  display: inline-block; }
+  display: inline-block;
+}
 
 .profile-picture {
   max-width: 5%;
-  height: auto; }
+  height: auto;
+}
 
 /* Landing Page - To Be Moved Later */
+
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: center; }
+  justify-content: center;
+}
 
 .cta-get-started {
   background-color: beige;
   width: 100px;
   padding: 10px;
   text-decoration: none;
-  color: black; }
+  color: black;
+}
 
 .services {
   display: flex;
   flex-direction: row;
-  justify-content: center; }
+  justify-content: center;
+}
 
 .trophy-icon,
 .check-mark-icon,
 .support-icon {
-  height: 60px; }
+  height: 60px;
+}
 
 .carousel-image {
-  height: 200px; }
+  height: 200px;
+}

@@ -104,6 +104,7 @@ export class ShoppingCart extends React.Component {
     const { handleRemoveFromCart, handleCartCheckout } = this;
 
     let cart = this.props.videos;
+    let subtotal = this.state.cartTotalCost;
 
     const cartContentsView = cart.map((video) => {
       return (
@@ -134,7 +135,7 @@ export class ShoppingCart extends React.Component {
       <div className="checkout-card">
         <section className="checkout-top-half"></section>
         <section className="checkout-bottom-half">
-          Subtotal: {`${this.state.cartTotalCost} KREM`}
+          Subtotal: {this.subtotal ? `${this.subtotoal} KREM` : "------"}
           <button
             className="checkout-button"
             type="button"
