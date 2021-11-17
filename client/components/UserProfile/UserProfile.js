@@ -13,6 +13,7 @@ class UserProfile extends React.Component {
   componentDidMount() {
     try {
       const token = window.localStorage.getItem('token');
+      console.log(token);
       this.props.getUser(this.props.match.params.id, {
         headers: { authorization: token },
       });
@@ -25,7 +26,7 @@ class UserProfile extends React.Component {
     const user = this.props.user;
     const userVideos = user.userUniqueVideos ? user.userUniqueVideos : [];
 
-    return (
+    return !Array.isArray(user) ? (
       <div>
         <section>
           <h2>User Profile</h2>
@@ -49,6 +50,10 @@ class UserProfile extends React.Component {
             );
           })}
         </section>
+      </div>
+    ) : (
+      <div>
+        <h2>You currently don't have access to this user profile!</h2>
       </div>
     );
   }

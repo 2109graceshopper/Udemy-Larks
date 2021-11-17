@@ -13,6 +13,8 @@ export const fetchUserInfo = (id, header) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/api/users/${id}`, header);
+      // console.log(data);
+      // console.log(header['headers']['authorization']); //<--user token
       dispatch(setUserInfo(data));
     } catch (error) {
       console.log(error);

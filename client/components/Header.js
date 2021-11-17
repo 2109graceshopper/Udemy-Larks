@@ -5,7 +5,7 @@ import { logout } from '../store';
 // import { cartIcon, graceShopperLogo } from "../../public/icons"; //path to wherever we save shared icons/art/logos/etc
 // import { profilePicture } from "../../server/"; //path to wherever we save user photo id
 
-const Header = ({ handleClick, handleChange, isLoggedIn, id }) => {
+const Header = ({ handleClick, handleChange, isLoggedIn, user }) => {
   return (
     <nav>
       <Link to='/'>
@@ -37,11 +37,8 @@ const Header = ({ handleClick, handleChange, isLoggedIn, id }) => {
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <Link to={`users/${id}`}>
-            <img
-              className='profile-picture'
-              src='/icons/profile-picture-placeholder.png'
-            />
+          <Link to={`users/${user.id}`}>
+            <img className='header-profile-picture' src={user.userimageURL} />
           </Link>
           <button className='logInOut' type='button' onClick={handleClick}>
             Sign Out
@@ -66,7 +63,7 @@ const Header = ({ handleClick, handleChange, isLoggedIn, id }) => {
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
-    id: state.auth.id,
+    user: state.auth,
   };
 };
 

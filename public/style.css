@@ -21,9 +21,13 @@ nav {
 }
 
 .graceShopperLogo,
-.cart-icon,
-.profile-picture {
+.cart-icon {
   height: 50px;
+}
+
+.header-profile-picture {
+  height: 50px;
+  border-radius: 100px;
 }
 
 /* Move to allProducts.css */

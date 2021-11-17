@@ -6,7 +6,11 @@ const {
   OrderVideo,
   userUniqueVideo,
 } = require('../db/index');
-const { hasUserToken, isAdmin } = require('./gatekeepingMiddleware');
+const {
+  hasUserToken,
+  isAdmin,
+  isLoggedInUser,
+} = require('./gatekeepingMiddleware');
 
 router.get('/', hasUserToken, isAdmin, async (req, res, next) => {
   try {
@@ -19,7 +23,8 @@ router.get('/', hasUserToken, isAdmin, async (req, res, next) => {
   }
 });
 
-router.get('/:id', hasUserToken, async (req, res, next) => {
+router.get('/:id', hasUserToken, isLoggedInUser, async (req, res, next) => {
+  console.log(req.headers);
   try {
     const order = await Order.findOne({
       where: {
