@@ -19,7 +19,7 @@ router.get("/", hasUserToken, isAdmin, async (req, res, next) => {
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", hasUserToken, isAdmin, async (req, res, next) => {
   try {
     const order = await Order.findOne({
       where: {
