@@ -26,15 +26,20 @@ export class ShoppingCart extends React.Component {
     this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
   }
 
+  priceUpdater() {
+    let total =
+      this.props.videos.length > 0
+        ? this.props.videos.reduce((a, b) => ({
+            price: a.price + b.price,
+          }))
+        : { price: 0 };
+    this.setState({ cartTotalCost: total.price });
+  }
+
   async componentDidMount() {
     await this.props.getVideosInfo(this.state.cartContents);
 
-    if (this.state.cartContents.length > 0) {
-      let total = this.props.videos.reduce((a, b) => ({
-        price: a.price + b.price,
-      }));
-      this.setState({ cartTotalCost: total.price });
-    }
+    this.priceUpdater();
 
     setTimeout(async () => {
       let user = this.props.user;
@@ -42,22 +47,24 @@ export class ShoppingCart extends React.Component {
         userId: user.id,
       });
 
-      await this.props.getUserCart(this.state.userId);
-      let userDbCart = this.props.orders.map((item) => item.videoId);
-      let userLocalCart = this.state.cartContents;
-      let combinedCart = userDbCart.concat(userLocalCart);
-      combinedCart = [...new Set([...userDbCart, ...userLocalCart])];
-      localStorage.setItem("graceShopperCart", JSON.stringify(combinedCart));
+      if (user.id > 0) {
+        await this.props.getUserCart(this.state.userId);
+        let userDbCart = this.props.orders.map((item) => item.videoId);
+        let userLocalCart = this.state.cartContents;
+        let combinedCart = userDbCart.concat(userLocalCart);
+        combinedCart = [...new Set([...userDbCart, ...userLocalCart])];
+        this.setState({ cartContents: combinedCart });
+        localStorage.setItem("graceShopperCart", JSON.stringify(combinedCart));
 
-      // await //router.post
-      //this.props.updateCart(userId, localUserCart)
-    }, 100);
+        await this.props.updateCart(this.state.userId, this.state.cartContents);
+      }
+    }, 1000);
   }
 
   async componentDidUpdate(prevProps) {
-    //update display when checkout
-    // await this.props.getVideosInfo(this.state.cartContents);
-    //update db cart when localcart changes
+    if (prevProps.videos !== this.props.videos && this.state.userId > 0) {
+      await this.props.updateCart(this.state.userId, this.state.cartContents);
+    }
   }
 
   async handleRemoveFromCart(videoId) {
@@ -71,33 +78,32 @@ export class ShoppingCart extends React.Component {
     await this.props.getVideosInfo(this.state.cartContents);
 
     //Routing to remove from user db as well, if user is logged in
-    this.props.userId > 0
+    this.state.userId > 0
       ? await this.props.removeFromCart(this.state.userId, videoId)
       : null;
 
     //Update displayed subtotal when items are removed
-    let total =
-      this.props.videos.length > 0
-        ? this.props.videos.reduce((a, b) => ({
-            price: a.price + b.price,
-          }))
-        : { price: 0 };
-    this.setState({ cartTotalCost: total.price });
+    this.priceUpdater();
   }
 
   async handleCartCheckout() {
-    await this.props.checkOut(this.state.userId);
+    if (this.state.cartContents.length > 0) {
+      await this.props.checkOut(this.state.userId);
 
-    //clear cart from localStorage and set state cart to []
-    window.localStorage.removeItem("graceShopperCart");
-    this.setState({ cartContents: [] });
+      //clear cart from localStorage and set state cart to []
+      window.localStorage.removeItem("graceShopperCart");
+      this.setState({ cartContents: [] });
+      await this.props.getVideosInfo(this.state.cartContents);
+      this.priceUpdater();
+    } else {
+      console.log("Cart is empty, nothing to checkout!");
+    }
   }
 
   render() {
     const { handleRemoveFromCart, handleCartCheckout } = this;
 
     let cart = this.props.videos;
-    console.log(this.state);
 
     const cartContentsView = cart.map((video) => {
       return (
@@ -128,7 +134,7 @@ export class ShoppingCart extends React.Component {
       <div className="checkout-card">
         <section className="checkout-top-half"></section>
         <section className="checkout-bottom-half">
-          Subtotal: {`$${this.state.cartTotalCost}`}
+          Subtotal: {`${this.state.cartTotalCost} KREM`}
           <button
             className="checkout-button"
             type="button"

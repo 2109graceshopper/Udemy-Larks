@@ -148,8 +148,7 @@ async function seed() {
       unitsInStock: 20,
       authorName: "Takumi",
       description: "Tech Video",
-      imageURL:
-        "https://miro.medium.com/https://miro.medium.com/max/800/1*YhIXFNRgs5urKD6G3D04sw.jpeg/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+      imageURL: "https://miro.medium.com/max/800/1*YhIXFNRgs5urKD6G3D04sw.jpeg",
       category: 2,
     }),
     Video.create({
