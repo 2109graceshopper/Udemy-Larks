@@ -9,19 +9,19 @@
   align-items: $align;
 }
 
-.allVideos {
-  @include flex(row, space-around);
-  flex-wrap: wrap;
-  gap: 10px;
-  &__img {
+.userProfile {
+  @include flex(row, space-between);
+  gap: 5px;
+  border: solid 3px;
+  max-width: 250px;
+  &__image {
     object-fit: cover;
     max-width: 200px;
   }
   &__card {
-    @include flex(row, space-between, center);
+    @include flex(column, space-around);
     flex: 0 1 45%;
     min-height: 225px;
-    border: solid 3px;
     padding: 1em;
   }
 }
