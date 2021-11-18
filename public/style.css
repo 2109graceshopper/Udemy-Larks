@@ -83,7 +83,7 @@ a:visited {
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  max-width: 2000px;
+  min-width: 1000px;
   min-height: 120px; }
 
 .nav__img {
@@ -144,6 +144,9 @@ a:visited {
 
 .services__card h5 {
   margin: 0; }
+
+.popularVideos > img {
+  margin: 10px; }
 
 body {
   font-family: sans-serif;

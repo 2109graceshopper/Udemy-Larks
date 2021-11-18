@@ -20,3 +20,6 @@
 
 .services__card h5 {
   margin: 0; }
+
+.popularVideos > img {
+  margin: 10px; }

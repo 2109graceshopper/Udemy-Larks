@@ -18,7 +18,7 @@ class LandingPage extends React.Component {
           </div>
         </main>
 
-        <section>
+        <section className="popularVideos">
           <h1>Today's Popular Videos</h1>
           <img className="carousel-image" src="/icons/video-placeholder.jpeg" />
           <img className="carousel-image" src="/icons/video-placeholder.jpeg" />

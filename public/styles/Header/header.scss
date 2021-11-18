@@ -13,8 +13,9 @@
   @include flex(row, space-between, center);
   flex-wrap: wrap;
   gap: 10px;
-  max-width: 2000px;
+  min-width: 1000px;
   min-height: 120px;
+
   &__img {
     max-width: 20%;
     object-fit: cover;
