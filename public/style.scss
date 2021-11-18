@@ -1,4 +1,27 @@
-@import "./styles/AllProducts/allProducts.scss";
+.allVideos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.allVideos__img {
+  object-fit: cover;
+  max-width: 200px;
+}
+
+.allVideos__card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex: 0 1 45%;
+  min-height: 250px;
+  border: solid 3px;
+  padding: 1em;
+}
 
 body {
   font-family: sans-serif;
@@ -24,8 +47,9 @@ nav {
 
 .graceShopperLogo,
 .cart-icon,
-.profile-picture {
+.header-profile-picture {
   height: 50px;
+  border-radius: 100px;
 }
 
 /* Move to allProducts.css */
@@ -54,7 +78,6 @@ form div {
 }
 
 /* Landing Page - To Be Moved Later */
-
 .main {
   display: flex;
   flex-direction: column;

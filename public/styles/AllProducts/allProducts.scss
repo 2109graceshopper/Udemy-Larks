@@ -19,8 +19,8 @@
   }
   &__card {
     @include flex(row, space-between, center);
-    flex: 0 1 45%;
-    min-height: 250px;
+    flex: 0 1 33%;
+    min-height: 225px;
     border: solid 3px;
     padding: 1em;
   }
