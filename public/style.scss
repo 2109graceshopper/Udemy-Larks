@@ -1,6 +1,7 @@
 @import "./styles/AllProducts/allProducts.scss";
 @import "./styles/ShoppingCart/shoppingCart.scss";
 @import "./styles/UserProfile/userProfile.scss";
+@import "./styles/Header/header.scss";
 
 body {
   font-family: sans-serif;
@@ -39,11 +40,6 @@ nav {
 /* Move to singleVideo.css */
 .video-picture {
   height: 250px;
-}
-
-nav a {
-  display: inline-block;
-  margin: 1em;
 }
 
 form div {

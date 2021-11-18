@@ -69,8 +69,8 @@ export class Header extends React.Component {
     const { handleChange } = this;
     const { handleClick, isLoggedIn, id, userimageURL } = this.props;
     return (
-      <div>
-        <nav>
+      <div className="center">
+        <nav className="nav">
           <Link to="/">
             <img
               className="graceShopperLogo"
@@ -104,18 +104,17 @@ export class Header extends React.Component {
           </Link>
 
           {isLoggedIn ? (
-            <div>
+            <div className="signVertical">
               {/* The navbar will show these links after you log in */}
               <Link to={`/users/${id}`}>
-                <img className="header-profile-picture" src={userimageURL} />
+                <img className="nav__img" src={userimageURL} />
               </Link>
               <button className="logInOut" type="button" onClick={handleClick}>
                 Sign Out
               </button>
             </div>
           ) : (
-            <div>
-              {/* The navbar will show these links before you log in */}
+            <div className="signVertical">
               <Link to="/login" className="logInOut">
                 Sign In
               </Link>
