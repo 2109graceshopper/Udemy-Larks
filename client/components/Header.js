@@ -77,17 +77,19 @@ export class Header extends React.Component {
               src="/icons/grace-shopper-icon.png"
             />
           </Link>
-          <Link to="/videos"><h3 className="videosNav">Videos</h3></Link>
+          <Link to="/videos">
+            <h3 className="videosNav">Videos</h3>
+          </Link>
           {/* Categories Drop Down */}
           {this.state.videoPage ? (
             <div className="categories-dropdown">
               <select onChange={handleChange}>
                 <option value="all">All Videos</option>
-                <option value="1">Category 1</option>
-                <option value="2">Category 2</option>
-                <option value="3">Category 3</option>
-                <option value="4">Category 4</option>
-                <option value="5">Category 5</option>
+                <option value="1">Fullstack Bootcamp</option>
+                <option value="2">Applying to Google</option>
+                <option value="3">???</option>
+                <option value="4">FrontEnd Guru</option>
+                <option value="5">Money Laundering</option>
               </select>
             </div>
           ) : null}
