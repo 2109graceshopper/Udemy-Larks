@@ -1,6 +1,6 @@
 import React from "react";
-import {connect} from "react-redux";
-import {authenticate} from "../../store";
+import { connect } from "react-redux";
+import { authenticate } from "../../store";
 
 class Registration extends React.Component {
   constructor() {
@@ -28,7 +28,7 @@ class Registration extends React.Component {
   }
 
   render() {
-    const {name, displayName, handleSubmit, error} = this.props;
+    const { name, displayName, handleSubmit, error } = this.props;
     return (
       <div>
         <h1>Register</h1>
@@ -69,13 +69,13 @@ class Registration extends React.Component {
   }
 }
 
-const mapSignup = state => {
+const mapSignup = (state) => {
   return {
-    name: 'signup',
-    displayName: 'Sign Up',
-    error: state.auth.error
-  }
-}
+    name: "signup",
+    displayName: "Sign Up",
+    error: state.auth.error,
+  };
+};
 
 const mapDisaptch = (dispatch) => {
   return {
@@ -85,8 +85,8 @@ const mapDisaptch = (dispatch) => {
       const username = event.target.username.value;
       const password = event.target.password.value;
       dispatch(authenticate(username, password, name));
-    }
-  }
-}
+    },
+  };
+};
 
 export default connect(mapSignup, mapDisaptch)(Registration);

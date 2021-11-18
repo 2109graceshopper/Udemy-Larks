@@ -10,7 +10,6 @@ import Home from "../components/Home";
 import ShoppingCart from "../components/ShoppingCart/ShoppingCart";
 import SingleVideo from "../components/SingleVideo/SingleVideo";
 import UserProfile from "../components/UserProfile/UserProfile";
-import { fetchVideos } from "../store/videos";
 import { fetchUserInfo } from "../store/user";
 import { fetchCartByUser } from "../store/orders";
 
