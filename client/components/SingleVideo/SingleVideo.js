@@ -48,7 +48,7 @@ class SingleVideo extends React.Component {
       localStorage.setItem("graceShopperCart", cartItems);
     } else {
       let cartItems = JSON.parse(localStorage.getItem("graceShopperCart"));
-      cartItems.push(videoId);
+      cartItems.includes(videoId) ? null : cartItems.push(videoId);
       cartItems = JSON.stringify(cartItems);
       localStorage.setItem("graceShopperCart", cartItems);
     }
@@ -78,7 +78,7 @@ class SingleVideo extends React.Component {
               <button
                 className="add-to-cart-button"
                 type="button"
-                onClick={() => handleAddToLocalCart(video.id)}
+                onClick={() => this.handleAddToLocalCart(video.id)}
               >
                 Add to cart
               </button>
