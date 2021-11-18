@@ -55,7 +55,7 @@ export class Header extends React.Component {
 
   render() {
     const { handleChange } = this;
-    const { handleClick, isLoggedIn, id } = this.props;
+    const { handleClick, isLoggedIn, id, userimageURL } = this.props;
     return (
       <div>
         <nav>
@@ -95,10 +95,7 @@ export class Header extends React.Component {
             <div>
               {/* The navbar will show these links after you log in */}
               <Link to={`/users/${id}`}>
-                <img
-                  className="profile-picture"
-                  src="/icons/profile-picture-placeholder.png"
-                />
+                <img className="header-profile-picture" src={userimageURL} />
               </Link>
               <button className="logInOut" type="button" onClick={handleClick}>
                 Sign Out
