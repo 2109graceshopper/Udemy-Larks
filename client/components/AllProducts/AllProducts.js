@@ -1,43 +1,48 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchVideos } from "../../store/videos";
-import { fetchUserInfo } from "../../store/user";
 
 export class AllProducts extends React.Component {
   constructor(props) {
     super(props);
 
-    const videoFilter = localStorage.getItem("videoCategoryFilter");
-
     this.state = {
-      videoCategoryFilter: videoFilter || "all", //this.state dependent on state from header selector
-      userOwnedVideos: [],
+      videoCategoryFilter: "all",
+      userOwnedVideos: this.props.HeaderState.userOwnedVideos || [],
     };
     this.handleAddToCart = this.handleAddToLocalCart.bind(this);
   }
 
   componentDidMount() {
+    this.props.videoHandler();
     this.props.getVideos();
+    this.setState({ userOwnedVideos: [] });
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.id !== prevProps.id) {
-      try {
-        const token = window.localStorage.getItem("token");
-        this.props.getUser(this.props.id, {
-          headers: { authorization: token },
-        });
-      } catch (error) {
-        console.log(error);
-      }
+    if (
+      this.props.HeaderState.videoCategoryFilter !==
+      prevProps.HeaderState.videoCategoryFilter
+    ) {
+      this.setState({
+        videoCategoryFilter: this.props.HeaderState.videoCategoryFilter,
+      });
     }
-    if (this.props.user.userUniqueVideos !== prevProps.user.userUniqueVideos) {
-      let userOwnedVideoIds = this.props.user.userUniqueVideos.map(
-        (video) => video.id
-      );
-      this.setState({ userOwnedVideos: userOwnedVideoIds });
+
+    if (
+      this.props.HeaderState.userOwnedVideos !==
+      prevProps.HeaderState.userOwnedVideos
+    ) {
+      this.setState({
+        userOwnedVideos: this.props.HeaderState.userOwnedVideos,
+      });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.videoHandler();
   }
 
   //This checks for a "graceShopperCart" in local storage. If it doesn't exist, it makes one with a value of [videoId].
@@ -58,38 +63,15 @@ export class AllProducts extends React.Component {
     const { handleAddToLocalCart } = this;
     const videos = this.props.videos || [];
 
+    console.log(this.props);
+    console.log(this.state);
+
     let filteredVideos =
       this.state.videoCategoryFilter !== "all"
         ? videos.filter(
             (video) => video.category === this.state.videoCategoryFilter
           )
         : videos;
-
-    // const videosToShow =
-    //   videos &&
-    //   videos.map((video) => {
-    //     return (
-    //       <div className="single-video-card" key={video.id}>
-    //         <Link to={`/videos/${video.id}`}>
-    //           <img className="video-preview" src={video.imageURL} />
-    //           <div className="video-details">
-    //             {video.title}
-    //             {video.details}
-    //             <button
-    //               className="add-to-cart-button"
-    //               type="button"
-    //               onClick={() => handleAddToLocalCart(video.id)}
-    //             >
-    //               Add to cart
-    //             </button>
-    //           </div>
-    //           <div className="video-price">{video.price} KREM</div>
-    //         </Link>
-    //       </div>
-    //     );
-    //   });
-
-    // replace above 'videosToShow' with this if categorization is added
 
     const videosToShow =
       filteredVideos &&
@@ -153,7 +135,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUser: (userId, header) => dispatch(fetchUserInfo(userId, header)),
     getVideos: () => dispatch(fetchVideos()),
   };
 };
