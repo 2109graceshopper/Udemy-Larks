@@ -41,30 +41,45 @@ export class ShoppingCart extends React.Component {
 
     this.priceUpdater();
 
-    setTimeout(async () => {
-      let user = this.props.user;
-      this.setState({
-        userId: user.id,
-      });
+    let user = this.props.user;
+    this.setState({
+      userId: user.id,
+    });
 
+    setTimeout(async () => {
       if (user.id > 0) {
         await this.props.getUserCart(this.state.userId);
         let userDbCart = this.props.orders.map((item) => item.videoId);
         let userLocalCart = this.state.cartContents;
         let combinedCart = userDbCart.concat(userLocalCart);
         combinedCart = [...new Set([...userDbCart, ...userLocalCart])];
-        this.setState({ cartContents: combinedCart });
-        localStorage.setItem("graceShopperCart", JSON.stringify(combinedCart));
-
+        this.setState({ cartContents: [...combinedCart] });
         await this.props.updateCart(this.state.userId, this.state.cartContents);
+        localStorage.setItem("graceShopperCart", JSON.stringify(combinedCart));
       }
     }, 1000);
   }
 
-  async componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps, prevState) {
     if (prevProps.videos !== this.props.videos && this.state.userId > 0) {
       await this.props.updateCart(this.state.userId, this.state.cartContents);
     }
+
+    // const ordervideos = prevProps.orders.map((ordervideo) => {
+    //   return ordervideo.videoId;
+    // });
+    // console.log(prevState);
+
+    // if (JSON.stringify(ordervideos) !== JSON.stringify(this.props.orders.data)) {
+    //   await this.props.getUserCart(this.state.userId);
+    //   let userDbCart = this.props.orders.map((item) => item.videoId);
+    //   let userLocalCart = this.state.cartContents;
+    //   let combinedCart = userDbCart.concat(userLocalCart);
+    //   combinedCart = [...new Set([...userDbCart, ...userLocalCart])];
+    //   this.setState({ cartContents: [...combinedCart] });
+    //   await this.props.updateCart(this.state.userId, this.state.cartContents);
+    //   localStorage.setItem("graceShopperCart", JSON.stringify(combinedCart));
+    // }
   }
 
   async handleRemoveFromCart(videoId) {

@@ -81,14 +81,16 @@ router.put("/:userId", async (req, res, next) => {
       where: { userId: req.params.userId, isCart: true },
     });
 
-    req.body.map(async (videoId) => {
-      await OrderVideo.findOrCreate({
-        where: {
-          videoId: videoId,
-          orderId: cart.orderId,
-        },
-      }).catch((err) => alert(err));
-    });
+    if(cart) {
+      req.body.map(async (videoId) => {
+        await OrderVideo.findOrCreate({
+          where: {
+            videoId: videoId,
+            orderId: cart.orderId,
+          },
+        }).catch((err) => alert(err));
+      });
+    }
 
     res.send(req.body);
   } catch (error) {
