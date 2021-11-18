@@ -26,6 +26,15 @@ class UserProfile extends React.Component {
     const userVideos = user.userUniqueVideos ? user.userUniqueVideos : [];
     return !Array.isArray(user) ? (
       <div>
+        <section className="userProfile">
+          <div className="userProfile__card">
+            <h2>User Profile</h2>
+            <img className="" src={user.userimageURL} />
+            <h3>Name: {user.firstName + " " + user.lastName}</h3>
+            <h3>Email: {user.username}</h3>
+            <h3>Address: {user.address}</h3>
+          </div>
+        </section>
         <section>
           <h2>User Profile</h2>
           <img className="profile-picture" src={user.userimageURL} />
@@ -38,7 +47,7 @@ class UserProfile extends React.Component {
             return (
               <div key={video.id}>
                 <Link to={`/videos/${video.id}`}>
-                  <img src={video.imageURL} />
+                  <img className="userProfile__image" src={video.imageURL} />
                   <div>
                     <h3>{video.title}</h3>
                     <h4>{video.description}</h4>

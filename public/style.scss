@@ -1,4 +1,6 @@
 @import "./styles/AllProducts/allProducts.scss";
+@import "./styles/ShoppingCart/shoppingCart.scss";
+@import "./styles/UserProfile/userProfile.scss";
 
 body {
   font-family: sans-serif;
@@ -24,8 +26,9 @@ nav {
 
 .graceShopperLogo,
 .cart-icon,
-.profile-picture {
+.header-profile-picture {
   height: 50px;
+  border-radius: 100px;
 }
 
 /* Move to allProducts.css */
@@ -54,7 +57,6 @@ form div {
 }
 
 /* Landing Page - To Be Moved Later */
-
 .main {
   display: flex;
   flex-direction: column;
