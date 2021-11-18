@@ -1,8 +1,8 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Link, Switch, Redirect } from "react-router-dom";
 import { logout } from "../store";
-import Routes from "../Routes";
 import AllProducts from "../components/AllProducts/AllProducts";
 import Login from "../components/Login/Login";
 import Registration from "../components/Registration/Registration";
@@ -12,8 +12,6 @@ import SingleVideo from "../components/SingleVideo/SingleVideo";
 import UserProfile from "../components/UserProfile/UserProfile";
 import { fetchVideos } from "../store/videos";
 import { fetchUserInfo } from "../store/user";
-// import { cartIcon, graceShopperLogo } from "../../public/icons"; //path to wherever we save shared icons/art/logos/etc
-// import { profilePicture } from "../../server/"; //path to wherever we save user photo id
 
 export class Header extends React.Component {
   constructor(props) {

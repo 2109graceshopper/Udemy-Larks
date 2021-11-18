@@ -1,8 +1,8 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchVideos } from "../../store/videos";
-// import { fetchUserInfo } from "../../store/user";
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -44,9 +44,6 @@ export class AllProducts extends React.Component {
   componentWillUnmount() {
     this.props.videoHandler();
   }
-
-  // console.log(this.state.userOwnedVideos);
-  // console.log(this.props.HeaderState.userOwnedVideos);
 
   //This checks for a "graceShopperCart" in local storage. If it doesn't exist, it makes one with a value of [videoId].
   //If it already exists, it retrieves the cart, adds a new videoId to the value, and re-stores locally.
@@ -138,7 +135,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // getUser: (userId, header) => dispatch(fetchUserInfo(userId, header)),
     getVideos: () => dispatch(fetchVideos()),
   };
 };
