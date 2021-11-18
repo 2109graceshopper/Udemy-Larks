@@ -107,6 +107,7 @@ export class ShoppingCart extends React.Component {
 
     let cart = this.props.videos;
     let subtotal = this.state.cartTotalCost;
+    console.log(subtotal);
 
     const cartContentsView = cart.map((video) => {
       return (
@@ -136,14 +137,18 @@ export class ShoppingCart extends React.Component {
       <div className="checkout-card">
         <section className="checkout-top-half"></section>
         <section className="checkout-bottom-half">
-          <p>Subtotal: {subtotal ? `${subtotal} KREM` : "------"}</p>
-          <button
-            className="checkout-button"
-            type="button"
-            onClick={() => handleCartCheckout()}
-          >
-            Checkout
-          </button>
+          {subtotal ? (
+            <div>
+              <p>Subtotal: {`$subtotal`} KREM </p>
+              <button
+                className="checkout-button"
+                type="button"
+                onClick={() => handleCartCheckout()}
+              >
+                Checkout
+              </button>
+            </div>
+          ) : null}
         </section>
       </div>
     );
@@ -153,10 +158,14 @@ export class ShoppingCart extends React.Component {
         <h1>Your Cart:</h1>
         <section className="all-cart-products">
           {" "}
-          {cart.length > 0 ? cartContentsView : <h2>Your cart is empty!</h2>}
+          {cart.length > 0 ? (
+            cartContentsView
+          ) : (
+            <h2>Your cart is empty. Add some videos to get learning!</h2>
+          )}
         </section>
 
-        <section className="checkout-box">{checkoutView}</section>
+        {/* <section className="checkout-box">{checkoutView}</section> */}
         {/* <section className="recommendations">(optional)</section> */}
       </div>
     );
