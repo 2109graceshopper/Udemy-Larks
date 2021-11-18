@@ -27,6 +27,7 @@
   flex-wrap: wrap;
   gap: 10px;
   max-width: 2000px;
+  min-height: 120px;
   &__img {
     max-width: 20%;
     object-fit: cover;

@@ -95,7 +95,8 @@ a:visited {
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  max-width: 2000px; }
+  max-width: 2000px;
+  min-height: 120px; }
 
 .nav__img {
   max-width: 20%;

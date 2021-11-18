@@ -17,19 +17,22 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  max-width: 2000px; }
-  .nav__img {
-    max-width: 20%;
-    object-fit: cover; }
-  .nav__card {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    flex: 0 1 45%;
-    min-height: 225px;
-    border: solid 3px;
-    padding: 1em; }
+  max-width: 2000px;
+  min-height: 120px; }
+
+.nav__img {
+  max-width: 20%;
+  object-fit: cover; }
+
+.nav__card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex: 0 1 45%;
+  min-height: 225px;
+  border: solid 3px;
+  padding: 1em; }
 
 .nav > * {
   margin: 0.7em; }
