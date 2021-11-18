@@ -13,7 +13,7 @@ class UserProfile extends React.Component {
   componentDidMount() {
     try {
       const token = window.localStorage.getItem("token");
-      this.props.getUser(this.props.match.params.id, {
+      this.props.getUser(this.props.user.id, {
         headers: { authorization: token },
       });
     } catch (error) {
@@ -24,8 +24,7 @@ class UserProfile extends React.Component {
   render() {
     const user = this.props.user;
     const userVideos = user.userUniqueVideos ? user.userUniqueVideos : [];
-    console.log(user);
-    return !Array.isArray(user) ? (
+    return (
       <div>
         <section className="userProfile">
           <div className="userProfile__card">
@@ -33,8 +32,10 @@ class UserProfile extends React.Component {
             <img className="" src={user.userimageURL} />
             <h3>Name: {user.firstName + " " + user.lastName}</h3>
             <h3>Email: {user.username}</h3>
+            <h3>Address: {user.address}</h3>
           </div>
         </section>
+
         <section>
           <h2>Your Products</h2>
           {userVideos.map((video) => {
@@ -52,11 +53,7 @@ class UserProfile extends React.Component {
           })}
         </section>
       </div>
-    ) : (
-      <div>
-        <h2>You currently don't have access to this user profile!</h2>
-      </div>
-    );
+    ) 
   }
 }
 

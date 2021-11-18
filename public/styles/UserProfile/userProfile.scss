@@ -14,14 +14,16 @@
   gap: 5px;
   border: solid 3px;
   max-width: 250px;
+
   &__image {
     object-fit: cover;
     max-width: 200px;
   }
+  
   &__card {
     @include flex(column, space-around);
     flex: 0 1 45%;
-    min-height: 225px;
+    min-height: 250px;
     padding: 1em;
   }
 }
