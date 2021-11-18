@@ -35,12 +35,7 @@ class UserProfile extends React.Component {
             <h3>Address: {user.address}</h3>
           </div>
         </section>
-        <section>
-          <h2>User Profile</h2>
-          <img className="profile-picture" src={user.userimageURL} />
-          <h3>Name: {user.firstName + " " + user.lastName}</h3>
-          <h3>Email: {user.username}</h3>
-        </section>
+
         <section>
           <h2>Your Products</h2>
           {userVideos.map((video) => {
