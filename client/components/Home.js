@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import LandingPage from './LandingPage/LandingPage';
+import LandingPage from "./LandingPage/LandingPage";
 
 /**
  * COMPONENT
@@ -11,7 +11,7 @@ export const Home = (props) => {
 
   return (
     <div>
-      <h3>Welcome, {username}</h3>
+      {username ? <h2>Welcome, {username}</h2> : <h2>Welcome!</h2>}
       <LandingPage />
     </div>
   );

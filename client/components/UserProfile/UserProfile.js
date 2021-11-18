@@ -13,7 +13,7 @@ class UserProfile extends React.Component {
   componentDidMount() {
     try {
       const token = window.localStorage.getItem("token");
-      this.props.getUser(this.props.match.params.id, {
+      this.props.getUser(this.props.user.id, {
         headers: { authorization: token },
       });
     } catch (error) {
@@ -24,7 +24,10 @@ class UserProfile extends React.Component {
   render() {
     const user = this.props.user;
     const userVideos = user.userUniqueVideos ? user.userUniqueVideos : [];
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
     return (
       <div>
         <section className="userProfile">
@@ -36,6 +39,7 @@ class UserProfile extends React.Component {
             <h3>Address: {user.address}</h3>
           </div>
         </section>
+
         <section>
           <h2>Your Products</h2>
           {userVideos.map((video) => {

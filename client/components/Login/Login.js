@@ -12,6 +12,7 @@ class Login extends React.Component {
       msgBool: false,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -22,12 +23,21 @@ class Login extends React.Component {
     });
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    const name = event.target.name;
+    const username = event.target.username.value;
+    const password = event.target.password.value;
+    this.props.handleLoginSubmit(username, password, name);
+  }
+
   message() {
     return <p>{this.state.msg}</p>;
   }
 
   render() {
-    const {name, displayName, handleSubmit, error} = this.props;
+    const { handleSubmit } = this;
+    const { name, displayName, error } = this.props;
     return (
       <div>
         <h1>Sign In</h1>
@@ -59,21 +69,18 @@ class Login extends React.Component {
   }
 }
 
-const mapLogin = state => {
+const mapLogin = (state) => {
   return {
-    name: 'login',
-    displayName: 'Login',
-    error: state.auth.error
-  }
-}
+    user: state.auth,
+    name: "login",
+    displayName: "Login",
+    error: state.auth.error,
+  };
+};
 
 const mapDispatch = (dispatch) => {
   return {
-    handleSubmit(event) {
-      event.preventDefault();
-      const name = event.target.name;
-      const username = event.target.username.value;
-      const password = event.target.password.value;
+    handleLoginSubmit: (username, password, name) => {
       dispatch(authenticate(username, password, name));
     },
   };
