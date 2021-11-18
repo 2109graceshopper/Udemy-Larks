@@ -28,6 +28,7 @@ export class Header extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleVideoPage = this.handleVideoPage.bind(this);
+    // this.handleCart = this.handleCart.bind(this);
   }
 
   handleChange(evt) {
@@ -37,6 +38,10 @@ export class Header extends React.Component {
   handleVideoPage() {
     this.setState({ videoPage: !this.state.videoPage });
   }
+
+  // handleCart(cartLength) {
+  //   this.setState({ cartContents: cartLength});
+  // }
 
   async componentDidUpdate(prevProps) {
     if (this.props.id !== prevProps.id) {
@@ -103,6 +108,7 @@ export class Header extends React.Component {
           {/* Favorites? */}
           <Link to="/cart">
             <img className="cart-icon" src="/icons/shopping-cart-icon.png" />
+            <p>{this.state.cartContents.length}</p>
           </Link>
 
           {isLoggedIn ? (
