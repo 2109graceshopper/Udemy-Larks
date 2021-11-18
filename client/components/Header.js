@@ -108,7 +108,7 @@ export class Header extends React.Component {
           {/* Favorites? */}
           <Link to="/cart">
             <img className="cart-icon" src="/icons/shopping-cart-icon.png" />
-            <p>{this.state.cartContents.length}</p>
+            {/* <p>{this.state.cartContents.length}</p> */}
           </Link>
 
           {isLoggedIn ? (
