@@ -88,7 +88,7 @@ export class Header extends React.Component {
           {isLoggedIn ? (
             <div>
               {/* The navbar will show these links after you log in */}
-              <Link to={`users/${id}`}>
+              <Link to={`/users/${id}`}>
                 <img
                   className="profile-picture"
                   src="/icons/profile-picture-placeholder.png"
@@ -118,7 +118,9 @@ export class Header extends React.Component {
               <AllProducts HeaderState={this.state} />
             </Route>
             <Route exact path="/videos/:videoId" component={SingleVideo} />
-            <Route path="/users/:id" component={UserProfile} />
+            <Route exact path="/users/:id">
+              <UserProfile HeaderState={this.state} />
+            </Route>
             <Route path="/cart" component={ShoppingCart} />
             <Redirect to="/home" />
           </Switch>
