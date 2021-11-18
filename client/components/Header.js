@@ -54,7 +54,6 @@ export class Header extends React.Component {
         (video) => video.id
       );
       this.setState({ userOwnedVideos: userOwnedVideoIds });
-      console.log("uservideos", userOwnedVideoIds);
     }
     if (this.props.id !== prevProps.id) {
       await this.props.getUserCart(this.props.id);
