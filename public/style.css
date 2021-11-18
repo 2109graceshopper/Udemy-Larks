@@ -83,7 +83,6 @@ a:visited {
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  min-width: 1000px;
   min-height: 120px; }
 
 .nav__img {
