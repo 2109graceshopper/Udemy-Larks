@@ -33,3 +33,10 @@
 
 .nav > * {
   margin: 0.7em; }
+
+.videosNav {
+  color: #3d3fd0; }
+
+.videosNav:hover {
+  color: #3d3fd0;
+  text-decoration: underline; }

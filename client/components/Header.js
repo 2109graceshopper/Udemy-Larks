@@ -77,7 +77,7 @@ export class Header extends React.Component {
               src="/icons/grace-shopper-icon.png"
             />
           </Link>
-          <Link to="/videos">Videos</Link>
+          <Link to="/videos"><h3 className="videosNav">Videos</h3></Link>
           {/* Categories Drop Down */}
           {this.state.videoPage ? (
             <div className="categories-dropdown">
