@@ -7,7 +7,7 @@ import AllProducts from "./AllProducts/AllProducts";
 // import { cartIcon, graceShopperLogo } from "../../public/icons"; //path to wherever we save shared icons/art/logos/etc
 // import { profilePicture } from "../../server/"; //path to wherever we save user photo id
 
-const Header = ({ handleClick, isLoggedIn, id }) => {
+const Header = ({ handleClick, isLoggedIn, id, userimageURL}) => {
   function handleChange(event) {
     localStorage.setItem("videoCategoryFilter", event.target.value);
   }
@@ -44,10 +44,7 @@ const Header = ({ handleClick, isLoggedIn, id }) => {
         <div>
           {/* The navbar will show these links after you log in */}
           <Link to={`users/${id}`}>
-            <img
-              className="profile-picture"
-              src="/icons/profile-picture-placeholder.png"
-            />
+          <img className='header-profile-picture' src={userimageURL} />
           </Link>
           <button className="logInOut" type="button" onClick={handleClick}>
             Sign Out
@@ -73,6 +70,7 @@ const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
     id: state.auth.id,
+    userimageURL: state.auth.userimageURL
   };
 };
 

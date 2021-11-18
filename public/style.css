@@ -40,8 +40,9 @@ nav {
 
 .graceShopperLogo,
 .cart-icon,
-.profile-picture {
-  height: 50px; }
+.header-profile-picture {
+  height: 50px;
+  border-radius: 100px; }
 
 /* Move to allProducts.css */
 .video-preview {
