@@ -109,24 +109,23 @@ export class ShoppingCart extends React.Component {
     const cartContentsView = cart.map((video) => {
       return (
         <div className="shoppingCart" key={video.id}>
-          <Link to={`/videos/${video.id}`}>
-            <img className="video-preview" src={video.imageURL} />
-            <div className="video-details">
-              {video.title}
-              {/* {video.description} */}
+          <div className="shoppingCart__card">
+            <Link to={`/videos/${video.id}`}>
+              <h1>{video.title}</h1>
+              <img className="video-preview" src={video.imageURL} />
+              <div className="video-details">{/* {video.description} */}</div>
+            </Link>
+            <div>
+              <button
+                className="remove-from-cart-button"
+                type="button"
+                onClick={() => handleRemoveFromCart(video.id)}
+              >
+                Remove from cart
+              </button>
+              <p>{video.price} KREM</p>
             </div>
-          </Link>
-          <div>
-            {" "}
-            <button
-              className="remove-from-cart-button"
-              type="button"
-              onClick={() => handleRemoveFromCart(video.id)}
-            >
-              Remove from cart
-            </button>
           </div>
-          <div className="video-price">{video.price} KREM</div>
         </div>
       );
     });
@@ -135,7 +134,7 @@ export class ShoppingCart extends React.Component {
       <div className="checkout-card">
         <section className="checkout-top-half"></section>
         <section className="checkout-bottom-half">
-          Subtotal: {subtotal ? `${subtotal} KREM` : "------"}
+          <p>Subtotal: {subtotal ? `${subtotal} KREM` : "------"}</p>
           <button
             className="checkout-button"
             type="button"
