@@ -35,7 +35,7 @@ async function seed() {
       lastName: "brown",
       address: "1810 Hiram Mountain\nNew Maechester, CA 31787-1942",
       isAdmin: false,
-      userimageURL: "https://randomuser.me/api/portraits/men/75.jpg",
+      userimageURL: "https://randomuser.me/api/portraits/men/50.jpg",
     }),
     User.create({
       username: "Mathilde@gmail.com",
@@ -44,7 +44,7 @@ async function seed() {
       lastName: "Schneider",
       address: "1810 Hiram Mountain\nNew Maechester, CA 31787-1942",
       isAdmin: false,
-      userimageURL: "https://randomuser.me/api/portraits/women/75.jpg",
+      userimageURL: "https://randomuser.me/api/portraits/women/65.jpg",
     }),
     User.create({
       username: "Jaleel@gmail.com",
@@ -53,7 +53,7 @@ async function seed() {
       lastName: "Bode",
       address: "632 Hortense Roads Suite 875\nHamillberg, OR 39790-6770",
       isAdmin: false,
-      userimageURL: "https://randomuser.me/api/portraits/men/75.jpg",
+      userimageURL: "https://randomuser.me/api/portraits/men/55.jpg",
     }),
     User.create({
       username: "Jarrett@gmail.com",
@@ -62,7 +62,7 @@ async function seed() {
       lastName: "Kreiger",
       address: "1019 Domenica Lake Suite 191\nNew Freidahaven, WI 14195",
       isAdmin: false,
-      userimageURL: "https://randomuser.me/api/portraits/men/75.jpg",
+      userimageURL: "https://randomuser.me/api/portraits/men/60.jpg",
     }),
     User.create({
       username: "Asia@gmail.com",
@@ -72,7 +72,7 @@ async function seed() {
       address:
         "39546 Tressa Expressway Apt. 466\nNorth Katharinamouth, VT 45825-3766",
       isAdmin: false,
-      userimageURL: "https://randomuser.me/api/portraits/women/75.jpg",
+      userimageURL: "https://randomuser.me/api/portraits/women/60.jpg",
     }),
     User.create({
       username: "Helene@gmail.com",
@@ -81,7 +81,7 @@ async function seed() {
       lastName: "Wuckert",
       address: "127 Rosenbaum Squares Suite 658\nYostland, MS 64937-3476",
       isAdmin: false,
-      userimageURL: "https://randomuser.me/api/portraits/women/75.jpg",
+      userimageURL: "https://randomuser.me/api/portraits/women/70.jpg",
     }),
     User.create({
       username: "Krystina@gmail.com",
@@ -90,7 +90,7 @@ async function seed() {
       lastName: "Aufderhar",
       address: "654 Gerhold Street Suite 556\nNorth Odieview, WV 15513-8263",
       isAdmin: false,
-      userimageURL: "https://randomuser.me/api/portraits/women/75.jpg",
+      userimageURL: "https://randomuser.me/api/portraits/women/40.jpg",
     }),
     User.create({
       username: "Bernard@gmail.com",
@@ -99,7 +99,7 @@ async function seed() {
       lastName: "Corkery",
       address: "6095 Luna Rue\nPort Raven, MS 58904",
       isAdmin: false,
-      userimageURL: "https://randomuser.me/api/portraits/men/75.jpg",
+      userimageURL: "https://randomuser.me/api/portraits/men/30.jpg",
     }),
     User.create({
       username: "Destiney@gmail.com",
@@ -108,7 +108,7 @@ async function seed() {
       lastName: "Franecki",
       address: "602 Dickinson Estate Suite 842\nWest Nobleshire, OK 42744-7204",
       isAdmin: false,
-      userimageURL: "https://randomuser.me/api/portraits/men/75.jpg",
+      userimageURL: "https://randomuser.me/api/portraits/women/72.jpg",
     }),
     User.create({
       username: "Alvah@gmail.com",
@@ -117,7 +117,7 @@ async function seed() {
       lastName: "Hagenes",
       address: "2963 Vincent Ways\nNew Alverta, LA 25139",
       isAdmin: false,
-      userimageURL: "https://randomuser.me/api/portraits/women/75.jpg",
+      userimageURL: "https://randomuser.me/api/portraits/women/73.jpg",
     }),
     User.create({
       username: "Myriam@gmail.com",
@@ -126,7 +126,7 @@ async function seed() {
       lastName: "Shields",
       address: "5025 Erna Valley Suite 892\nWehnerhaven, GA 65976",
       isAdmin: false,
-      userimageURL: "https://randomuser.me/api/portraits/women/75.jpg",
+      userimageURL: "https://randomuser.me/api/portraits/women/43.jpg",
     }),
   ]);
 
@@ -177,7 +177,7 @@ async function seed() {
       authorName: "Jian",
       description: "Tech Video",
       imageURL:
-        "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg ",
+        "https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/QEY2ZW45ABHM3PPY36IJHWHLGM.jpg",
       category: 5,
     }),
     Video.create({
@@ -187,7 +187,7 @@ async function seed() {
       authorName: "Tandeep",
       description: "Tech Video",
       imageURL:
-        "https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/QEY2ZW45ABHM3PPY36IJHWHLGM.jpg",
+        "https://miro.medium.com/max/1400/1*G3l_HIHH2Nn0Hu-fkORl7A.jpeg",
       category: 1,
     }),
     Video.create({
