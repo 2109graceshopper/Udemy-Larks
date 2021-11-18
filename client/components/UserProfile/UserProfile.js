@@ -25,35 +25,35 @@ class UserProfile extends React.Component {
     const user = this.props.user;
     const userVideos = user.userUniqueVideos ? user.userUniqueVideos : [];
     return (
-      <div>
-        <section className="userProfile">
-          <div className="userProfile__card">
+      <div className="singleProfileContainer ">
+        <div className="container container--userProfile">
+          <div className="container__card">
             <h2>User Profile</h2>
-            <img className="" src={user.userimageURL} />
+            <img src={user.userimageURL} />
             <h3>Name: {user.firstName + " " + user.lastName}</h3>
             <h3>Email: {user.username}</h3>
             <h3>Address: {user.address}</h3>
           </div>
-        </section>
+        </div>
 
         <section>
           <h2>Your Products</h2>
           {userVideos.map((video) => {
             return (
-              <div key={video.id}>
-                <Link to={`/videos/${video.id}`}>
-                  <img className="userProfile__image" src={video.imageURL} />
-                  <div>
+              <div className="container" key={video.id}>
+                <div className="container__card">
+                  <div>{/* <h4>{video.description}</h4> */}</div>
+                  <Link to={`/videos/${video.id}`}>
                     <h3>{video.title}</h3>
-                    <h4>{video.description}</h4>
-                  </div>
-                </Link>
+                    <img className="container__image" src={video.imageURL} />
+                  </Link>
+                </div>
               </div>
             );
           })}
         </section>
       </div>
-    ) 
+    );
   }
 }
 

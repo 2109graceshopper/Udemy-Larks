@@ -1,19 +1,33 @@
-.userProfile {
+.singleProfileContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 5px;
   border: solid 3px;
-  max-width: 250px; }
-  .userProfile__image {
-    object-fit: cover;
-    max-width: 200px; }
-  .userProfile__card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    flex: 0 1 45%;
-    min-height: 250px;
-    padding: 1em; }
+  margin: 1rem; }
+
+.container--userProfile {
+  max-width: 300px; }
+
+.container__image {
+  object-fit: cover;
+  max-width: 300px; }
+
+.container__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 250px;
+  padding: 1em; }
+
+a:visited {
+  text-decoration: none;
+  color: black; }
