@@ -24,8 +24,8 @@ class UserProfile extends React.Component {
   render() {
     const user = this.props.user;
     const userVideos = user.userUniqueVideos ? user.userUniqueVideos : [];
-    console.log(user);
-    return !Array.isArray(user) ? (
+
+    return (
       <div>
         <section className="userProfile">
           <div className="userProfile__card">
@@ -53,11 +53,7 @@ class UserProfile extends React.Component {
           })}
         </section>
       </div>
-    ) : (
-      <div>
-        <h2>You currently don't have access to this user profile!</h2>
-      </div>
-    );
+    ) 
   }
 }
 
