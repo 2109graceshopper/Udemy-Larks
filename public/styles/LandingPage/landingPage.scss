@@ -1,0 +1,28 @@
+@mixin flex($direction, $justify, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin flex-align($align) {
+  align-items: $align;
+}
+
+.services {
+  @include flex(row, space-between, center);
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px;
+  &__img {
+    max-width: 20%;
+    object-fit: cover;
+  }
+  &__card {
+    @include flex(column, space-around, center);
+    padding: 1em;
+    h5 {
+      margin: 0;
+    }
+  }
+}

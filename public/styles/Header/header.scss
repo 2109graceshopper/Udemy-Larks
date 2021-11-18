@@ -9,19 +9,6 @@
   align-items: $align;
 }
 
-// nav a {
-//   display: inline-block;
-//   margin: 1em;
-// }
-
-.signVertical {
-  @include flex(column, center);
-}
-
-.center {
-  @include flex(column, center);
-}
-
 .nav {
   @include flex(row, space-between, center);
   flex-wrap: wrap;
@@ -52,4 +39,12 @@
 .videosNav:hover {
   color: rgb(61, 63, 208);
   text-decoration: underline;
+}
+
+.signVertical {
+  @include flex(column, center);
+}
+
+.center {
+  @include flex(column, center);
 }

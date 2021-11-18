@@ -25,23 +25,23 @@ class LandingPage extends React.Component {
           <img className="carousel-image" src="/icons/video-placeholder.jpeg" />
         </section>
 
-        <section className="services">
-          <div>
+        <div className="services">
+          <div className="services__card">
             <img className="trophy-icon" src="/icons/trophy.png" />
             <h3>Master Classes</h3>
             <h5>Award Winning Courses</h5>
           </div>
-          <div>
+          <div className="services__card">
             <img className="check-mark-icon" src="icons/check-mark.png" />
             <h3>Money Back</h3>
-            <h5>30 Days guaranteed</h5>
+            <h5>30 Days Guaranteed</h5>
           </div>
-          <div>
+          <div className="services__card">
             <img className="support-icon" src="icons/support.png" />
             <h3>High Quality</h3>
-            <h5>from the best instructors</h5>
+            <h5>From the best instructors</h5>
           </div>
-        </section>
+        </div>
       </div>
     );
   }

@@ -1,15 +1,3 @@
-.signVertical {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; }
-
-.center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; }
-
 .nav {
   display: flex;
   flex-direction: row;
@@ -43,3 +31,15 @@
 .videosNav:hover {
   color: #3d3fd0;
   text-decoration: underline; }
+
+.signVertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }

@@ -1,0 +1,22 @@
+.services {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px; }
+
+.services__img {
+  max-width: 20%;
+  object-fit: cover; }
+
+.services__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1em; }
+
+.services__card h5 {
+  margin: 0; }
