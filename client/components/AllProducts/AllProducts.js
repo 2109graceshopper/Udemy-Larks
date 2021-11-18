@@ -16,6 +16,7 @@ export class AllProducts extends React.Component {
   }
 
   componentDidMount() {
+    this.props.videoHandler();
     this.props.getVideos();
     this.setState({ userOwnedVideos: [] });
   }
@@ -38,6 +39,10 @@ export class AllProducts extends React.Component {
         userOwnedVideos: this.props.HeaderState.userOwnedVideos,
       });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.videoHandler();
   }
 
   // console.log(this.state.userOwnedVideos);

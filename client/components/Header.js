@@ -22,13 +22,18 @@ export class Header extends React.Component {
     this.state = {
       videoCategoryFilter: "all",
       userOwnedVideos: [],
+      videoPage: false,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleVideoPage = this.handleVideoPage.bind(this);
   }
 
   handleChange(evt) {
     this.setState({ videoCategoryFilter: evt.target.value });
-    console.log(this.state);
+  }
+
+  handleVideoPage() {
+    this.setState({ videoPage: !this.state.videoPage });
   }
 
   componentDidUpdate(prevProps) {
@@ -62,18 +67,21 @@ export class Header extends React.Component {
               src="/icons/grace-shopper-icon.png"
             />
           </Link>
-          {/* Categories Drop Down */}
-          <div className="categories-dropdown">
-            <select onChange={handleChange}>
-              <option value="all">All Videos</option>
-              <option value="1">Category 1</option>
-              <option value="2">Category 2</option>
-              <option value="3">Category 3</option>
-              <option value="4">Category 4</option>
-              <option value="5">Category 5</option>
-            </select>
-          </div>
           <Link to="/videos">Videos</Link>
+          {/* Categories Drop Down */}
+          {this.state.videoPage ? (
+            <div className="categories-dropdown">
+              <select onChange={handleChange}>
+                <option value="all">All Videos</option>
+                <option value="1">Category 1</option>
+                <option value="2">Category 2</option>
+                <option value="3">Category 3</option>
+                <option value="4">Category 4</option>
+                <option value="5">Category 5</option>
+              </select>
+            </div>
+          ) : null}
+
           {/* Search Bar */}
           <input
             className="searchBar"
@@ -115,7 +123,10 @@ export class Header extends React.Component {
           <Switch>
             <Route path="/home" component={Home} />
             <Route exact path="/videos">
-              <AllProducts HeaderState={this.state} />
+              <AllProducts
+                HeaderState={this.state}
+                videoHandler={this.handleVideoPage}
+              />
             </Route>
             <Route exact path="/videos/:videoId" component={SingleVideo} />
             <Route exact path="/users/:id">
@@ -130,7 +141,10 @@ export class Header extends React.Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Registration} />
             <Route exact path="/videos">
-              <AllProducts HeaderState={this.state} />
+              <AllProducts
+                HeaderState={this.state}
+                videoHandler={this.handleVideoPage}
+              />
             </Route>
             <Route exact path="/videos/:videoId" component={SingleVideo} />
             <Route path="/cart" component={ShoppingCart} />
