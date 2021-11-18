@@ -37,10 +37,6 @@ export class ShoppingCart extends React.Component {
   }
 
   async componentDidMount() {
-    await this.props.getVideosInfo(this.state.cartContents);
-
-    this.priceUpdater();
-
     setTimeout(async () => {
       let user = this.props.user;
       this.setState({
@@ -56,9 +52,15 @@ export class ShoppingCart extends React.Component {
         this.setState({ cartContents: combinedCart });
         localStorage.setItem("graceShopperCart", JSON.stringify(combinedCart));
 
-        await this.props.updateCart(this.state.userId, this.state.cartContents);
+        setTimeout(async () => {
+          this.props.updateCart(this.state.userId, this.state.cartContents);
+        }, 1000);
       }
     }, 1000);
+
+    await this.props.getVideosInfo(this.state.cartContents);
+
+    this.priceUpdater();
   }
 
   async componentDidUpdate(prevProps) {

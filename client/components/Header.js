@@ -12,16 +12,21 @@ import SingleVideo from "../components/SingleVideo/SingleVideo";
 import UserProfile from "../components/UserProfile/UserProfile";
 import { fetchVideos } from "../store/videos";
 import { fetchUserInfo } from "../store/user";
+import { fetchCartByUser } from "../store/orders";
 
 export class Header extends React.Component {
   constructor(props) {
     super(props);
 
+    const localCart = JSON.parse(localStorage.getItem("graceShopperCart"));
+
     this.state = {
       videoCategoryFilter: "all",
       userOwnedVideos: [],
       videoPage: false,
+      cartContents: localCart || [],
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleVideoPage = this.handleVideoPage.bind(this);
   }
@@ -34,7 +39,7 @@ export class Header extends React.Component {
     this.setState({ videoPage: !this.state.videoPage });
   }
 
-  componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps) {
     if (this.props.id !== prevProps.id) {
       try {
         const token = window.localStorage.getItem("token");
@@ -50,6 +55,14 @@ export class Header extends React.Component {
         (video) => video.id
       );
       this.setState({ userOwnedVideos: userOwnedVideoIds });
+    }
+    if (this.props.id !== prevProps.id) {
+      await this.props.getUserCart(this.props.id);
+      let userDbCart = this.props.orders.map((item) => item.videoId);
+      let userLocalCart = this.state.cartContents;
+      let combinedCart = userDbCart.concat(userLocalCart);
+      combinedCart = [...new Set([...userDbCart, ...userLocalCart])];
+      localStorage.setItem("graceShopperCart", JSON.stringify(combinedCart));
     }
   }
 
@@ -156,6 +169,7 @@ const mapState = (state) => {
     id: state.auth.id,
     user: state.user,
     userimageURL: state.auth.userimageURL,
+    orders: state.orders,
   };
 };
 
@@ -165,7 +179,7 @@ const mapDispatch = (dispatch) => {
       dispatch(logout());
     },
     getUser: (userId, header) => dispatch(fetchUserInfo(userId, header)),
-    getVideos: () => dispatch(fetchVideos()),
+    getUserCart: (userId) => dispatch(fetchCartByUser(userId)),
   };
 };
 
