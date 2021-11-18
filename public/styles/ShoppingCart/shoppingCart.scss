@@ -10,16 +10,17 @@
 }
 
 .shoppingCart {
-  @include flex(row, space-between, space-between);
+  @include flex(row, space-around);
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 10px;
+  margin: 25px;
   &__img {
     object-fit: cover;
     max-width: 200px;
   }
   &__card {
     @include flex(row, space-between, center);
-    flex: 0 0 200px;
+    flex: 0 0 500px;
     border: solid 3px;
     padding: 1em;
   }
