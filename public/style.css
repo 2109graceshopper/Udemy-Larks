@@ -16,7 +16,29 @@
   justify-content: space-between;
   align-items: center;
   flex: 0 1 45%;
-  min-height: 250px;
+  min-height: 225px;
+  border: solid 3px;
+  padding: 1em; }
+
+.shoppingCart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px; }
+
+.shoppingCart__img {
+  object-fit: cover;
+  max-width: 200px; }
+
+.shoppingCart__card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex: 0 1 45%;
+  min-height: 225px;
   border: solid 3px;
   padding: 1em; }
 

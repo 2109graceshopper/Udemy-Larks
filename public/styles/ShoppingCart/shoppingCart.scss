@@ -1,0 +1,27 @@
+@mixin flex($direction, $justify, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin flex-align($align) {
+  align-items: $align;
+}
+
+.shoppingCart {
+  @include flex(row, space-around);
+  flex-wrap: wrap;
+  gap: 10px;
+  &__img {
+    object-fit: cover;
+    max-width: 200px;
+  }
+  &__card {
+    @include flex(row, space-between, center);
+    flex: 0 1 45%;
+    min-height: 225px;
+    border: solid 3px;
+    padding: 1em;
+  }
+}

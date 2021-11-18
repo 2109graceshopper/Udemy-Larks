@@ -108,7 +108,7 @@ export class ShoppingCart extends React.Component {
 
     const cartContentsView = cart.map((video) => {
       return (
-        <div className="single-cart-item" key={video.id}>
+        <div className="shoppingCart" key={video.id}>
           <Link to={`/videos/${video.id}`}>
             <img className="video-preview" src={video.imageURL} />
             <div className="video-details">
