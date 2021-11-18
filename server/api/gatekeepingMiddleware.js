@@ -25,7 +25,18 @@ const isAdmin = (req, res, next) => {
   }
 };
 
+//check if the user is only on their page.
+const isLoggedInUser = (req, res, next) => {
+  if (req.user.id !== req.params.id) {
+    return res.status(403).send("Not for your eyes!");
+  } else {
+    //user page
+    next();
+  }
+};
+
 module.exports = {
   hasUserToken,
   isAdmin,
+  isLoggedInUser
 };
