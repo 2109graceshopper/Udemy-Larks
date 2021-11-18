@@ -136,14 +136,17 @@ export class ShoppingCart extends React.Component {
       <div className="checkout-card">
         <section className="checkout-top-half"></section>
         <section className="checkout-bottom-half">
-          <p>Subtotal: {subtotal ? `${subtotal} KREM` : "------"}</p>
-          <button
-            className="checkout-button"
-            type="button"
-            onClick={() => handleCartCheckout()}
-          >
-            Checkout
-          </button>
+          <div>
+            {cartContentsView}
+            <p>Subtotal: {`${subtotal}`} KREM </p>
+            <button
+              className="checkout-button"
+              type="button"
+              onClick={() => handleCartCheckout()}
+            >
+              Checkout
+            </button>
+          </div>
         </section>
       </div>
     );
@@ -152,11 +155,14 @@ export class ShoppingCart extends React.Component {
       <div>
         <h1>Your Cart:</h1>
         <section className="all-cart-products">
-          {" "}
-          {cart.length > 0 ? cartContentsView : <h2>Your cart is empty!</h2>}
+          {cart.length > 0 ? (
+            checkoutView
+          ) : (
+            <h2>Your cart is empty. Add some videos to get learning!</h2>
+          )}
         </section>
 
-        <section className="checkout-box">{checkoutView}</section>
+        {/* <section className="checkout-box">{checkoutView}</section> */}
         {/* <section className="recommendations">(optional)</section> */}
       </div>
     );
