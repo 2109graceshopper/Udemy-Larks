@@ -158,6 +158,7 @@ const mapState = (state) => {
     isLoggedIn: !!state.auth.id,
     id: state.auth.id,
     user: state.user,
+    userimageURL: state.auth.userimageURL,
   };
 };
 
