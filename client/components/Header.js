@@ -7,7 +7,7 @@ import AllProducts from "./AllProducts/AllProducts";
 // import { cartIcon, graceShopperLogo } from "../../public/icons"; //path to wherever we save shared icons/art/logos/etc
 // import { profilePicture } from "../../server/"; //path to wherever we save user photo id
 
-const Header = ({ handleClick, isLoggedIn, id }) => {
+const Header = ({ handleClick, isLoggedIn, id, userimageURL }) => {
   function handleChange(event) {
     localStorage.setItem("videoCategoryFilter", event.target.value);
   }
@@ -37,7 +37,7 @@ const Header = ({ handleClick, isLoggedIn, id }) => {
       />
       {/* Favorites? */}
       <Link to="/cart">
-        <img className="cart-icon" src="/icons/shopping-cart-icon.png" />
+        <img className='header-profile-picture' src={userimageURL} />
       </Link>
 
       {isLoggedIn ? (
@@ -73,6 +73,7 @@ const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
     id: state.auth.id,
+    userimageURL: state.auth.userimageURL
   };
 };
 
