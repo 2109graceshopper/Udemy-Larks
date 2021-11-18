@@ -32,6 +32,7 @@ class UserProfile extends React.Component {
          <img className='profile-picture' src={user.userimageURL} />
          <h3>Name: {user.firstName + ' ' + user.lastName}</h3>
          <h3>Email: {user.username}</h3>
+         <h3>Address: {user.address}</h3>
        </section>
        <section>
          <h2>Your Products</h2>
