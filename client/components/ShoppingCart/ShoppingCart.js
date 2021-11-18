@@ -135,7 +135,7 @@ export class ShoppingCart extends React.Component {
       <div className="checkout-card">
         <section className="checkout-top-half"></section>
         <section className="checkout-bottom-half">
-          Subtotal: {this.subtotal ? `${this.subtotoal} KREM` : "------"}
+          Subtotal: {subtotal ? `${subtotal} KREM` : "------"}
           <button
             className="checkout-button"
             type="button"

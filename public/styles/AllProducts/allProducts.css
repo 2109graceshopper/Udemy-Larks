@@ -5,15 +5,17 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 10px; }
-  .allVideos__img {
-    object-fit: cover;
-    max-width: 200px; }
-  .allVideos__card {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    flex: 0 1 45%;
-    height: 50%;
-    border: solid 3px;
-    padding: 1em; }
+
+.allVideos__img {
+  object-fit: cover;
+  max-width: 200px; }
+
+.allVideos__card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex: 0 1 45%;
+  min-height: 250px;
+  border: solid 3px;
+  padding: 1em; }
