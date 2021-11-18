@@ -18,7 +18,6 @@ export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.videoHandler();
     this.props.getVideos();
-    this.setState({ userOwnedVideos: [] });
   }
 
   componentDidUpdate(prevProps) {
