@@ -1,0 +1,42 @@
+.signVertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 2000px; }
+  .nav__img {
+    max-width: 20%;
+    object-fit: cover; }
+  .nav__card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex: 0 1 45%;
+    min-height: 225px;
+    border: solid 3px;
+    padding: 1em; }
+
+.nav > * {
+  margin: 0.7em; }
+
+.videosNav {
+  color: #3d3fd0; }
+
+.videosNav:hover {
+  color: #3d3fd0;
+  text-decoration: underline; }

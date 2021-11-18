@@ -12,18 +12,21 @@
   gap: 5px;
   border: solid 3px;
   margin: 1rem; }
-  .container--userProfile {
-    max-width: 300px; }
-  .container__image {
-    object-fit: cover;
-    max-width: 300px; }
-  .container__card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    min-height: 250px;
-    padding: 1em; }
+
+.container--userProfile {
+  max-width: 300px; }
+
+.container__image {
+  object-fit: cover;
+  max-width: 300px; }
+
+.container__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 250px;
+  padding: 1em; }
 
 a:visited {
   text-decoration: none;

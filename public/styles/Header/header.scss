@@ -1,0 +1,54 @@
+@mixin flex($direction, $justify, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin flex-align($align) {
+  align-items: $align;
+}
+
+// nav a {
+//   display: inline-block;
+//   margin: 1em;
+// }
+
+.signVertical {
+  @include flex(column, center);
+}
+
+.center {
+  @include flex(column, center);
+}
+
+.nav {
+  @include flex(row, space-between, center);
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 2000px;
+  &__img {
+    max-width: 20%;
+    object-fit: cover;
+  }
+  &__card {
+    @include flex(row, space-between, center);
+    flex: 0 1 45%;
+    min-height: 225px;
+    border: solid 3px;
+    padding: 1em;
+  }
+}
+
+.nav > * {
+  margin: 0.7em;
+}
+
+.videosNav {
+  color: rgb(61, 63, 208);
+}
+
+.videosNav:hover {
+  color: rgb(61, 63, 208);
+  text-decoration: underline;
+}

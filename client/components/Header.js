@@ -54,7 +54,6 @@ export class Header extends React.Component {
         (video) => video.id
       );
       this.setState({ userOwnedVideos: userOwnedVideoIds });
-      console.log("uservideos", userOwnedVideoIds);
     }
     if (this.props.id !== prevProps.id) {
       await this.props.getUserCart(this.props.id);
@@ -70,25 +69,27 @@ export class Header extends React.Component {
     const { handleChange } = this;
     const { handleClick, isLoggedIn, id, userimageURL } = this.props;
     return (
-      <div>
-        <nav>
+      <div className="center">
+        <nav className="nav">
           <Link to="/">
             <img
               className="graceShopperLogo"
               src="/icons/grace-shopper-icon.png"
             />
           </Link>
-          <Link to="/videos">Videos</Link>
+          <Link to="/videos">
+            <h3 className="videosNav">Videos</h3>
+          </Link>
           {/* Categories Drop Down */}
           {this.state.videoPage ? (
             <div className="categories-dropdown">
               <select onChange={handleChange}>
                 <option value="all">All Videos</option>
-                <option value="1">Category 1</option>
-                <option value="2">Category 2</option>
-                <option value="3">Category 3</option>
-                <option value="4">Category 4</option>
-                <option value="5">Category 5</option>
+                <option value="1">Fullstack Bootcamp</option>
+                <option value="2">Applying to Google</option>
+                <option value="3">???</option>
+                <option value="4">FrontEnd Guru</option>
+                <option value="5">Money Laundering</option>
               </select>
             </div>
           ) : null}
@@ -105,18 +106,17 @@ export class Header extends React.Component {
           </Link>
 
           {isLoggedIn ? (
-            <div>
+            <div className="signVertical">
               {/* The navbar will show these links after you log in */}
               <Link to={`/users/${id}`}>
-                <img className="header-profile-picture" src={userimageURL} />
+                <img className="nav__img" src={userimageURL} />
               </Link>
               <button className="logInOut" type="button" onClick={handleClick}>
                 Sign Out
               </button>
             </div>
           ) : (
-            <div>
-              {/* The navbar will show these links before you log in */}
+            <div className="signVertical">
               <Link to="/login" className="logInOut">
                 Sign In
               </Link>
