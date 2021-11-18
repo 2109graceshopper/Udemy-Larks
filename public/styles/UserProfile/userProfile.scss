@@ -1,0 +1,27 @@
+@mixin flex($direction, $justify, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin flex-align($align) {
+  align-items: $align;
+}
+
+.userProfile {
+  @include flex(row, space-between);
+  gap: 5px;
+  border: solid 3px;
+  max-width: 250px;
+  &__image {
+    object-fit: cover;
+    max-width: 200px;
+  }
+  &__card {
+    @include flex(column, space-around);
+    flex: 0 1 45%;
+    min-height: 225px;
+    padding: 1em;
+  }
+}
