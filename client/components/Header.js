@@ -94,7 +94,7 @@ export class Header extends React.Component {
                 <option value="2">Applying to Google</option>
                 <option value="3">???</option>
                 <option value="4">FrontEnd Guru</option>
-                <option value="5">Money Laundering</option>
+                <option value="5">NFT</option>
               </select>
             </div>
           ) : null}
