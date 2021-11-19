@@ -65,6 +65,7 @@ class SingleVideo extends React.Component {
             <h3>Authors: {video.authorName}</h3>
             <h2>Description:</h2>
             <p>{video.description}</p>
+            <div className="video-price">{video.price} KREM</div>
           </div>
           <div>
             <img className="video-picture" src={video.imageURL} />
@@ -82,7 +83,6 @@ class SingleVideo extends React.Component {
               >
                 Add to cart
               </button>
-              <div className="video-price">{video.price} KREM</div>
             </div>
           )}
         </section>

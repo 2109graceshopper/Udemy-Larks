@@ -83,6 +83,7 @@ export class AllProducts extends React.Component {
             <div className="video-details">
               <h1>{video.title}</h1>
               <p>{video.description}</p>
+              <p>{video.price} KREM</p>
               {this.state.userOwnedVideos.includes(video.id) ? (
                 <h3>Course Owned!</h3>
               ) : (
@@ -94,7 +95,6 @@ export class AllProducts extends React.Component {
                   >
                     Add to cart
                   </button>
-                  <div className="video-price">{video.price} KREM</div>
                 </div>
               )}
             </div>
