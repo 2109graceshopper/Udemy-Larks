@@ -13,18 +13,6 @@ GraceShopper is a udemy-style e-commerce learning platform offering video course
 
 - [React,](https://reactjs.org/) [Redux,](https://redux.js.org/) [Sequelize,](https://sequelize.org/) [Express,](https://expressjs.com/) [Node.js,](https://nodejs.org/en/) [Sass](https://sass-lang.com/)
 
-### Lessons Applied
-
-- The team used Figma to plan the wireframe for the project which was very helpful for envisioning our goal
-    
-    [GraceShopper](https://www.figma.com/file/93oR427kfzs2oAk4MKMLCl/GraceShopper?node-id=0%3A1)
-    
-- Schema database design ensured for consistent model relationships between users, owned videos, as well as user orders
-    
-    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2deae286-e6a4-44f2-b2e3-09021f5fa997/Untitled.png)
-    
-- Notion was an instrumental tool for teamwork collaboration and for facilitating our scrum process for daily standups (we used kanban boards and logs to keep track of daily progress)
-
 ### Authors
 
 - Tandeep Gill - [https://github.com/TandeepGill](https://github.com/TandeepGill)
