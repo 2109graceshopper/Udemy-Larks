@@ -1,8 +1,6 @@
 ## Heroku Deployed Site
 https://udemylarks.herokuapp.com/
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/08adec13-00c2-4f95-8753-b5c889de3a57/Untitled.png)
-
 ### Introduction
 
 GraceShopper is a udemy-style e-commerce learning platform offering video courses for purchase. It supports video sorting by category, persistent shopping carts for both guests and registered users, and feedback to prevent the re-purchase of previously acquired products. Account information is secured with the bcrypt library, and admin privileges are in place to restrict CRUD operations for unauthorized accounts. This project was made over the course of eight days with a four-man team as part of the FullStack Academy Software Engineering and Web Development Immersive Program: [Fullstack Academy](https://www.fullstackacademy.com/programs/coding-bootcamp)
